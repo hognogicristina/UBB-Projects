@@ -33,4 +33,4 @@ This repository includes my homeworks or projects from college.
 
 <h2>Second Year</h2>
 <h3>Semester 4</h3>
-<ul>Coming soon..</ul>
+Coming soon..
