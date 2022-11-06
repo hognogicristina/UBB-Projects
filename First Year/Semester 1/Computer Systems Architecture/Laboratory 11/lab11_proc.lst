@@ -1,0 +1,14 @@
+     1                                  bits 32                         
+     2                                  segment code use32 public code
+     3                                  global compare_b
+     4                                  
+     5                                  ; procedure definition
+     6                                      compare_b:
+     7 00000000 8B442404                        mov eax, [esp+4]
+     8 00000004 3C62                            cmp al, 'b'
+     9 00000006 7406                            je gasit
+    10 00000008 B800000000                      mov eax, 0
+    11 0000000D C3                              ret
+    12                                          gasit: 
+    13 0000000E B801000000                      mov eax, 1
+    14 00000013 C3                              ret 
