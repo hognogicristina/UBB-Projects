@@ -1,5 +1,5 @@
 <h1>UBB-Projects</h1>
-This repository includes my homeworks, college projects and materials from teachers.
+This repository includes my homeworks or projects from college.
 
 <h2>First Year</h2>
 <h3>Semester 1</h3>
