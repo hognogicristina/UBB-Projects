@@ -18,7 +18,7 @@ This repository includes my homeworks, college projects and materials from teach
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Geometry">Geometry</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Graph%20Algorithms">Graph Algorithms</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Object%20Oriented%20Programming">Object Oriented Programming</a></li>
-	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Operating%20Systems"></a>Operating Systems</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Operating%20Systems">Operating Systems</a></li>
 </ul>
 
 <h2>Second Year</h2>
