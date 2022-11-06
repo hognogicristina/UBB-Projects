@@ -1,0 +1,3 @@
+C:/Users/hogno/Documents/Fukulta/C++/DSA/Interfaces/SortedBag/cmake-build-debug/CMakeFiles/SortedBag.dir
+C:/Users/hogno/Documents/Fukulta/C++/DSA/Interfaces/SortedBag/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/hogno/Documents/Fukulta/C++/DSA/Interfaces/SortedBag/cmake-build-debug/CMakeFiles/rebuild_cache.dir
