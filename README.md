@@ -9,7 +9,7 @@ This repository includes my homeworks and projects from college.
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%201/Computer%20Systems%20Architecture">Computer Systems Architecture</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%201/Fundamentals%20of%20Programming">Fundamentals of Programming</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%201/Mathematical%20Analysis">Mathematical Analysis</a></li>
-
+<br>
 </ul><li><b>2<sup>nd</sup> Semester</b></li>
 <ul>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Data%20Structures%20and%20Algorithms">Data Structures and Algorithms</a></li>
