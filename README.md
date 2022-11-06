@@ -2,7 +2,7 @@
 This repository includes my homeworks or projects from college.
 
 <h2>First Year</h2>
-<ul><li>1<sup>rd</sup> Semester</li>
+<ul><li>1<sup>st</sup> Semester</li>
 <ul>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%201/Algebra">Algebra</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%201/Computational%20Logic">Computational Logic</a></li>
@@ -11,7 +11,7 @@ This repository includes my homeworks or projects from college.
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%201/Mathematical%20Analysis">Mathematical Analysis</a></li>
 </ul>
 
-<li>2<sup>rd</sup> Semester</li>
+<li>2<sup>nd</sup> Semester</li>
 <ul>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Data%20Structures%20and%20Algorithms">Data Structures and Algorithms</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/First%20Year/Semester%202/Dynamical%20Systems">Dynamical Systems</a></li>
@@ -23,7 +23,7 @@ This repository includes my homeworks or projects from college.
 </ul>
 
 <h2>Second Year</h2>
-<ul><li>3<sup>th</sup> Semester</li>
+<ul><li>3<sup>rd</sup> Semester</li>
 <ul>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Advanced%20Programming%20Methods">Advanced Programming Methods</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Computer%20Networks">Computer Networks</a></li>
