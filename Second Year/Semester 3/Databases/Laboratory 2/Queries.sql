@@ -51,12 +51,12 @@ INSERT INTO Stores(stoLoc) VALUES ('Amsterdam')
 INSERT INTO Stores(stoLoc) VALUES ('Prague')
 INSERT INTO Stores(stoLoc) VALUES ('Vienna')
 
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 3, 'MacBook Air Blue', 'MacBook Air is an incredibly portable laptop — it’s nimble and quick, with a silent, fanless design and a beautiful Retina display.', 2)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 1, 'MacBook Air Red', 'MacBook Air is an incredibly portable laptop — it’s nimble and quick, with a silent, fanless design and a beautiful Retina display.', NULL)
+INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 3, 'MacBook Air Blue', 'MacBook Air is an incredibly portable laptop â€” itâ€™s nimble and quick, with a silent, fanless design and a beautiful Retina display.', 2)
+INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 1, 'MacBook Air Red', 'MacBook Air is an incredibly portable laptop â€” itâ€™s nimble and quick, with a silent, fanless design and a beautiful Retina display.', NULL)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (2, 5, 'MacBook Pro Pink', 'MacBook Pro has the compact design supports up to 20 hours of battery life and an active cooling system to sustain enhanced performance.', 5)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (2, 4, 'MacBook Pro Black', 'MacBook Pro has the compact design supports up to 20 hours of battery life and an active cooling system to sustain enhanced performance.', 3)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (3, 2, 'iPad Air Orange', 'iPad Air lets you immerse yourself in whatever you’re reading, watching, or creating.', NULL)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (3, 3, 'iPad Air Blue', 'iPad Air lets you immerse yourself in whatever you’re reading, watching, or creating.', 1)
+INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (3, 2, 'iPad Air Orange', 'iPad Air lets you immerse yourself in whatever youâ€™re reading, watching, or creating.', NULL)
+INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (3, 3, 'iPad Air Blue', 'iPad Air lets you immerse yourself in whatever youâ€™re reading, watching, or creating.', 1)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (4, 2, 'iPad Pro Orange', 'Astonishing performance. Incredibly advanced displays. Superfast wireless connectivity.', 3)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (5, 5, 'iPad Mini Pink', 'iPad mini is meticulously designed to be absolutely beautiful. Larger edge-to-edge screen, along with narrow borders and elegant rounded corners.', 2)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (5, 6, 'iPad Mini White', 'iPad mini is meticulously designed to be absolutely beautiful. Larger edge-to-edge screen, along with narrow borders and elegant rounded corners.', 5)
@@ -218,7 +218,7 @@ FROM Customers c
 SELECT DISTINCT e.empName 
 FROM Employee e 
 WHERE e.empName IN ( SELECT c.cusName 
-					 FROM Customers c )
+		     FROM Customers c )
 
 -- c1. Find all blue devices that are not from a specific model, exemple iPad.
 -- used: EXCEPT
@@ -276,20 +276,20 @@ ORDER BY m.modName
 SELECT e.empName
 FROM Employee e
 WHERE e.catID IN ( SELECT c.catID 
-				   FROM Categories c
-				   WHERE c.catName = 'iPhone' )
+		   FROM Categories c
+		   WHERE c.catName = 'iPhone' )
 
 -- e2. Find all categories that are being available in 2 different stores, exemple Paris or Dublin.
 -- used: OR
 SELECT c.catName
 FROM Categories c
 WHERE c.catID IN ( SELECT e.catID 
-				   FROM Employee e
-				   WHERE e.empID IN ( SELECT w.empID 
-									  FROM Work_In w
-									  WHERE w.stoID IN ( SELECT s.stoID 
-														 FROM Stores s
-														 WHERE stoLoc = 'Paris' OR stoLoc = 'Dublin' ))) 
+		   FROM Employee e
+		   WHERE e.empID IN ( SELECT w.empID 
+				      FROM Work_In w
+				      WHERE w.stoID IN ( SELECT s.stoID 
+						   	 FROM Stores s
+						   	 WHERE stoLoc = 'Paris' OR stoLoc = 'Dublin' ))) 
 
 -- f1. Find all product that are already ordered, without NULL rates and increase their rate after customers influenced it.
 -- used: arithmetic expression in SELECT clause
@@ -297,30 +297,30 @@ WHERE c.catID IN ( SELECT e.catID
 SELECT proID, p.proName, proRate + 5 AS proNewRate 
 FROM Products p
 WHERE proRate IS NOT NULL AND EXISTS ( SELECT * FROM Orders o
-									   WHERE o.proID = p.proID )
+				       WHERE o.proID = p.proID )
 
 -- f2. Find all Customers that have ordered not in 2022-10-19.
  -- used: condition in the WHERE clause with NOT/ AND
 SELECT c.cusName
 FROM Customers c
 WHERE EXISTS ( SELECT * FROM Orders o
-			   WHERE o.cusID = c.cusID AND NOT o.ordDate = '2022-10-19' )
+	       WHERE o.cusID = c.cusID AND NOT o.ordDate = '2022-10-19' )
 
 -- g1. Find the product that is red and has Pro model, than multiply the rate to 5, because is going to be the best rated product.
 -- used: arithmetic expression in SELECT clause
 -- used: condition in the WHERE clause with NOT/ AND
 SELECT p.proName, p.proRate * 5 AS proNewRate 
 FROM ( SELECT * FROM Products P
-	   WHERE NOT P.colID IN (2, 6) AND P.modID = 11 ) p 
+       WHERE NOT P.colID IN (2, 6) AND P.modID = 11 ) p 
 
 -- g2. Find all customers, except that ones who ordered in 2022-12-01, and change their phone number to correct form.
 -- used: arithmetic expression in SELECT clause
 -- used: NOT
 SELECT c.cusName, c.cusPhoneNr + 100000000 AS cusNewPhoneNr 
 FROM ( SELECT * FROM Customers C
-	   WHERE C.cusID IN ( SELECT o.cusID 
-						  FROM Orders o
-						  WHERE NOT o.ordDate = '2022-12-01' )) c 
+       WHERE C.cusID IN ( SELECT o.cusID 
+			  FROM Orders o
+			  WHERE NOT o.ordDate = '2022-12-01' )) c 
 
 -- h1. Find how many models are available for all categories.
 -- used: COUNT
@@ -336,9 +336,9 @@ SELECT e.empName, SUM(e.empWork) AS empTotalHours
 FROM Employee e
 GROUP BY e.empName
 HAVING SUM(e.empWork) = ( SELECT MIN(w.E)
-						  FROM ( SELECT SUM(e1.empWork) E
-								 FROM Employee e1
-								 GROUP BY e1.empName ) w )
+			  FROM ( SELECT SUM(e1.empWork) E
+				 FROM Employee e1
+				 GROUP BY e1.empName ) w )
 
 -- h3. Find all products with rate greater than 2.
 -- used: the HAVING clause
@@ -357,8 +357,8 @@ SELECT e.empJob, AVG(e.empSalary) AS empAvgSalary, MAX(e.empSalary) AS empMaxSal
 FROM Employee e
 GROUP BY e.empJob
 HAVING 1 < ( SELECT COUNT(e2.empJob)
-			 FROM Employee e2
-			 WHERE e.empJob = e2.empJob )
+	     FROM Employee e2
+	     WHERE e.empJob = e2.empJob )
 
 -- i1. Find all employee which have salary bigger than the least salary from category Sales Associate or Cleaning & Maintenance.
 -- used: ANY
@@ -366,8 +366,8 @@ HAVING 1 < ( SELECT COUNT(e2.empJob)
 SELECT e.*
 FROM Employee e
 WHERE e.empSalary > ANY ( SELECT e2.empSalary
-						  FROM Employee e2
-						  WHERE e2.empJob = 'Sales Associate' OR e2.empJob = 'Cleaning & Maintenance' )
+			  FROM Employee e2
+			  WHERE e2.empJob = 'Sales Associate' OR e2.empJob = 'Cleaning & Maintenance' )
 ORDER BY e.empSalary DESC
 
 -- i1. Find all employee which have salary bigger than the least salary from category Sales Associate or Cleaning & Maintenance.
@@ -376,8 +376,8 @@ ORDER BY e.empSalary DESC
 SELECT e.*
 FROM Employee e
 WHERE e.empSalary > ( SELECT MIN(e2.empSalary)
-					  FROM Employee e2
-					  WHERE e2.empJob = 'Sales Associate' or e2.empJob = 'Cleaning & Maintenance' )
+		      FROM Employee e2
+		      WHERE e2.empJob = 'Sales Associate' or e2.empJob = 'Cleaning & Maintenance' )
 ORDER BY e.empSalary DESC
 
 -- i2. Find all the descriptions for the recent ordered products.
@@ -385,16 +385,16 @@ ORDER BY e.empSalary DESC
 SELECT p.proName, p.proDescription
 FROM Products p
 WHERE p.proID = ANY ( SELECT o.proID
-					  FROM Orders o
-					  WHERE o.ordDate >= '2022-11-02' )
+		      FROM Orders o
+		      WHERE o.ordDate >= '2022-11-02' )
 
 -- i2. Find all the descriptions for the recent ordered products.
 -- used: IN instead of ANY 
 SELECT p.proName, p.proDescription
 FROM Products p
 WHERE p.proID IN ( SELECT o.proID
-				   FROM Orders o
-				   WHERE o.ordDate >= '2022-11-02' )
+		   FROM Orders o
+		   WHERE o.ordDate >= '2022-11-02' )
 
 -- i3. Find all the employee for which the expierence is greater then the ones who are working at iPhone.
 -- used: ALL
@@ -402,8 +402,8 @@ WHERE p.proID IN ( SELECT o.proID
 SELECT e.*
 FROM Employee e
 WHERE e.empExperience > ALL ( SELECT e2.empExperience
-							  FROM Employee e2
-							  WHERE e2.catID = 3 )
+			      FROM Employee e2
+			      WHERE e2.catID = 3 )
 ORDER BY e.empExperience DESC
 
 -- i3. Find all the employee for which the expierence is greater then the ones who are working at iPhone.
@@ -412,8 +412,8 @@ ORDER BY e.empExperience DESC
 SELECT e.*
 FROM Employee e
 WHERE e.empExperience > ( SELECT MAX(e2.empExperience)
-						  FROM Employee e2
-						  WHERE e2.catID = 3 )
+			  FROM Employee e2
+			  WHERE e2.catID = 3 )
 ORDER BY e.empExperience DESC
 
 -- i4. Find all products for a user which is not interested for a MacBook.
@@ -421,17 +421,17 @@ ORDER BY e.empExperience DESC
 SELECT p.*
 FROM Products p
 WHERE p.modID IN ( SELECT m.modID
-				   FROM Model m
-				   WHERE m.catID <> ALL ( SELECT c.catID
-										  FROM Categories c
-										  WHERE catID = 1 ))
+		   FROM Model m
+		   WHERE m.catID <> ALL ( SELECT c.catID
+					  FROM Categories c
+					  WHERE catID = 1 ))
 
 -- i4. Find all products for a user which is not interested for a MacBook.
 -- used: NOT IN instead of ALL
 SELECT p.*
 FROM Products p
 WHERE p.modID IN ( SELECT m.modID
-				   FROM Model m
-				   WHERE m.catID NOT IN ( SELECT c.catID
-										  FROM Categories c
-										  WHERE catID = 1 ))
+		   FROM Model m
+		   WHERE m.catID NOT IN ( SELECT c.catID
+					  FROM Categories c
+					  WHERE catID = 1 ))
