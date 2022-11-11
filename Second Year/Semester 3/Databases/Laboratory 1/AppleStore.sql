@@ -111,6 +111,7 @@ CREATE TABLE Payment (
 
 CREATE TABLE Deliveries (
 	delID int primary key identity,
-	ordID int foreign key references Orders(ordID) NOT NULL,
+	ordID int NOT NULL,
+	constraint FK_Deliveries foreign key(ordID) references Orders(ordID),
 	delDate date
 );
