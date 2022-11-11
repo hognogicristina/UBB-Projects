@@ -52,22 +52,22 @@ INSERT INTO Stores(stoLoc) VALUES ('Prague')
 INSERT INTO Stores(stoLoc) VALUES ('Vienna')
 
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 3, 'MacBook Air Blue', 'MacBook Air is an incredibly portable laptop — it’s nimble and quick, with a silent, fanless design and a beautiful Retina display.', 2)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 1, 'MacBook Air Red', 'MacBook Air is an incredibly portable laptop — it’s nimble and quick, with a silent, fanless design and a beautiful Retina display.', NULL)
+INSERT INTO Products(modID, colID, proName, proDescription) VALUES (1, 1, 'MacBook Air Red', 'MacBook Air is an incredibly portable laptop — it’s nimble and quick, with a silent, fanless design and a beautiful Retina display.')
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (2, 5, 'MacBook Pro Pink', 'MacBook Pro has the compact design supports up to 20 hours of battery life and an active cooling system to sustain enhanced performance.', 5)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (2, 4, 'MacBook Pro Black', 'MacBook Pro has the compact design supports up to 20 hours of battery life and an active cooling system to sustain enhanced performance.', 3)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (3, 2, 'iPad Air Orange', 'iPad Air lets you immerse yourself in whatever you’re reading, watching, or creating.', NULL)
+INSERT INTO Products(modID, colID, proName, proDescription) VALUES (3, 2, 'iPad Air Orange', 'iPad Air lets you immerse yourself in whatever you’re reading, watching, or creating.')
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (3, 3, 'iPad Air Blue', 'iPad Air lets you immerse yourself in whatever you’re reading, watching, or creating.', 1)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (4, 2, 'iPad Pro Orange', 'Astonishing performance. Incredibly advanced displays. Superfast wireless connectivity.', 3)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (5, 5, 'iPad Mini Pink', 'iPad mini is meticulously designed to be absolutely beautiful. Larger edge-to-edge screen, along with narrow borders and elegant rounded corners.', 2)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (5, 6, 'iPad Mini White', 'iPad mini is meticulously designed to be absolutely beautiful. Larger edge-to-edge screen, along with narrow borders and elegant rounded corners.', 5)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (6, 4, 'iPhone Pro Black', 'A magical new way to interact with iPhone. Groundbreaking safety features designed to save lives. An innovative 48MP camera for mind-blowing detail.', 4)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (6, 6, 'iPhone Pro White', 'A magical new way to interact with iPhone. Groundbreaking safety features designed to save lives. An innovative 48MP camera for mind-blowing detail.', NULL)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (7, 1, 'iPhone Mini Red', 'A magical new way to interact with iPhone. Groundbreaking safety features designed to save lives. An innovative 48MP camera for mind-blowing detail.', NULL)
+INSERT INTO Products(modID, colID, proName, proDescription) VALUES (6, 6, 'iPhone Pro White', 'A magical new way to interact with iPhone. Groundbreaking safety features designed to save lives. An innovative 48MP camera for mind-blowing detail.')
+INSERT INTO Products(modID, colID, proName, proDescription) VALUES (7, 1, 'iPhone Mini Red', 'A magical new way to interact with iPhone. Groundbreaking safety features designed to save lives. An innovative 48MP camera for mind-blowing detail.')
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (8, 2, 'iPhone Max Orange', 'A magical new way to interact with iPhone. Groundbreaking safety features designed to save lives. An innovative 48MP camera for mind-blowing detail.', 1)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (9, 4, 'Watch Series 1 Black', 'Powerful sensors for insights about your health and fitness. Innovative safety features. Convenient ways to stay connected.', 2)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (10, 6, 'Watch Series 2 White', 'Powerful sensors for insights about your health and fitness. Innovative safety features. Convenient ways to stay connected.', 4)
 INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (11, 1, 'AirPods Pro Red', 'With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case, AirPods deliver an incredible wireless headphone experience.', 2)
-INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (12, 3, 'AirPods Max Blue', 'AirPods Max is a perfect balance of exhilarating high-fidelity audio and the effortless magic of AirPods. The ultimate personal listening experience is here.', NULL)
+INSERT INTO Products(modID, colID, proName, proDescription) VALUES (12, 3, 'AirPods Max Blue', 'AirPods Max is a perfect balance of exhilarating high-fidelity audio and the effortless magic of AirPods. The ultimate personal listening experience is here.')
 
 INSERT INTO Employee(catID, empName, empSalary, empWork, empJob, empExperience) VALUES (1, 'Andreea', 7000, 7, 'Advertising & Marketing Manager', 80)
 INSERT INTO Employee(catID, empName, empSalary, empWork, empJob, empExperience) VALUES (2, 'Cosmina', 4500, 9, 'Cleaning & Maintenance', 60)
@@ -95,7 +95,7 @@ INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Cristina', 757602
 INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Edward', 759743685, 'Str Vladimir, Nr 12')
 INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Florin', 711136910, 'Str Lalelelor, Nr 56')
 INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Alina', 726138997, 'Str Victoriei, Nr 4')
-INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Olivia', NULL, 'Str Decebal, Nr 97')
+INSERT INTO Customers(cusName, cusAdrres) VALUES ('Olivia', 'Str Decebal, Nr 97')
 INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Iulia', 756984123, 'Str Decebal, Nr 9')
 INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres) VALUES ('Alexandra', 736589423, 'Str Artarilor, Nr 2')
 
@@ -254,7 +254,7 @@ LEFT JOIN Deliveries d ON o.ordDate = d.delDate
 -- d3. Find all stores and employees that work in, include stores that don't have any employees yet.
 -- used: ORDER BY
 -- used: TOP
-SELECT TOP 5 s.stoLoc, e.empName 
+SELECT TOP 5 e.empName, s.stoLoc
 FROM Employee e
 RIGHT JOIN Work_In w ON w.empID = e.empID
 RIGHT JOIN Stores s ON s.stoID = w.stoID
