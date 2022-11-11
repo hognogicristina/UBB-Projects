@@ -34,5 +34,5 @@ This repository includes my homeworks and projects from college.
 	
 <br>
 <li><b>4<sup>th</sup> Semester</b></li>
-Coming soon..
+Coming soon...
 </ul>
