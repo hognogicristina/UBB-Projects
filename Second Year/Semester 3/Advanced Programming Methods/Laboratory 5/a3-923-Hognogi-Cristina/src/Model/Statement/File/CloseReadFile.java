@@ -31,7 +31,7 @@ public class CloseReadFile implements InterStatement {
             throw new StatExeExecption(String.format("%s does not evaluate to StringValue", expression));
 
         StringValue fileName = (StringValue) value; /* cast the value to StringValue */
-        InterDictionary<String, BufferedReader> fileTable = state.getFileTable(); // get the file table */
+        InterDictionary<String, BufferedReader> fileTable = state.getFileTable(); /* get the file table */
 
         if (!fileTable.containsKey(fileName.getValue())) /* if the file is not in the file table */
             throw new StatExeExecption(String.format("%s is not present in the FileTable", value));
