@@ -35,8 +35,8 @@ public class MyStack<T> implements InterStack<T> {
 
     @Override
     public List<T> getReversed() {
-        // return the stack in reversed order
-        // convert the stack to an array for easier manipulation and then to a list
+        /* return the stack in reversed order
+           convert the stack to an array for easier manipulation and then to a list */
         List<T> reversed = Arrays.asList((T[]) this.myStack.toArray());
         Collections.reverse(reversed);
         return this.myStack;

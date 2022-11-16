@@ -46,13 +46,13 @@ public class MyDictionary<T1, T2> implements InterDictionary<T1, T2> {
 
     @Override
     public Collection<T2> values() {
-        // get all the values from the dictionary (values are not unique)
+        /* get all the values from the dictionary (values are not unique) */
         return this.dict.values();
     }
 
     @Override
     public void remove(T1 key) throws UtilitsException {
-        // remove the element associated with the key
+        /* remove the element associated with the key */
         if (!containsKey(key))
             throw new UtilitsException(key + " is not defined.");
 
@@ -61,7 +61,7 @@ public class MyDictionary<T1, T2> implements InterDictionary<T1, T2> {
 
     @Override
     public Set<T1> keySet() {
-        // get all the keys from the dictionary (keys are unique)
+        /* get all the keys from the dictionary (keys are unique) */
         return dict.keySet();
     }
 

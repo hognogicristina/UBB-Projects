@@ -6,7 +6,7 @@ import Model.Utilities.MyDictionary;
 
 import java.util.Scanner;
 
-// Class that implements the menu of the interpreter
+/* Class that implements the menu of the interpreter */
 public class TextMenu {
     private InterDictionary<String, Command> commands;
 
@@ -23,7 +23,7 @@ public class TextMenu {
             String line = String.format("%4s : %s", command.getKey(), command.getDescription());
             System.out.println(line);
         }
-        // example: 1 : Open a file
+        /* example: 1 : Open a file */
     }
 
     public void show() {

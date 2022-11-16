@@ -9,17 +9,18 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
 
-// Class that implements the command pattern
+/* Class that implements the command pattern */
 public class RunExaCommand extends Command {
     private final Controller controller;
 
     public RunExaCommand(String key, String description, Controller controller) {
-        super(key, description); // call the constructor of the parent class
+        super(key, description); /* call the constructor of the parent class */
         this.controller = controller;
     }
 
     @Override
     public void execute() {
+
         try {
             // execute all steps
             System.out.println("Do you want to display the steps?[Y/n]");

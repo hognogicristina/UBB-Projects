@@ -1,6 +1,6 @@
 package View;
 
-// Class for the exit command
+/* Class for the exit command */
 public class ExitCommand extends Command {
     public ExitCommand(String key, String description) {
         super(key, description);

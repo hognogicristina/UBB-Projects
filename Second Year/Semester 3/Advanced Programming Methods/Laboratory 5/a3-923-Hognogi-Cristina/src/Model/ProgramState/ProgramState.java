@@ -16,7 +16,7 @@ public class ProgramState {
     InterStack<InterStatement> exeStack;
     InterDictionary<String, InterValue> symTable;
     InterList<InterValue> out;
-    InterDictionary<String, BufferedReader> fileTable;
+    InterDictionary<String, BufferedReader> fileTable; /* create a new file table */
     InterStatement originalProgram;
 
     public ProgramState(InterStack<InterStatement> exeStack, InterDictionary<String, InterValue> symTable, InterList<InterValue> out, InterDictionary<String, BufferedReader> fileTable, InterStatement originalProgram) {
@@ -57,6 +57,7 @@ public class ProgramState {
 
     public InterDictionary<String, BufferedReader> getFileTable() {
         return fileTable;
+        /* returns the file table */
     }
 
     public void setFileTable(InterDictionary<String, BufferedReader> fileTable) {
@@ -98,12 +99,12 @@ public class ProgramState {
     }
 
     public String fileTableToString() {
-        // function that returns the file table as a string
+        /* function that returns the file table as a string */
         StringBuilder fileTableStringBuilder = new StringBuilder();
 
         for (String key : fileTable.keySet()) // for each key in the file table
             fileTableStringBuilder.append(String.format("%s\n", key));
-        // append the string representation of the key to the string builder
+        /* append the string representation of the key to the string builder */
 
         return fileTableStringBuilder.toString();
     }
@@ -123,14 +124,18 @@ public class ProgramState {
 
     public String programStateToString() throws UtilitsException {
         return "Execution stack: \n" + exeStackToString() + "Symbol table: \n" + symTableToString() + "Output list: \n" + outToString() + "File table:\n" + fileTableToString() + "\n";
-        // example: Execution stack:
-        //          a = 5 + 2
-        //          b = 3 + 4
-        //          Symbol table:
-        //          a -> 7
-        //          b -> 7
-        //          Output list:
-        //          7
-        //          7
+        /* example: Execution stack:
+                    a = 5 + 2
+                    b = 3 + 4
+                    Symbol table:
+                    a -> 7
+                    b -> 7
+                    Output list:
+                    7
+                    7
+                    File table:
+                    file1
+                    file2
+         */
     }
 }

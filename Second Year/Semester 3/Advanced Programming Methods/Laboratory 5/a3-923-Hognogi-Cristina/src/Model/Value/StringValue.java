@@ -3,6 +3,7 @@ package Model.Value;
 import Model.Type.InterType;
 import Model.Type.StringType;
 
+/* Class for the string value */
 public class StringValue implements InterValue {
     private final String value;
 
@@ -17,10 +18,12 @@ public class StringValue implements InterValue {
     @Override
     public String toString() {
         return "\"" + this.value + "\"";
+        /* example: "hello" */
     }
 
     @Override
     public boolean equals(InterValue another) {
+        /* check if two objects are the same */
         if (another instanceof StringValue) {
             StringValue anotherStringValue = (StringValue) another;
             return this.value.equals(anotherStringValue.value);

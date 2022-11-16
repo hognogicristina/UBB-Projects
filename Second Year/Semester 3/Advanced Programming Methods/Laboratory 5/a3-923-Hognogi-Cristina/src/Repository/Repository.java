@@ -51,7 +51,7 @@ public class Repository implements InterRepository {
 
     @Override
     public void logPrgStaExe() throws UtilitsException, IOException {
-        // writes the current state of the program to the log file (logFilePath) and closes the file after writing is done
+        /* writes the current state of the program to the log file (logFilePath) and closes the file after writing is done */
         PrintWriter logFile = new PrintWriter((new BufferedWriter(new FileWriter(this.logFilePath, true))));
         logFile.println(this.programStates.get(0).programStateToString());
 

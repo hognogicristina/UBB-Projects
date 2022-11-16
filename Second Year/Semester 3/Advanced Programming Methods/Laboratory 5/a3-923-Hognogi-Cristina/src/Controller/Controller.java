@@ -39,12 +39,12 @@ public class Controller {
     public void allSteps() throws UtilitsException, StatExeExecption, ExpEvalException, IOException {
         // executes all the steps and displays the current state of the program
         ProgramState program = this.repo.getCurrentState();
-        this.repo.logPrgStaExe();
+        this.repo.logPrgStaExe(); /* log the current state of the program */
         display();
 
         while(!program.getExeStack().isEmpty()) { // while the stack is not empty
             oneStep(program);
-            this.repo.logPrgStaExe();
+            this.repo.logPrgStaExe(); /* log the current state of the program */
             display();
         }
     }
@@ -57,6 +57,7 @@ public class Controller {
     }
 
     public InterRepository getRepository() {
+        /* returns the repository */
         return repo;
     }
 }

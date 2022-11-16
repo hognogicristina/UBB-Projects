@@ -10,6 +10,7 @@ import Model.Value.InterValue;
 
 import java.util.Objects;
 
+/* Class that represents the relational expression */
 public class RelatExpression implements InterExpression {
     InterExpression exp1;
     InterExpression exp2;
@@ -23,14 +24,14 @@ public class RelatExpression implements InterExpression {
 
     @Override
     public InterValue eval(InterDictionary<String, InterValue> tbl) throws UtilitsException, ExpEvalException {
-        // evaluate the two operands
+        /* evaluate the two operands */
         InterValue v1, v2;
         v1 = this.exp1.eval(tbl);
 
-        if (v1.getType().equals(new IntType())) { // check if the first operand is an integer
+        if (v1.getType().equals(new IntType())) { /* check if the first operand is an integer */
             v2 = this.exp2.eval(tbl);
 
-            if (v2.getType().equals(new IntType())) { // check if the second operand is an integer
+            if (v2.getType().equals(new IntType())) { /* check if the second operand is an integer */
                 IntValue i1 = (IntValue) v1;
                 IntValue i2 = (IntValue) v2;
                 int n1, n2;
@@ -38,17 +39,17 @@ public class RelatExpression implements InterExpression {
                 n2 = i2.getVal();
 
                 if (Objects.equals(this.op, "<"))
-                    return new BoolValue(n1 < n2); // result of the "<" operation
+                    return new BoolValue(n1 < n2); /* result of the "<" operation */
                 else if (Objects.equals(this.op, "<="))
-                    return new BoolValue(n1 <= n2); // result of the "<=" operation
+                    return new BoolValue(n1 <= n2); /* result of the "<=" operation */
                 else if (Objects.equals(this.op, "=="))
-                    return new BoolValue(n1 == n2); // result of the "==" operation
+                    return new BoolValue(n1 == n2); /* result of the "==" operation */
                 else if (Objects.equals(this.op, "!="))
-                    return new BoolValue(n1 != n2); // result of the "!=" operation
+                    return new BoolValue(n1 != n2); /* result of the "!=" operation */
                 else if (Objects.equals(this.op, ">="))
-                    return new BoolValue(n1 >= n2); // result of the ">=" operation
+                    return new BoolValue(n1 >= n2); /* result of the ">=" operation */
                 else if (Objects.equals(this.op, ">"))
-                    return new BoolValue(n1 > n2); // result of the ">" operation
+                    return new BoolValue(n1 > n2); /* result of the ">" operation */
             } else
                 throw new ExpEvalException("Second operand is not an integer.");
         }
@@ -61,7 +62,7 @@ public class RelatExpression implements InterExpression {
     @Override
     public String toString() {
         return exp1.toString() + " " + op + " " + exp2.toString();
-        // example: a < b
+        /* example: a < b */
     }
 }
 
