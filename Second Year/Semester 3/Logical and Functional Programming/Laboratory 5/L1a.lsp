@@ -1,0 +1,105 @@
+; -----------------------------------------------------------------------------------------------------
+
+; PROBLEM AREA
+
+; 2.
+; a) Write a function to return the dot product of two vectors.
+; b) Write a function to return the depth of a list. Example: the depth of a linear list is 1. 
+; c) Write a function to sort a linear list without keeping the double values.
+; d) Write a function to return the intersection of two sets.
+
+; -----------------------------------------------------------------------------------------------------
+
+; LEGEND AREA
+
+; car = first element of a list
+; cdr = rest of the list
+; t = true
+; listp = list predicate (returns t if the argument is a list)
+; cons = construct a list from two arguments (first element and rest of the list)
+; nil = empty list (null list)
+; list = construct a list from a sequence of arguments (first element, second element, third element, ...)
+
+; -----------------------------------------------------------------------------------------------------
+
+; CODE AREA
+
+; a. Write a function to return the dot product of two vectors.
+; dot product of two vectors: [1, 3, -5] * [1, 3, -5] = 1*1 + 3*3 + (-5)*(-5) = 35
+; for command line: (myDotProduct '(1 3 -5) '(1 3 -5)) => 35
+
+(defun myDotProduct (v1 v2)
+    (cond
+        ((null v1) 0)
+        (t (+ (* (car v1) (car v2)) (myDotProduct (cdr v1) (cdr v2))))
+    )
+)
+
+; b. Write a function to return the depth of a list. Example: the depth of a linear list is 1. 
+; for command line: (myMain '(1 2 3)) => 1 (linear list)
+; for command line: (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) => 4 (nested list)
+
+(defun myMax (a b)
+    (cond
+        ((> a b) a)
+        (t b)
+    )
+)
+
+(defun myFindDepth (l c)
+    (cond
+        ((null l) c)
+        ((listp (car l)) (myMax (myFindDepth (car l) (+ c 1)) (myFindDepth (cdr l) c)))
+        (t (myFindDepth (cdr l) c))
+    )
+)
+
+(defun myMain (l)
+    (cond (t (myFindDepth l 1)))
+)
+
+; c. Write a function to sort a linear list without keeping the double values.
+; for command line: (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23))
+
+(defun myInsert (l e)
+    (cond
+        ((null l) (list e))
+        ((= (car l) e) l)
+        ((< e (car l)) (cons e l))
+        (t (cons (car l) (myInsert(cdr l) e)))
+    )
+)
+
+(defun mySort (l)
+    (cond
+        ((null l) nil)
+        (t (myInsert (mySort (cdr l)) (car l)))
+    )
+)
+
+
+; d. Write a function to return the intersection of two sets.
+; for command line: (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11))
+
+(defun myContains (e l)
+    (cond
+        ((null l) nil)
+        ((= (car l) e) t)
+        (t (myContains e (cdr l)))
+    )
+)
+
+(defun myIntersection (l p)
+    (cond
+        ((null l) NIL)
+        ((myContains (car l) p) (cons (car l) (myIntersection (cdr l) p)))
+        (t (myIntersection (cdr l) p))
+    )
+)
+
+; -----------------------------------------------------------------------------------------------------
+
+; TESTS AREA
+
+; -----------------------------------------------------------------------------------------------------
+
