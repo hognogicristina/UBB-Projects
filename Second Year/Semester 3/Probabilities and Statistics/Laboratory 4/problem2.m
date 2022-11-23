@@ -34,7 +34,7 @@ clf
 plot(k, p_k, 'o', U_X, u_X/N, '*')
 
 
-#c)
+# c)
 # p = 0.3 and N = 100000
 clear X
 
