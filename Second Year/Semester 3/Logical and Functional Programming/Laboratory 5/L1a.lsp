@@ -19,6 +19,8 @@
 ; cons = construct a list from two arguments (first element and rest of the list)
 ; nil = empty list (null list)
 ; list = construct a list from a sequence of arguments (first element, second element, third element, ...)
+; equal = test if two arguments are equal (returns t if they are equal)
+; NIL = null value (not a list)
 
 ; -----------------------------------------------------------------------------------------------------
 
@@ -59,7 +61,7 @@
 )
 
 ; c. Write a function to sort a linear list without keeping the double values.
-; for command line: (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23))
+; for command line: (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) => (1 2 3 4 5 6 7 9 23 35 81)
 
 (defun myInsert (l e)
     (cond
@@ -79,12 +81,12 @@
 
 
 ; d. Write a function to return the intersection of two sets.
-; for command line: (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11))
+; for command line: (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) => (7 9)
 
 (defun myContains (e l)
     (cond
         ((null l) nil)
-        ((= (car l) e) t)
+        ((equal (car l) e) t)
         (t (myContains e (cdr l)))
     )
 )
@@ -100,6 +102,42 @@
 ; -----------------------------------------------------------------------------------------------------
 
 ; TESTS AREA
+
+; a.
+(defun myTestA ()
+    (cond
+        ((equal (myDotProduct '(1 3 -5) '(1 3 -5)) 35) t)
+    )
+)
+
+; b.
+(defun myTestB ()
+    (cond
+        ((equal (myMain '(1 2 3)) 1) t)
+        ((equal (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) 4) t)
+    )
+)
+
+; c.
+(defun myTestC ()
+    (cond
+        ((equal (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) '(1 2 3 4 5 6 7 9 23 35 81)) t)
+    )
+)
+
+; d.
+(defun myTestD ()
+    (cond
+        ((equal (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) '(7 9)) t)
+    )
+)
+
+; test all functions
+(defun myTestAll ()
+    (cond
+        ((and (myTestA) (myTestB) (myTestC) (myTestD)) t)
+    )
+)
 
 ; -----------------------------------------------------------------------------------------------------
 
