@@ -17,10 +17,9 @@
 ; t = true
 ; listp = list predicate (returns t if the argument is a list)
 ; cons = construct a list from two arguments (first element and rest of the list)
-; nil = empty list (null list)
 ; list = construct a list from a sequence of arguments (first element, second element, third element, ...)
 ; equal = test if two arguments are equal (returns t if they are equal)
-; NIL = null value (not a list)
+; NIL = null value (empty list)
 
 ; -----------------------------------------------------------------------------------------------------
 
@@ -74,7 +73,7 @@
 
 (defun mySort (l)
     (cond
-        ((null l) nil)
+        ((null l) NIL)
         (t (myInsert (mySort (cdr l)) (car l)))
     )
 )
@@ -85,7 +84,7 @@
 
 (defun myContains (e l)
     (cond
-        ((null l) nil)
+        ((null l) NIL)
         ((equal (car l) e) t)
         (t (myContains e (cdr l)))
     )
