@@ -22,7 +22,7 @@ public class RunExaCommand extends Command {
     public void execute() {
 
         try {
-            // execute all steps
+            /* execute all steps */
             System.out.println("Do you want to display the steps?[Y/n]");
             Scanner readOption = new Scanner(System.in);
             String option = readOption.next();
