@@ -1,7 +1,6 @@
 -- DROP DATABASE STATEMENTS
 USE master 
 GO
-
 ALTER DATABASE AppleStore 
 SET single_user WITH ROLLBACK IMMEDIATE
 DROP DATABASE AppleStore
@@ -30,91 +29,91 @@ DROP TABLE Categories;
 
 -- CREATE TABLE STATEMENTS
 CREATE TABLE Categories (
-	catID int primary key identity, -- auto increments primary key = personl/unique id
-	catName varchar(30) NOT NULL
+	catID INT PRIMARY KEY IDENTITY, -- auto increments primary key = personl/unique id
+	catName VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Model (
-	modID int primary key identity,
-	catID int foreign key references Categories(catID) NOT NULL, -- foreign key = an id taken from another table
-	modName varchar(30) NOT NULL
+	modID INT PRIMARY KEY IDENTITY,
+	catID INT FOREIGN KEY REFERENCES Categories(catID) NOT NULL, -- foreign key = an id taken from another table
+	modName VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Colour (
 	-- m(colours):n(products)
-	colID int primary key identity,
-	colName varchar(30) NOT NULL
+	colID INT PRIMARY KEY IDENTITY,
+	colName VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Available_Model (
-	colID int foreign key references Colour(colID) NOT NULL,
-	modID int foreign key references Model(modID) NOT NULL,
-	constraint PK_Available_Model primary key(colID, modID)
+	colID INT FOREIGN KEY REFERENCES Colour(colID) NOT NULL,
+	modID INT FOREIGN KEY REFERENCES Model(modID) NOT NULL,
+	CONSTRAINT PK_Available_Model PRIMARY KEY (colID, modID)
 );
 
 CREATE TABLE Available_Categories (
-	colID int foreign key references Colour(colID) NOT NULL,
-	catID int foreign key references Categories(catID) NOT NULL,
-	constraint PK_Available_Categories primary key(colID, catID)
+	colID INT FOREIGN KEY REFERENCES Colour(colID) NOT NULL,
+	catID INT FOREIGN KEY REFERENCES Categories(catID) NOT NULL,
+	CONSTRAINT PK_Available_Categories PRIMARY KEY (colID, catID)
 );
 
 CREATE TABLE Stores (
 	-- 1(store):n(employees)
-	stoID int primary key identity,
-	stoLoc varchar(200) NOT NULL
+	stoID INT PRIMARY KEY IDENTITY,
+	stoLoc VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE Products (
 	-- m(products):n(colours)
-	proID int primary key identity,
-	modID int foreign key references Model(modID) NOT NULL,
-	colID int foreign key references Colour(colID) NOT NULL,
-	proName varchar(100) NOT NULL,
-	proDescription varchar(500) NOT NULL,
-	proRate int
+	proID INT PRIMARY KEY IDENTITY,
+	modID INT FOREIGN KEY REFERENCES Model(modID) NOT NULL,
+	colID INT FOREIGN KEY REFERENCES Colour(colID) NOT NULL,
+	proName VARCHAR(100) NOT NULL,
+	proDescription VARCHAR(500) NOT NULL,
+	proRate INT
 );
 
 CREATE TABLE Employee (
-	empID int primary key identity,
-	catID int foreign key references Categories(catID) NOT NULL,
-	empName varchar(100) NOT NULL,
-	empSalary int,
-	empWork int,
-	empJob varchar(100) NOT NULL, 
-	empExperience int
+	empID INT PRIMARY KEY IDENTITY,
+	catID INT FOREIGN KEY REFERENCES Categories(catID) NOT NULL,
+	empName VARCHAR(100) NOT NULL,
+	empSalary INT,
+	empWork INT,
+	empJob VARCHAR(100) NOT NULL, 
+	empExperience INT
 );
 
 CREATE TABLE Work_In (
-	stoID int foreign key references Stores(stoID) NOT NULL,
-	empID int foreign key references Employee(empID) NOT NULL,
-	constraint PK_Work_In primary key(stoID, empID)
+	stoID INT FOREIGN KEY REFERENCES Stores(stoID) NOT NULL,
+	empID INT FOREIGN KEY REFERENCES Employee(empID) NOT NULL,
+	CONSTRAINT PK_Work_In PRIMARY KEY (stoID, empID)
 );
 
 CREATE TABLE Customers (
 	-- 1(customer):n(orders)
-	cusID int primary key identity,
-	cusName varchar(100) NOT NULL,
-	cusPhoneNr int,
-	cusAdrres varchar(200) NOT NULL
+	cusID INT PRIMARY KEY IDENTITY,
+	cusName VARCHAR(100) NOT NULL,
+	cusPhoneNr INT,
+	cusAdrres VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE Orders (
-	ordID int primary key identity,
-	cusID int foreign key references Customers(cusID) NOT NULL,
-	proID int foreign key references Products(proID) NOT NULL,
-	ordDate date
+	ordID INT PRIMARY KEY IDENTITY,
+	cusID INT FOREIGN KEY REFERENCES Customers(cusID) NOT NULL,
+	proID INT FOREIGN KEY REFERENCES Products(proID) NOT NULL,
+	ordDate DATE
 );
 
 CREATE TABLE Payment (
-	ordID int foreign key references Orders(ordID) NOT NULL,
-	payDate date,
-	payType varchar(50),
-	constraint PK_Payment primary key(ordID)
+	ordID INT FOREIGN KEY REFERENCES Orders(ordID) NOT NULL,
+	payDate DATE,
+	payType VARCHAR(50),
+	CONSTRAINT PK_Payment PRIMARY KEY (ordID)
 );
 
 CREATE TABLE Deliveries (
-	delID int primary key identity,
-	ordID int NOT NULL,
-	constraint FK_Deliveries foreign key(ordID) references Orders(ordID),
-	delDate date
+	delID INT PRIMARY KEY IDENTITY,
+	ordID INT NOT NULL,
+	CONSTRAINT FK_Deliveries FOREIGN KEY (ordID) REFERENCES Orders(ordID),
+	delDate DATE
 );

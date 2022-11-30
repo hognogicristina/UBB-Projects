@@ -71,7 +71,7 @@ GO
 CREATE OR ALTER PROCEDURE addPKWorkIn
 AS
 BEGIN
-	ALTER TABLE Work_In ADD CONSTRAINT PK_Work_In PRIMARY KEY(stoID, empID)
+	ALTER TABLE Work_In ADD CONSTRAINT PK_Work_In PRIMARY KEY (stoID, empID)
 	PRINT 'ALTER TABLE Work_In ADD CONSTRAINT PK_Accessories PRIMARY KEY(stoID, empID)'
 END
 GO
@@ -80,7 +80,7 @@ GO
 CREATE OR ALTER PROCEDURE addCKCustomers
 AS
 BEGIN
-	ALTER TABLE Customers ADD CONSTRAINT CK_Customers UNIQUE(cusPhoneNr, cusAdrres)
+	ALTER TABLE Customers ADD CONSTRAINT CK_Customers UNIQUE (cusPhoneNr, cusAdrres)
 	PRINT 'ALTER TABLE Customers ADD CONSTRAINT CK_Customers UNIQUE(cusPhoneNr, cusAdrres)'
 END
 GO
@@ -107,7 +107,7 @@ GO
 CREATE OR ALTER PROCEDURE addFKDeliveries
 AS
 BEGIN
-	ALTER TABLE Deliveries ADD CONSTRAINT FK_Deliveries FOREIGN KEY(ordID) REFERENCES Orders(ordID)
+	ALTER TABLE Deliveries ADD CONSTRAINT FK_Deliveries FOREIGN KEY (ordID) REFERENCES Orders(ordID)
 	PRINT 'ALTER TABLE Deliveries ADD CONSTRAINT FK_Deliveries FOREIGN KEY(ordID) REFERENCES Orders(ordID)'
 END
 GO
@@ -117,9 +117,9 @@ CREATE OR ALTER PROCEDURE addAccessories
 AS 
 BEGIN 
 	CREATE TABLE Accessories (
-		accID int primary key,
-		modID int NOT NULL,
-		accTitle varchar(100) NOT NULL)
+		accID INT PRIMARY KEY,
+		modID INT NOT NULL,
+		accTitle VARCHAR(100) NOT NULL)
 		PRINT 'CREATE TABLE Accessories'
 END
 GO
@@ -162,16 +162,16 @@ EXEC undoAccessories
 -- Second part of the homework
 -- create a new table that keeps only the current version (the version is an integer number)
 CREATE TABLE Current_Version (
-	currentVersion int default 0)
+	currentVersion INT DEFAULT 0)
 
 INSERT INTO Current_Version(currentVersion) VALUES (0)
 SELECT * FROM Current_Version
 
 -- create a new table that holds the version of the database schema (the version is an integer number)
 CREATE TABLE Procedure_Table (
-	proTabID int primary key identity,
-	firstProcedure varchar(100),
-	secondProcedure varchar(100))
+	proTabID INT PRIMARY KEY IDENTITY,
+	firstProcedure VARCHAR(100),
+	secondProcedure VARCHAR(100))
 
 INSERT INTO Procedure_Table(firstProcedure, secondProcedure) VALUES ('modifyRate', 'undoRate')
 INSERT INTO Procedure_Table(firstProcedure, secondProcedure) VALUES ('addStoName', 'undoStoName')
@@ -185,10 +185,10 @@ SELECT * FROM Procedure_Table
 -- Third part of the homework
 -- write a stored procedure that receives as a parameter a version number and brings the database to that version
 GO
-CREATE OR ALTER PROCEDURE goToVersion(@version int)
+CREATE OR ALTER PROCEDURE goToVersion(@version INT)
 AS
 BEGIN
-	DECLARE @currentVersion int
+	DECLARE @currentVersion INT
 	-- 1. validate the parameter (version should be between 0 and 7, otherwise print an error)
 	IF @version < 0 OR @version > 7
 		BEGIN
@@ -208,7 +208,7 @@ BEGIN
 					WHILE @currentVersion < @version 
 						BEGIN
 							-- execute the direct stored procedures
-							PRINT 'The current version is: ' + CAST(@currentVersion AS varchar(10)) + ' where version is: ' + CAST(@version AS varchar(10))
+							PRINT 'The current version is: ' + CAST(@currentVersion AS VARCHAR(10)) + ' where version is: ' + CAST(@version AS VARCHAR(10))
 
 							-- tip: proTabID = @currentVersion + 1 because the first version is 0 
 							-- tip: the first procedure is in the second row of the table
@@ -230,7 +230,7 @@ BEGIN
 						WHILE @currentVersion > @version 
 							BEGIN
 								-- execute the reverse stored procedures
-								PRINT 'The current version is: ' + CAST(@currentVersion AS varchar(10)) + ' where version is: ' + CAST(@version AS varchar(10))
+								PRINT 'The current version is: ' + CAST(@currentVersion AS VARCHAR(10)) + ' where version is: ' + CAST(@version AS VARCHAR(10))
 
 								-- tip: the second procedure of the current version is the first procedure of the previous version  
 								-- tip: not the first procedure of the current version
@@ -249,13 +249,13 @@ BEGIN
 					IF @version = @currentVersion
 						BEGIN
 							-- print a corresponfing message
-							PRINT 'You are already on this version, because ' + CAST(@currentVersion AS varchar(10)) + ' = ' + CAST(@version AS varchar(10))
+							PRINT 'You are already on this version, because ' + CAST(@currentVersion AS VARCHAR(10)) + ' = ' + CAST(@version AS VARCHAR(10))
 							RETURN
 						END
 
 			-- 4. update the new version in the version table
 			UPDATE Current_Version SET currentVersion = @currentVersion
-			PRINT 'The current version has been updated to: ' + CAST(@currentVersion AS varchar(10))
+			PRINT 'The current version has been updated to: ' + CAST(@currentVersion AS VARCHAR(10))
 		END
 END
 
