@@ -1,4 +1,6 @@
+GO
 USE AppleStore
+GO
 
 -- INSERT STATEMENTS
 INSERT INTO Categories(catName) VALUES ('MacBook')
