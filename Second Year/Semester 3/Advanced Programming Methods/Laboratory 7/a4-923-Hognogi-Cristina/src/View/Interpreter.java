@@ -194,41 +194,6 @@ public class Interpreter {
             e.printStackTrace();
         }
 
-        InterStatement ex10 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
-                new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
-                        new CompStatement( new PrintStatement(new ReadHeapExpression(new VarExpression("v"))),
-                                new CompStatement(new Model.Statement.WriteHeapStatement("v", new ValueExpression(new IntValue(30))),
-                                        new PrintStatement(new ArithExpression('+', new ReadHeapExpression(new VarExpression("v")), new ValueExpression(new IntValue(5))))))));
-
-        ProgramState prg10 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex10);
-        InterRepository repo10;
-
-        try {
-            repo10 = new Repository(prg10, "log10.txt");
-            Controller controller10 = new Controller(repo10);
-            menu.addCommand(new RunExaCommand("10", ex10.toString(), controller10));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        InterStatement ex11 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
-                new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
-                        new CompStatement(new DeclStatement("a", new RefType(new RefType(new IntType()))),
-                                new CompStatement(new Model.Statement.NewStatement("a", new VarExpression("v")),
-                                        new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(30))),
-                                                new PrintStatement(new ReadHeapExpression(new ReadHeapExpression(new VarExpression("a")))))))));
-
-        ProgramState prg11 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex11);
-        InterRepository repo11;
-
-        try {
-            repo11 = new Repository(prg11, "log11.txt");
-            Controller controller11 = new Controller(repo11);
-            menu.addCommand(new RunExaCommand("11", ex11.toString(), controller11));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         // add the commands to the menu
         menu.show();
     }
