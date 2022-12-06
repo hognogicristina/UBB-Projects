@@ -11,7 +11,7 @@ class Lista:
         self.prim = None
 
 '''
-functia de adaugare la final
+function add at the end
 '''
 def adaugaE(nod, elem):
     if nod.urm == None:
@@ -21,7 +21,7 @@ def adaugaE(nod, elem):
         adaugaE(nod.urm, elem)
 
 '''
-functia de concatenare
+function concatenate
 '''
 def concat(list1, list2):
     if list1.prim == None:
@@ -38,7 +38,7 @@ def concatR(nod, list2):
 
 
 '''
-crearea unei liste din valori citite pana la 0
+create a list from values read until 0
 '''
 def creareLista():
     lista = Lista()
@@ -55,7 +55,7 @@ def creareLista_rec():
         return nod
     
 '''
-tiparirea elementelor unei liste
+print the elements of a list
 '''
 def tipar(lista):
     tipar_rec(lista.prim)
@@ -66,7 +66,7 @@ def tipar_rec(nod):
         tipar_rec(nod.urm)
 
 '''
-functia pentru testare
+function test
 '''
 def test():
     list1 = Lista()
@@ -92,7 +92,7 @@ def test():
     assert list1.prim.urm.urm.urm.urm.urm.urm.e == 6
     
 '''
-program pentru test
+program main
 '''   
 def main():
     test()
