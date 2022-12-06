@@ -29,14 +29,17 @@
 ; dot product of two vectors: [1, 3, -5] * [1, 3, -5] = 1*1 + 3*3 + (-5)*(-5) = 35
 ; for command line: (myDotProduct '(1 3 -5) '(1 3 -5)) => 35
 
+
+
 (defun myDotProduct (v1 v2)
     (cond ((null v1) 0)
           ((null v2) 0)
+          ((not (equal (length v1) (length v2))) -1)
           (t (+ (* (car v1) (car v2)) (myDotProduct (cdr v1) (cdr v2))))))
 
 ; b. Write a function to return the depth of a list. Example: the depth of a linear list is 1. 
 ; for command line: (myMain '(1 2 3)) => 1 (linear list)
-; for command line: (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) => 4 (nested list)
+; for command line: (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420)) 1) (23 4 5) (1))) => 4 (nested list)
 
 (defun myMax (a b)
     (cond ((> a b) a)
@@ -73,6 +76,7 @@
 
 (defun myIntersection (l p)
     (cond ((null l) nil)
+          ((null p) nil)
           ((myContains (car l) p) (cons (car l) (myIntersection (cdr l) p)))
           (t (myIntersection (cdr l) p))))
 
@@ -82,20 +86,31 @@
 
 ; a.
 (defun myTestA ()
-    (cond ((equal (myDotProduct '(1 3 -5) '(1 3 -5)) 35) t)))
+    (cond ((equal (myDotProduct '(1 3 -5) '(1 3 -5)) 35) t)
+          ((equal (myDotProduct '(1 3 -5) '(1 3)) -1) t)
+          ((equal (myDotProduct '(1 3 -5) '(0)) 0) t)
+          ((equal (myDotProduct '(7 8) '(1 3)) 6) nil)))
 
 ; b.
 (defun myTestB ()
     (cond ((equal (myMain '(1 2 3)) 1) t)
-          ((equal (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) 4) t)))
+          ((equal (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420)) 1) (23 4 5) (1))) 4) t)
+          ((equal (myMain '(1 2 (3) 4)) 1) nil)
+          ((equal (myMain '(1 2 (3 4 (3)) 2 (9 7 (3 6 (1))) 1)) 3) nil)))
 
 ; c.
 (defun myTestC ()
-    (cond ((equal (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) '(1 2 3 4 5 6 7 9 23 35 81)) t)))
+    (cond ((equal (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) '(1 2 3 4 5 6 7 9 23 35 81)) t)
+          ((equal (mySort '(5 6 3 8 9 1 2 7 6 2 7)) '(1 2 3 5 6 7 8 9)) t)
+          ((equal (mySort '(5 6 3 8 9 1 2 7 6 2 7)) '(1 2 2 3 5 6 6 7 7 8 9)) nil)
+          ((equal (mySort '(5 6 3 8 9 1 2 7 6 2 7)) '(5 6 3 8 9 1 2 7 6 2 7)) nil)))
 
 ; d.
 (defun myTestD ()
-    (cond ((equal (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) '(7 9)) t)))
+    (cond ((equal (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) '(7 9)) t)
+          ((equal (myIntersection '(3 7) '(9 2)) '(nil)) t)
+          ((equal (myIntersection '(3 7) '(9 2)) '(3 7)) nil)
+          ((equal (myIntersection '(3 7) '(0)) '(3 7)) nil)))
 
 ; test all functions
 (defun myTestAll ()
