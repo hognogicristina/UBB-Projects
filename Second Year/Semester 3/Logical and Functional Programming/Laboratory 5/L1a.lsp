@@ -19,7 +19,7 @@
 ; cons = construct a list from two arguments (first element and rest of the list)
 ; list = construct a list from a sequence of arguments (first element, second element, third element, ...)
 ; equal = test if two arguments are equal (returns t if they are equal)
-; NIL = null value (empty list)
+; nil = null value (empty list)
 
 ; -----------------------------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@
 
 (defun mySort (l)
     (cond
-        ((null l) NIL)
+        ((null l) nil)
         (t (myInsert (mySort (cdr l)) (car l)))
     )
 )
@@ -84,7 +84,7 @@
 
 (defun myContains (e l)
     (cond
-        ((null l) NIL)
+        ((null l) nil)
         ((equal (car l) e) t)
         (t (myContains e (cdr l)))
     )
@@ -92,7 +92,7 @@
 
 (defun myIntersection (l p)
     (cond
-        ((null l) NIL)
+        ((null l) nil)
         ((myContains (car l) p) (cons (car l) (myIntersection (cdr l) p)))
         (t (myIntersection (cdr l) p))
     )
