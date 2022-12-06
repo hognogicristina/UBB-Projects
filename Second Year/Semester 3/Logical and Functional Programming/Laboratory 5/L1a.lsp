@@ -29,8 +29,6 @@
 ; dot product of two vectors: [1, 3, -5] * [1, 3, -5] = 1*1 + 3*3 + (-5)*(-5) = 35
 ; for command line: (myDotProduct '(1 3 -5) '(1 3 -5)) => 35
 
-
-
 (defun myDotProduct (v1 v2)
     (cond ((null v1) 0)
           ((null v2) 0)
