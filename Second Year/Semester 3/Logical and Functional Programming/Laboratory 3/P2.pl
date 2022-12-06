@@ -2,7 +2,8 @@
 
 % PROBLEM AREA
 
-/* 9.
+/* 
+9.
 a. For a list of integer number, write a predicate to add in list after 1-st, 3-rd, 7-th, 15-th element a given value e.
 b. For a heterogeneous list, formed from integer numbers and list of numbers; add in every sublist after 1-st, 3-rd, 7-th, 15-th element 
 the value found before the sublist in the heterogenous list. The list has the particularity that starts with a number and there aren’t 
@@ -101,7 +102,6 @@ addElemHetero([H|T], _, R):-
 
 % a.
 % for command line: testAddElem.
-
 testAddElem:- 
     addElem([1, 2], 22, 1, [1, 22, 2]),
     addElem([1, 2, 3], 22, 1, [1, 22, 2, 3, 22]),
@@ -119,7 +119,6 @@ testAddElemModif:-
 
 % b.
 % for command line: testAddElemHetero.
-
 testAddElemHetero:-
     addElemHetero([1, [2, 3]], 0, [1, [2, 1, 3]]),
     addElemHetero([1, [2, 3], 7, [4, 1, 4], 5], 0, [1, [2, 1, 3], 7, [4, 7, 1, 4, 7], 5]),

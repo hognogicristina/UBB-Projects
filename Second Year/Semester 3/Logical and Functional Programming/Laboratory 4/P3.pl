@@ -43,7 +43,6 @@ allSols(N, L):-
 % TESTS AREA
 
 % for command line: testAllSols.
-
 testAllSols:-
     allSols(15, [[1, 2, 3, 4, 5], [4, 5, 6], [7, 8]]),
     allSols(30, [[4, 5, 6, 7, 8], [6, 7, 8, 9], [9, 10, 11]]),

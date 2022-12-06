@@ -10,7 +10,8 @@
 
 % LEGEND AREA
 
-/* Legend to help me:
+/* 
+    Legend to help me:
     . means "end of the line" 
     :- means "if"
     ! means that the function stops/cuts (like a break)
@@ -48,6 +49,7 @@ intersection([_|T], L2, R):-
 % integer(A: int, B: int, R: list)
 % flow model (i, i, o), (i, i, i)
 % for command line: integer(-3, 5, R).
+% modification: reverse mode
 
 integer(A, B, [A|R]):-
     A > B,
