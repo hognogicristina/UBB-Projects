@@ -30,73 +30,51 @@
 ; for command line: (myDotProduct '(1 3 -5) '(1 3 -5)) => 35
 
 (defun myDotProduct (v1 v2)
-    (cond
-        ((null v1) 0)
-        (t (+ (* (car v1) (car v2)) (myDotProduct (cdr v1) (cdr v2))))
-    )
-)
+    (cond ((null v1) 0)
+          ((null v2) 0)
+          (t (+ (* (car v1) (car v2)) (myDotProduct (cdr v1) (cdr v2))))))
 
 ; b. Write a function to return the depth of a list. Example: the depth of a linear list is 1. 
 ; for command line: (myMain '(1 2 3)) => 1 (linear list)
 ; for command line: (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) => 4 (nested list)
 
 (defun myMax (a b)
-    (cond
-        ((> a b) a)
-        (t b)
-    )
-)
+    (cond ((> a b) a)
+          (t b)))
 
 (defun myFindDepth (l c)
-    (cond
-        ((null l) c)
-        ((listp (car l)) (myMax (myFindDepth (car l) (+ c 1)) (myFindDepth (cdr l) c)))
-        (t (myFindDepth (cdr l) c))
-    )
-)
+    (cond ((null l) c)
+          ((listp (car l)) (myMax (myFindDepth (car l) (+ c 1)) (myFindDepth (cdr l) c)))
+          (t (myFindDepth (cdr l) c))))
 
 (defun myMain (l)
-    (cond (t (myFindDepth l 1)))
-)
+    (cond (t (myFindDepth l 1))))
 
 ; c. Write a function to sort a linear list without keeping the double values.
 ; for command line: (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) => (1 2 3 4 5 6 7 9 23 35 81)
 
 (defun myInsert (l e)
-    (cond
-        ((null l) (list e))
-        ((= (car l) e) l)
-        ((< e (car l)) (cons e l))
-        (t (cons (car l) (myInsert(cdr l) e)))
-    )
-)
+    (cond ((null l) (list e))
+          ((= (car l) e) l)
+          ((< e (car l)) (cons e l))
+          (t (cons (car l) (myInsert(cdr l) e)))))
 
 (defun mySort (l)
-    (cond
-        ((null l) nil)
-        (t (myInsert (mySort (cdr l)) (car l)))
-    )
-)
-
+    (cond ((null l) nil)
+          (t (myInsert (mySort (cdr l)) (car l)))))
 
 ; d. Write a function to return the intersection of two sets.
 ; for command line: (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) => (7 9)
 
 (defun myContains (e l)
-    (cond
-        ((null l) nil)
-        ((equal (car l) e) t)
-        (t (myContains e (cdr l)))
-    )
-)
+    (cond ((null l) nil)
+          ((equal (car l) e) t)
+          (t (myContains e (cdr l)))))
 
 (defun myIntersection (l p)
-    (cond
-        ((null l) nil)
-        ((myContains (car l) p) (cons (car l) (myIntersection (cdr l) p)))
-        (t (myIntersection (cdr l) p))
-    )
-)
+    (cond ((null l) nil)
+          ((myContains (car l) p) (cons (car l) (myIntersection (cdr l) p)))
+          (t (myIntersection (cdr l) p))))
 
 ; -----------------------------------------------------------------------------------------------------
 
@@ -104,39 +82,24 @@
 
 ; a.
 (defun myTestA ()
-    (cond
-        ((equal (myDotProduct '(1 3 -5) '(1 3 -5)) 35) t)
-    )
-)
+    (cond ((equal (myDotProduct '(1 3 -5) '(1 3 -5)) 35) t)))
 
 ; b.
 (defun myTestB ()
-    (cond
-        ((equal (myMain '(1 2 3)) 1) t)
-        ((equal (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) 4) t)
-    )
-)
+    (cond ((equal (myMain '(1 2 3)) 1) t)
+          ((equal (myMain '(1 2 (2 3 4) (1 2 3 (4 5 (69 420 )) 1) (23 4 5) (1))) 4) t)))
 
 ; c.
 (defun myTestC ()
-    (cond
-        ((equal (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) '(1 2 3 4 5 6 7 9 23 35 81)) t)
-    )
-)
+    (cond ((equal (mySort '(3 6 2 9 3 4 7 5 1 9 2 3 81 35 23)) '(1 2 3 4 5 6 7 9 23 35 81)) t)))
 
 ; d.
 (defun myTestD ()
-    (cond
-        ((equal (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) '(7 9)) t)
-    )
-)
+    (cond ((equal (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) '(7 9)) t)))
 
 ; test all functions
 (defun myTestAll ()
-    (cond
-        ((and (myTestA) (myTestB) (myTestC) (myTestD)) t)
-    )
-)
+    (cond ((and (myTestA) (myTestB) (myTestC) (myTestD)) t)))
 
 ; -----------------------------------------------------------------------------------------------------
 
