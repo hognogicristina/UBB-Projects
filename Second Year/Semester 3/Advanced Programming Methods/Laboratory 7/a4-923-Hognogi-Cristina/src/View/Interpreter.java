@@ -120,15 +120,11 @@ public class Interpreter {
             e.printStackTrace();
         }
 
-        InterStatement ex6 = new CompStatement(new DeclStatement("varf", new StringType()),
-                new CompStatement(new AssignStatement("varf", new ValueExpression(new StringValue("test.in"))),
-                        new CompStatement(new OpenReadFile(new VarExpression("varf")),
-                                new CompStatement(new DeclStatement("varc", new IntType()),
-                                        new CompStatement(new ReadFile(new VarExpression("varf"), "varc"),
-                                                new CompStatement(new PrintStatement(new VarExpression("varc")),
-                                                        new CompStatement(new ReadFile(new VarExpression("varf"), "varc"),
-                                                                new CompStatement(new PrintStatement(new VarExpression("varc")),
-                                                                        new CompStatement(new CloseReadFile(new VarExpression("varf")), new CloseReadFile(new VarExpression("varf")))))))))));
+        InterStatement ex6 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
+                new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
+                        new CompStatement(new DeclStatement("a", new RefType(new RefType(new IntType()))),
+                                new CompStatement(new Model.Statement.NewStatement("a", new VarExpression("v")),
+                                        new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new VarExpression("a")))))));
 
         ProgramState prg6 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex6);
         InterRepository repo6;
@@ -141,12 +137,12 @@ public class Interpreter {
             e.printStackTrace();
         }
 
-        InterStatement ex7 = new CompStatement(new DeclStatement("v", new IntType()),
-                new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(4))),
-                        new CompStatement(new Model.Statement.WhileStatement(new RelatExpression(">", new VarExpression("v"), new ValueExpression(new IntValue(0))),
-                                new CompStatement(new PrintStatement(new VarExpression("v")), new AssignStatement("v",new ArithExpression('-', new VarExpression("v"), new ValueExpression(new IntValue(1)))))),
-                                new PrintStatement(new VarExpression("v")))));
-
+        InterStatement ex7 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
+                new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
+                        new CompStatement(new DeclStatement("a", new RefType(new RefType(new IntType()))),
+                                new CompStatement(new Model.Statement.NewStatement("a", new VarExpression("v")),
+                                        new CompStatement(new PrintStatement(new ReadHeapExpression(new VarExpression("v"))),
+                                                new PrintStatement(new ArithExpression('+',new ReadHeapExpression(new ReadHeapExpression(new VarExpression("a"))), new ValueExpression(new IntValue(5)))))))));
 
         ProgramState prg7 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex7);
         InterRepository repo7;
@@ -157,13 +153,13 @@ public class Interpreter {
             menu.addCommand(new RunExaCommand("7", ex7.toString(), controller7));
         } catch (IOException e) {
             e.printStackTrace();
-        };
+        }
 
         InterStatement ex8 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
                 new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
-                        new CompStatement(new DeclStatement("a", new RefType(new RefType(new IntType()))),
-                                new CompStatement(new Model.Statement.NewStatement("a", new VarExpression("v")),
-                                        new CompStatement(new PrintStatement(new VarExpression("v")), new PrintStatement(new VarExpression("a")))))));
+                        new CompStatement( new PrintStatement(new ReadHeapExpression(new VarExpression("v"))),
+                                new CompStatement(new Model.Statement.WriteHeapStatement("v", new ValueExpression(new IntValue(30))),
+                                        new PrintStatement(new ArithExpression('+', new ReadHeapExpression(new VarExpression("v")), new ValueExpression(new IntValue(5))))))));
 
         ProgramState prg8 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex8);
         InterRepository repo8;
@@ -180,8 +176,8 @@ public class Interpreter {
                 new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
                         new CompStatement(new DeclStatement("a", new RefType(new RefType(new IntType()))),
                                 new CompStatement(new Model.Statement.NewStatement("a", new VarExpression("v")),
-                                        new CompStatement(new PrintStatement(new ReadHeapExpression(new VarExpression("v"))),
-                                                new PrintStatement(new ArithExpression('+',new ReadHeapExpression(new ReadHeapExpression(new VarExpression("a"))), new ValueExpression(new IntValue(5)))))))));
+                                        new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(30))),
+                                                new PrintStatement(new ReadHeapExpression(new ReadHeapExpression(new VarExpression("a")))))))));
 
         ProgramState prg9 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex9);
         InterRepository repo9;
@@ -193,6 +189,24 @@ public class Interpreter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        InterStatement ex10 = new CompStatement(new DeclStatement("v", new IntType()),
+                new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(4))),
+                        new CompStatement(new Model.Statement.WhileStatement(new RelatExpression(">", new VarExpression("v"), new ValueExpression(new IntValue(0))),
+                                new CompStatement(new PrintStatement(new VarExpression("v")), new AssignStatement("v",new ArithExpression('-', new VarExpression("v"), new ValueExpression(new IntValue(1)))))),
+                                new PrintStatement(new VarExpression("v")))));
+
+
+        ProgramState prg10 = new ProgramState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyHeap(), ex10);
+        InterRepository repo10;
+
+        try {
+            repo10 = new Repository(prg10, "log10.txt");
+            Controller controller10 = new Controller(repo10);
+            menu.addCommand(new RunExaCommand("10", ex10.toString(), controller10));
+        } catch (IOException e) {
+            e.printStackTrace();
+        };
 
         // add the commands to the menu
         menu.show();

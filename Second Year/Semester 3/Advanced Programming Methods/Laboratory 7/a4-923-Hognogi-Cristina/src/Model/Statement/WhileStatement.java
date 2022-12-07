@@ -10,9 +10,10 @@ import Model.Utilities.InterStack;
 import Model.Value.BoolValue;
 import Model.Value.InterValue;
 
+/* Class that represents the While statement */
 public class WhileStatement implements InterStatement{
-    private final InterExpression expression;
-    private final InterStatement statement;
+    private final InterExpression expression; /* expression that must be true to execute the statement */
+    private final InterStatement statement; /* statement to be executed while the expression is true */
 
     public WhileStatement(InterExpression expression, InterStatement statement) {
         this.expression = expression;
@@ -21,6 +22,7 @@ public class WhileStatement implements InterStatement{
 
     @Override
     public ProgramState execute(ProgramState state) throws StatExeExecption, ExpEvalException, UtilitsException {
+        /* evaluate the expression */
         InterValue value = expression.eval(state.getSymTable(), state.getHeap());
         InterStack<InterStatement> stack = state.getExeStack();
 
@@ -30,7 +32,7 @@ public class WhileStatement implements InterStatement{
         if (!(value instanceof BoolValue))
             throw new StatExeExecption(String.format("%s is not a BoolValue", value));
 
-        BoolValue boolValue = (BoolValue) value;
+        BoolValue boolValue = (BoolValue) value; /* cast the value to BoolValue */
 
         if (boolValue.getVal()) {
             stack.push(statement);
