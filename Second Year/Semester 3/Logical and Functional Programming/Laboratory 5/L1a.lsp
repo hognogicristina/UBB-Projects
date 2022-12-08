@@ -43,6 +43,7 @@
     (cond ((> a b) a)
           (t b)))
 
+; c is the current depth, l is the list
 (defun myFindDepth (l c)
     (cond ((null l) c)
           ((listp (car l)) (myMax (myFindDepth (car l) (+ c 1)) (myFindDepth (cdr l) c)))
@@ -64,7 +65,7 @@
     (cond ((null l) nil)
           (t (myInsert (mySort (cdr l)) (car l)))))
 
-; d. Write a function to return the intersection of two sets.
+; d. Write a function to return the intersection of two sets (no duplicates).
 ; for command line: (myIntersection '(3 7 8 56 9) '(9 2 7 5 6 11)) => (7 9)
 
 (defun myContains (e l)

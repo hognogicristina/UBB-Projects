@@ -31,7 +31,7 @@
     (cond ((null l) 0)
           (t (+ 1 (myMax (myGetDepth (cadr l)) (myGetDepth (caddr l)))))))
 
-; myBallanced returns true if the difference between the depth of two subtrees is equal to 1 
+; myBallanced returns true if the difference between the depth of two subtrees is equal to 1 or 0 
 (defun myBallanced (l)
     (cond ((null l) t)
           ((> (myDiff (myGetDepth (cadr l)) (myGetDepth (caddr l))) 1) nil)
@@ -43,8 +43,12 @@
 
 (defun myTest ()
     (cond ((equal (myBallanced '(A)) t) t)
-          ((equal (myBallanced '(A (B (C)) () (D))) t) t)
-          ((equal (myBallanced '(A (B (C)) () ())) nil) t)
-          ((equal (myBallanced '(A (B (C)) () (D (E () (F () (G))) ()))) nil) t)))
+          ((equal (myBallanced '(A (B (C)) (D))) t) t)
+          ((equal (myBallanced '(A (B () (D)) (C (E)))) t) t)
+          ((equal (myBallanced '(A (B (C) (E)) (D))) t) t)
+          ((equal (myBallanced '(A (B (C)))) nil) t)
+          ((equal (myBallanced '(A (B (C)) (D (E () (F () (G)))))) nil) t)
+          ((equal (myBallanced '(A (B (C () (G))) (D (E () (F (H)))))) nil) t)
+          ((equal (myBallanced '(A (B (C) (G)) (D (E () (F))))) nil) t)))
 
 ; -----------------------------------------------------------------------------------------------------
