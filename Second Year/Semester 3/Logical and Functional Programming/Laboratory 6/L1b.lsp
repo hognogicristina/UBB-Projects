@@ -35,6 +35,7 @@
 (defun myBallanced (l)
     (cond ((null l) t)
           ((> (myDiff (myGetDepth (cadr l)) (myGetDepth (caddr l))) 1) nil)
+          ((= (myDiff (myGetDepth (cadr l)) (myGetDepth (caddr l))) 0) nil)
           (t (and (myBallanced (cadr l)) (myBallanced (caddr l))))))
 
 ; -----------------------------------------------------------------------------------------------------
@@ -44,8 +45,7 @@
 (defun myTest ()
     (cond ((equal (myBallanced '(A)) t) t)
           ((equal (myBallanced '(A (B (C)) (D))) t) t)
-          ((equal (myBallanced '(A (B () (D)) (C (E)))) t) t)
-          ((equal (myBallanced '(A (B (C) (E)) (D))) t) t)
+          ((equal (myBallanced '(A (B) (C (D)))) t) t)
           ((equal (myBallanced '(A (B (C)))) nil) t)
           ((equal (myBallanced '(A (B (C)) (D (E () (F () (G)))))) nil) t)
           ((equal (myBallanced '(A (B (C () (G))) (D (E () (F (H)))))) nil) t)
