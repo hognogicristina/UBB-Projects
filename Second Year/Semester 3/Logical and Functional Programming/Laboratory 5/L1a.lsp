@@ -97,7 +97,6 @@
         (equal (myDotProduct '(1 3 -5) '()) 0) ; true
         (equal (myDotProduct '(7 8) '(1 3)) 6))) ; false
     
-
 ; b.
 (defun myTestB ()
     (and 
@@ -124,7 +123,6 @@
         ; modification
         (equal (myIntersection '(3 7 8 8 9) '(9 2 7 5 7 11)) '(7 9)); true
         (equal (myIntersection '(3 7 8 7 9) '(2 7 5 7 11)) '(7 7)))) ; false
-
 
 ; test all functions
 (defun myTestAll ()

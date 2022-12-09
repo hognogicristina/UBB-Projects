@@ -33,7 +33,7 @@
 
 ; myBalanced returns true if the difference between the depth of two subtrees is equal to 1 or 0
 (defun myBalanced (l)
-    (cond ((null l) t)
+    (cond ((null l) nil)
           ((> (myDiff (myGetDepth (cadr l)) (myGetDepth (caddr l))) 1) nil)
           (t (and (myBalanced (cadr l)) (myBalanced (caddr l))))))
 
