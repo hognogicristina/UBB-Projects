@@ -166,23 +166,25 @@ AS
 BEGIN
 	-- I. Delete 3 tables: Available_Model, Products, Colour
 	DECLARE @testID INT
+	DECLARE @testName VARCHAR(100)
 
 	-- declare a cursor for delete where TestID is even (delete procedures)
 	DECLARE deleteCursor CURSOR FOR
-	SELECT TestID FROM TestTables WHERE TestID % 2 = 0
-	ORDER BY Position ASC 
+	SELECT T1.Name, T2.TestID FROM Tests T1 JOIN TestTables T2 ON T1.TestID = T2.TestID 
+	WHERE T1.Name LIKE 'delete%'
+	ORDER BY Position
 	
 	OPEN deleteCursor 
-	FETCH deleteCursor INTO @testID
+	FETCH deleteCursor INTO @testName, @testID
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN 
 		-- get the name of the test to be run
-		DECLARE @deleteName VARCHAR(100) = (SELECT Name FROM Tests WHERE TestID = @testID)
+		DECLARE @deleteName VARCHAR(100) = (SELECT Name FROM Tests WHERE TestID = @testID AND Name = @testName)
 		EXEC @deleteName
 
 		-- code that processes @testID
-		FETCH deleteCursor INTO @testID
+		FETCH deleteCursor INTO @testName, @testID
 	END
 
 	CLOSE deleteCursor
@@ -197,20 +199,22 @@ BEGIN
 	DECLARE @testID INT
 	DECLARE @tableID INT
 	DECLARE @nrOfRows INT 
+	DECLARE @testName VARCHAR(100)
 
 	-- declare a cursor for delete where TestID is odd (insert procedures) from where you select TableID and NoOfRows 
 	-- because we need to know where will the insert be made and how many rows are there to use
 	DECLARE insertCursor CURSOR FOR
-	SELECT TestID, TableID, NoOfRows FROM TestTables WHERE TestID % 2 = 1
-	ORDER BY Position ASC 
+	SELECT T1.Name, T2.TestID, T2.TableID, T2.NoOfRows FROM Tests T1 JOIN TestTables T2 ON T1.TestID = T2.TestID
+	WHERE T1.Name LIKE 'add%'
+	ORDER BY Position
 	
 	OPEN insertCursor 
-	FETCH insertCursor INTO @testID, @tableID, @nrOfRows
+	FETCH insertCursor INTO @testName, @testID, @tableID, @nrOfRows
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN 
 		-- get the name of the test to be run
-		DECLARE @insertName VARCHAR(100) = (SELECT Name FROM Tests WHERE TestID = @testID)
+		DECLARE @insertName VARCHAR(100) = (SELECT Name FROM Tests WHERE TestID = @testID AND Name = @testName)
 
 		-- declare a time for when the insert tests start
 		DECLARE @startAt DATETIME = GETDATE()
@@ -224,7 +228,7 @@ BEGIN
 		INSERT INTO TestRunTables(TestRunID, TableID, StartAt, EndAt) VALUES (@runTableID, @tableID, @startAt, @endAt)
 
 		-- code that processes @testID, @tableID, @nrOfRows
-		FETCH insertCursor INTO @testID, @tableID, @nrOfRows
+		FETCH insertCursor INTO @testName, @testID, @tableID, @nrOfRows
 	END
 
 	CLOSE insertCursor
