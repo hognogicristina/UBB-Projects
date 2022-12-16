@@ -152,10 +152,7 @@ INSERT INTO Tests(Name) VALUES ('addColour'), ('deleteColour'), ('addModel'), ('
 INSERT INTO Tables(Name) VALUES ('Colour'), ('Model'), ('Products'), ('Available_Model')
 INSERT INTO Views(Name) VALUES ('nameColour'), ('coloursAndProducts'), ('groupColourByModel')
 INSERT INTO TestViews(TestID, ViewID) VALUES (9, 1), (9, 2), (9, 3)
-INSERT INTO TestTables(TestID, TableID, NoOfRows, Position) VALUES (2, 1, 900, 4), (1, 1, 400, 1), 
-																	(4, 2, 800, 3), (3, 2, 500, 2), 
-																	(6, 3, 700, 2), (5, 3, 600, 3),
-																	(8, 4, 1000, 1), (7, 4, 1100, 4)
+INSERT INTO TestTables(TestID, TableID, NoOfRows, Position) VALUES (2, 1, 900, 4), (1, 1, 400, 1), (4, 2, 800, 3), (3, 2, 500, 2), (6, 3, 700, 2), (5, 3, 600, 3), (8, 4, 1000, 1), (7, 4, 1100, 4)
 
 SELECT * FROM Tests
 SELECT * FROM Tables
