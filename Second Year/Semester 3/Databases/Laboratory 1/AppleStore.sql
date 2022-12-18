@@ -93,8 +93,9 @@ CREATE TABLE Customers (
 	-- 1(customer):n(orders)
 	cusID INT PRIMARY KEY IDENTITY,
 	cusName VARCHAR(100) NOT NULL,
-	cusPhoneNr INT,
-	cusAdrres VARCHAR(200) NOT NULL
+	cusPhoneNr INT UNIQUE,
+	cusAdrres VARCHAR(200) NOT NULL, 
+	cusPoints INT
 );
 
 CREATE TABLE Orders (
