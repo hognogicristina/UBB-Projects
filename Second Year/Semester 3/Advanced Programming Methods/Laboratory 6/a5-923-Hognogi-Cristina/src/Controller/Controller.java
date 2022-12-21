@@ -34,7 +34,12 @@ public class Controller {
     }
 
     public void oneStepForAllPrograms(List<ProgramState> programStates) throws InterruptedException, ExpEvalException, UtilitsException, StatExeExecption, IOException {
-        // before the execution, print the PrgState List into the log file (the program states are printed in the log file)
+        /* before the execution, print the PrgState List into the log file:
+        - get the list of callables (each callable is a program state); map each program state to a callable; collect the list of callables
+        - run concurrently the callables; get the list of new created program states; get the program state
+        - remove the null program states; collect the list of new program states
+        - add the new program states to the list of existing program states */
+
         programStates.forEach(programState -> {
             try {
                 repo.logPrgStaExe(programState);
@@ -44,24 +49,26 @@ public class Controller {
             }
         });
 
-        List<Callable<ProgramState>> callList = programStates.stream() // get the list of callables (each callable is a program state)
-                .map((ProgramState p) -> (Callable<ProgramState>) (p::oneStep)) // map each program state to a callable
-                .collect(Collectors.toList()); // collect the list of callables
+        List<Callable<ProgramState>> callList = programStates.stream()
+                .map((ProgramState p) -> (Callable<ProgramState>) (p::oneStep))
+                .collect(Collectors.toList());
 
-        List<ProgramState> newProgramList = executorService.invokeAll(callList).stream() // run concurrently the callables
-                .map(future -> { // get the list of new created program states (completed execution)
+        List<ProgramState> newProgramList = executorService.invokeAll(callList).stream()
+                .map(future -> {
                     try {
-                        return future.get(); // get the program state
+                        return future.get();
                     } catch (ExecutionException | InterruptedException e) {
                         System.out.println(e.getMessage());
                     }
                     return null;
                 })
-                .filter(Objects::nonNull) // remove the null program states
-                .collect(Collectors.toList()); // collect the list of new program states
-        programStates.addAll(newProgramList); // add the new program states to the list of existing program states
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        programStates.addAll(newProgramList);
 
-        programStates.forEach(programState -> { // update the repository
+        System.out.println(newProgramList);
+
+        programStates.forEach(programState -> {
             try {
                 repo.logPrgStaExe(programState);
             } catch (IOException | UtilitsException e) {
@@ -69,7 +76,7 @@ public class Controller {
             }
         });
 
-        repo.setProgramStates(programStates); // update the repository
+        repo.setProgramStates(programStates);
     }
 
     public List<Integer> getAddrFromSymTable(Collection<InterValue> symTableValues) {
@@ -101,31 +108,38 @@ public class Controller {
     }
 
     public void conservativeGarbageCollector(List<ProgramState> programStates) {
-        // removes the unused values from the heap
-        List<Integer> symTableAddresses = Objects.requireNonNull(programStates.stream() // get the list of symbol table addresses
-                        .map(p -> getAddrFromSymTable(p.getSymTable().values())) // get the list of addresses from the symbol table values
-                        .map(Collection::stream) // map each list of addresses to a stream
-                        .reduce(Stream::concat).orElse(null)) // concatenate the streams
-                .collect(Collectors.toList()); // collect the list of addresses
-        programStates.forEach(p -> { // get the list of heap addresses
+        /* removes the unused values from the heap:
+        - get the list of symbol table addresses; get the list of addresses from the symbol table values
+        - map each list of addresses to a stream; concatenate the streams; collect the list of addresses
+        - get the list of heap addresses; update the heap */
+
+        List<Integer> symTableAddresses = Objects.requireNonNull(programStates.stream()
+                        .map(p -> getAddrFromSymTable(p.getSymTable().values()))
+                        .map(Collection::stream)
+                        .reduce(Stream::concat).orElse(null))
+                .collect(Collectors.toList());
+        programStates.forEach(p -> {
             p.getHeap().setContent((HashMap<Integer, InterValue>) safeGarbageCollector(symTableAddresses, getAddrFromHeap(p.getHeap().getContent().values()), p.getHeap().getContent()));
-            // update the heap
         });
     }
 
     public void allSteps() throws UtilitsException, StatExeExecption, ExpEvalException, IOException, InterruptedException {
-        // executes all the steps and displays the current state of the program
-        executorService = Executors.newFixedThreadPool(2); // create a new executor service with 2 threads
-        List<ProgramState> programStateList = removeCompletedPrograms(repo.getProgramList()); // get the list of program states from the repository
+        /* executes all the steps and displays the current state of the program:
+        - create a new executor service with 2 threads; get the list of program states from the repository
+        - while there are program states in the list; execute one step for all the program states
+        - get the list of program states from the repository; shutdown the executor service */
 
-        while (programStateList.size() > 0) { // while there are program states in the list
-            conservativeGarbageCollector(programStateList); // garbage collector
-            oneStepForAllPrograms(programStateList); // execute one step for all the program states
-            programStateList = removeCompletedPrograms(repo.getProgramList()); // get the list of program states from the repository
+        executorService = Executors.newFixedThreadPool(2);
+        List<ProgramState> programStateList = removeCompletedPrograms(repo.getProgramList());
+
+        while (programStateList.size() > 0) {
+            conservativeGarbageCollector(programStateList);
+            oneStepForAllPrograms(programStateList);
+            programStateList = removeCompletedPrograms(repo.getProgramList());
         }
 
-        executorService.shutdownNow(); // shutdown the executor service
-        repo.setProgramStates(programStateList); // update the repository
+        executorService.shutdownNow();
+        repo.setProgramStates(programStateList);
     }
 
     private void display(ProgramState programState) {
