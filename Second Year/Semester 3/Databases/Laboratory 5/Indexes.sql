@@ -14,20 +14,82 @@ OBS:
 - We have a clustered index automatically created for the cid column from Tc
 */
 
+-- insert into Customers
+CREATE OR ALTER PROCEDURE insertCustomers
+@n INT
+AS
+BEGIN 
+	DECLARE @i INT = 0
+	WHILE @i < @n
+	BEGIN
+		INSERT INTO Customers(cusName, cusPhoneNr, cusAdrres, cusPoints) VALUES (CONCAT('Name', @i), @i, CONCAT('Address', @i), @i)
+		SET @i = @i + 1
+	END
+END
+GO
+
+-- insert into Products
+CREATE OR ALTER PROCEDURE insertProducts
+@n INT
+AS
+BEGIN 
+	DECLARE @i INT = 0
+	WHILE @i < @n
+	BEGIN
+		INSERT INTO Products(modID, colID, proName, proDescription, proRate) VALUES (1, 1, CONCAT('Name', @i), CONCAT('Description', @i), @i)
+		SET @i = @i + 1
+	END
+END
+GO
+
+-- insert into Orders
+CREATE OR ALTER PROCEDURE insertOrders
+@n INT
+AS
+BEGIN 
+	DECLARE @i INT = 0
+	WHILE @i < @n
+	BEGIN
+		INSERT INTO Orders(cusID, proID, ordDate, ordCode) VALUES (1, 1, '2022-12-21', @i)
+		SET @i = @i + 1
+	END
+END
+GO
+
+-- delete the inserts
+CREATE OR ALTER PROCEDURE deleteAll
+AS
+BEGIN	
+	DELETE FROM Orders WHERE ordDate LIKE '2022-12-21'
+	DELETE FROM Products WHERE proName LIKE 'Name%'
+	DELETE FROM Customers WHERE cusName LIKE 'Name%'
+END
+GO
+
+EXEC insertCustomers 5000
+EXEC insertProducts 5000
+EXEC insertOrders 5000
+
+SELECT * FROM Customers
+SELECT * FROM Products
+SELECT * FROM Orders
+
+EXEC deleteAll
+
 -- a. Write queries on Ta such that their execution plans contain the following operators:
 
 -- clustered index scan - scan the entire table
--- cost: 0.0032897
+-- cost: 0.0295304
 SELECT * FROM Customers
 ORDER BY cusID
 
 -- clustered index seek - return a specific subset of rows from a clustered index
--- cost: 0.0032875
+-- cost: 0.0295282
 SELECT * FROM Customers
 WHERE cusID > 2
 
 -- non-clustered index scan - scan the entire non-clustered index
--- cost: 0.0032897
+-- cost: 0.0154564
 SELECT cusPhoneNr FROM Customers
 ORDER BY cusPhoneNr
 
@@ -38,22 +100,22 @@ WHERE cusPhoneNr IN (756984132, 793467897, 711136910)
 
 -- key lookup 
 -- non-clustered index seek and key lookup - the data is found in a non-clustered index, but additional data is needed
--- cost: 0.0073873
+-- cost: 0.0065704
 SELECT cusPoints, cusPhoneNr FROM Customers
-WHERE cusPoints BETWEEN 10 AND 100
-ORDER BY cusPoints
+WHERE cusPhoneNr = 100
 
 -- b. Write a query on table Products with a WHERE clause of the form WHERE proRate = value and analyze its execution plan. 
 -- Create a non-clustered index that can speed up the query. Examine the execution plan again.
 
 -- a clustered index seek 
--- cost: 0.0069237
+-- cost: 0.0332451
 SELECT * FROM Products
-WHERE proRate = 3
+WHERE proRate = 500
 
 -- a non-clustered index seek 
--- cost: 0.0069237
+-- cost: 0.0065704
 CREATE NONCLUSTERED INDEX Products_proRate_index ON Products(proRate)
+DROP INDEX Products_proRate_index ON Products
 
 -- c. Create a view that joins at least 2 tables. 
 -- Check whether existing indexes are helpful; if not, reassess existing indexes/ examine the cardinality of the tables.
@@ -64,43 +126,35 @@ AS
 	FROM Orders O 
 	INNER JOIN Customers C ON C.cusID = O.cusID
 	INNER JOIN Products P ON P.proID = O.proID
-	WHERE P.proRate > 0 AND C.cusPoints < 200
+	WHERE P.proRate > 0 AND C.cusPoints < 500
 GO
 
 -- the automatically created ones
--- cost: 0.0124573
+-- cost: 0.198485
 SELECT * FROM allJoin
 
 -- the automatically created ones and a non-clustered index on proRate 
--- cost: 0.0124573
-SELECT * FROM allJoin
+-- cost: 0.188461
 
 -- the automatically created ones, a non-clustered index on proRate and a non-clustered index on cusPoints
--- cost: 0.0124573
+-- cost: 0.160367
 CREATE NONCLUSTERED INDEX Customers_cusPoints_index ON Customers(cusPoints)
-SELECT * FROM allJoin
-
--- the automatically created ones and a non-clustered index on cusPoints
--- cost: 0.0124573
-DROP INDEX Products_proRate_index ON Products
-SELECT * FROM allJoin
-
--- automatically created indexes, a non-clustered index on proRate and a non-clustered index on (cusID, proID) from Orders
--- cost: 0.0124573
-CREATE NONCLUSTERED INDEX Orders_index ON Orders(cusID, proID)
 DROP INDEX Customers_cusPoints_index ON Customers
-SELECT * FROM allJoin
-
--- the automatically created ones, a non-clustered index on cusPoints and a non-clustered index on (cusID, proID) from Orders
--- cost: 0.0121511
-SELECT * FROM allJoin
-
--- automatically created indexes and a non-clustered index on (cusID, proID) from Orders
--- cost: 0.0121544
-SELECT * FROM allJoin
 
 -- automatically created indexes, a non-clustered index on proRate, a non-clustered index on cusPoints
 -- and a non-clustered index on (cusID, proID) from Orders
--- cost: 0.121511
-SELECT * FROM allJoin
+-- cost: 0.154441
+CREATE NONCLUSTERED INDEX Orders_index ON Orders(cusID, proID)
 DROP INDEX Orders_index ON Orders
+
+-- the automatically created ones and a non-clustered index on cusPoints
+-- cost: 0.170391
+
+-- the automatically created ones, a non-clustered index on cusPoints and a non-clustered index on (cusID, proID) from Orders
+-- cost: 0.164465
+
+-- automatically created indexes and a non-clustered index on (cusID, proID) from Orders
+-- cost: 0.192559
+
+-- automatically created indexes, a non-clustered index on proRate and a non-clustered index on (cusID, proID) from Orders
+-- cost: 0.182535
