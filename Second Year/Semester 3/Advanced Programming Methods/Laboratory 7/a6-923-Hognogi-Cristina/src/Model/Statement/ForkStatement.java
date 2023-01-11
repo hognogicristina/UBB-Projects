@@ -23,7 +23,6 @@ public class ForkStatement implements InterStatement {
 
     @Override
     public ProgramState execute(ProgramState state) throws StatExeExecption, ExpEvalException, UtilitsException {
-        // create a new stack and a new symbol table for the new thread
         InterStack<InterStatement> newStack = new MyStack<>();
         newStack.push(statement);
         InterDictionary<String, InterValue> newSymTable = new MyDictionary<>();

@@ -139,7 +139,7 @@ public class Interpreter {
         }
 
         InterStatement ex7 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
-                new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new IntValue(20))),
+                new CompStatement(new Model.Statement.NewStatement("v", new ValueExpression(new BoolValue(true))),
                         new CompStatement(new DeclStatement("a", new RefType(new RefType(new IntType()))),
                                 new CompStatement(new Model.Statement.NewStatement("a", new VarExpression("v")),
                                         new CompStatement(new PrintStatement(new ReadHeapExpression(new VarExpression("v"))),
@@ -154,7 +154,7 @@ public class Interpreter {
             Controller controller7 = new Controller(repo7);
             menu.addCommand(new RunExaCommand("7", ex7.toString(), controller7));
         } catch (IOException | StatExeExecption | ExpEvalException | UtilitsException e) {
-            e.printStackTrace();
+            System.out.println("Type check failed for ex 7!");
         }
 
         InterStatement ex8 = new CompStatement(new DeclStatement("v", new RefType(new IntType())),
