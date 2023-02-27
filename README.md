@@ -35,9 +35,9 @@ This repository includes my homeworks and projects from college.
 <br>
 <li><b>4<sup>th</sup> Semester</b></li>
 <ul>
-	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Advanced%20Programming%20Methods">Artificial Intelligence</a></li>
-	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Computer%20Networks">Database Management Systems</a></li>
-	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Logical%20and%20Functional%20Programming">Software Engineering</a></li>
-	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Probabilities%20and%20Statistics">Systems for Design and Implementation</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Artificial%20Intelligence">Artificial Intelligence</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Database%20Management%20Systems">Database Management Systems</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Software%20Engineering">Software Engineering</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Systems%20for%20Design%20and%20Implementation">Systems for Design and Implementation</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Second%20Year/Semester%203/Web%20Programming">Web Programming</a></li>
 </ul>
