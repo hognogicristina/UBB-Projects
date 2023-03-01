@@ -3,7 +3,7 @@
 var repo = require("../repositories/repository.js")
 
 module.exports = {
-    gen: function () {
+    gen: function () { // generate 4 cats and add them to the repository
         repo.gen()
     },
 
