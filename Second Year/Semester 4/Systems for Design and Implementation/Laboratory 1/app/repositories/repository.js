@@ -1,9 +1,11 @@
+// Repository for the Cat model in which we define the CRUD operations
+
 const Cat = require("../models/model.js")
 
 var cats = []
 
 module.exports = {
-    gen: function () {
+    gen: function () { // generate some cats for testing
         cats = []
 
         let cat1 = new Cat(1, "Mittens", 3, 'white', 'Persian', 10)
@@ -17,17 +19,21 @@ module.exports = {
         cats.push(cat4)
     },
 
-    get: function () {
+    get: function () { // get all cats
         return cats
     },
 
-    create: function (id, name, age, color, breeds, weight) {
+    create: function (id, name, age, color, breeds, weight) { // create a new cat and add it to the array
         let newCat = new Cat(id, name, age, color, breeds, weight)
 
         cats.push(newCat)
     },
 
-    update: function (id, name, age, color, breeds, weight) {
+    delete: function (newCats) { // delete a cat by id and update the array
+        cats = newCats
+    },
+
+    update: function (id, name, age, color, breeds, weight) { // update a cat by id and update the array
         let index = cats.findIndex(el => el.id == id)
 
         cats[index] = {
@@ -38,9 +44,5 @@ module.exports = {
             breeds: breeds,
             weight: weight
 		}
-    },
-
-    delete: function (newCats) {
-        cats = newCats
     }
 }

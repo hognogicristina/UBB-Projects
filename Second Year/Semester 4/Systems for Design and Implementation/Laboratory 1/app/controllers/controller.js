@@ -1,24 +1,21 @@
+// Controller for cats in which we define the CRUD operations
+
 var repo = require("../repositories/repository.js")
 
 module.exports = {
-    get: function (_, res) {
-        res.send({
-            success: 1,
-            message: "Initial repository of cats",
-            data: repo.get()
-        })
+    gen: function () {
+        repo.gen()
     },
 
-    gen: function (_, res) {
-        repo.gen()
+    get: function (_, res) { // get all cats generated in the repository at the beginning        
         res.send({
-            success: 1,
+            success: true,
             message: "Repository of cats generated successfully",
             data: repo.get()
         })
     },
 
-    create: function (req, res) {
+    create: function (req, res) { // create a new cat and add it to the repository
         var id = repo.get().length + 1
         var name = req.body.name
         var age = req.body.age
@@ -29,12 +26,24 @@ module.exports = {
         repo.create(id, name, age, color, breeds, weight)
 
         res.send({
-            success: 1,
+            success: true,
             message: "Cat added successfully"
         })
     },
 
-    update: function (req, res) {
+    delete: function (req, res) { // delete a cat from the repository
+        var id = req.params.id
+        var newCats = repo.get().filter(el => el.id != id)
+
+        repo.delete(newCats)
+
+        res.send({
+            success: true,
+            message: "Cat deleted successfully"
+        })
+    },
+
+    update: function (req, res) { // update a cat from the repository
         var id = req.params.id
         var name = req.body.name
         var age = req.body.age
@@ -46,21 +55,9 @@ module.exports = {
             repo.update(id, name, age, color, breeds, weight)
 
             res.send({
-                success: 1,
+                success: true,
                 message: "Cat updated successfully"
             })
         }
-    },
-
-    delete: function (req, res) {
-        var id = req.params.id
-        var newCats = repo.get().filter(el => el.id != id)
-
-        repo.delete(newCats)
-
-        res.send({
-            success: 1,
-            message: "Cat deleted successfully"
-        })
     }
 }

@@ -1,3 +1,5 @@
+// Here we define the model for the cats table 
+
 module.exports = class Cats {
     constructor(id, name, age, color, breeds, weight) {
         this.id = id

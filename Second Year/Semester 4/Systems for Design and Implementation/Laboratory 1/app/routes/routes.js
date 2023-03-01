@@ -1,13 +1,12 @@
+// In routes we define the link for the operations and the controller that will handle the request
+
 module.exports = (app) => {
-    var controller = require("../controllers/controller.js")
+    const controller = require("../controllers/controller.js")
 
+    controller.gen()
+
+    app.get('/cats', controller.get)
     app.post('/cats/add', controller.create)
-
-    app.get('/cats/get', controller.get)
-
-    app.put('/cats/update/:id', controller.update)
-
     app.delete('/cats/delete/:id', controller.delete)
-
-    app.get('/cats', controller.gen)
+    app.put('/cats/update/:id', controller.update)
 }
