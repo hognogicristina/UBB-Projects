@@ -1,4 +1,4 @@
-# Lab 1 assignment: Without layered arhitecture
+# Lab 1 assignment: With layered arhitecture
 
 ----
 
