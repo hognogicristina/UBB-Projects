@@ -15,6 +15,24 @@ module.exports = {
         })
     },
 
+    getOne: function (req, res) { // get one cat by id
+        var id = req.params.id
+        var cat = repo.getOne(id)
+
+        if (cat) {
+            res.send({
+                success: true,
+                message: "Cat found successfully",
+                data: cat
+            })
+        } else {
+            res.send({
+                success: false,
+                message: "Cat not found"
+            })
+        }
+    },
+
     create: function (req, res) { // create a new cat and add it to the repository
         var id = repo.get().length + 1
         var name = req.body.name

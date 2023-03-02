@@ -23,6 +23,10 @@ module.exports = {
         return cats
     },
 
+    getOne: function (id) { // get one cat by id
+        return cats.find(el => el.id == id)
+    },
+
     create: function (id, name, age, color, breeds, weight) { // create a new cat and add it to the array
         let newCat = new Cat(id, name, age, color, breeds, weight)
 
