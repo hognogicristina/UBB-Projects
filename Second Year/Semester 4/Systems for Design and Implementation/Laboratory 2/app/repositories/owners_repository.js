@@ -28,21 +28,21 @@ module.exports = {
         return await db.getOneOwnerById(id)
     },
 
-    createOwner: function (id, firstName, lastName, address, phone, email) {
+    createOwner: async function (id, firstName, lastName, address, phone, email) {
         let newOwner = new Owner(id, firstName, lastName, address, phone, email)
 
-        db.addOwner(newOwner)
+        return await db.addOwner(newOwner)
     },
 
-    deleteOwner: function (id, newOwners) {
-        db.deleteOwner(id)
+    deleteOwner: async function (id) {
+        return await db.deleteOwner(id)
     },
 
-    updateOwner: function (id, firstName, lastName, address, phone, email) {
+    updateOwner: async function (id, firstName, lastName, address, phone, email) {
         let index = owners.findIndex(el => el.id == id)
 
         owners[index] = {
-			...owners[index],
+            id: parseInt(id),
 			firstName: firstName,
             lastName: lastName,
             address: address,
@@ -50,6 +50,6 @@ module.exports = {
             email: email
 		}
 
-        db.updateOwner(owners[index])
+        return await db.updateOwner(owners[index])
     }
 }

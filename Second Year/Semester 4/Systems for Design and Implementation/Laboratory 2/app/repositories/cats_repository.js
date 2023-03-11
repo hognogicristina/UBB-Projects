@@ -30,17 +30,17 @@ module.exports = {
         return await db.getOneCatById(id)
     },
 
-    create: function (id, name, age, color, breeds, weight, ownerId) {
-        let newCat = new Cat(id, name, age, color, breeds, weight, ownerId)
+    create: async function (id, name, age, color, breed, weight, ownerId) {
+        let newCat = new Cat(id, name, age, color, breed, weight, ownerId)
 
-        db.addCat(newCat)
+        return await db.addCat(newCat)
     },
 
-    delete: function (id) {
-        db.deleteCat(id)
+    delete: async function (id) {
+        return await db.deleteCat(id)
     },
 
-    update: function (id, name, age, color, breed, weight, ownerId) {
+    update: async function (id, name, age, color, breed, weight, ownerId) {
         let index = cats.findIndex(el => el.id == id)
 
         cats[index] = {
@@ -53,7 +53,7 @@ module.exports = {
             ownerId: ownerId
 		}
 
-        db.updateCat(cats[index])
+        return await db.updateCat(cats[index])
     },
 
     filterByWeight: async function (weight) {

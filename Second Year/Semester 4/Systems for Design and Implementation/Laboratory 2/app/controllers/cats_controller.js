@@ -39,25 +39,42 @@ module.exports = {
         var name = req.body.name
         var age = req.body.age
         var color = req.body.color
-        var breeds = req.body.breeds
+        var breed = req.body.breed
         var weight = req.body.weight
         var ownerId = req.body.ownerId
 
-        repo.create(id, name, age, color, breeds, weight, ownerId)
-
-        res.send({
-            success: true,
-            message: "Cat added successfully"
+        repo.getOne(id).then(cat => {
+            if (cat) {
+                res.send({
+                    success: false,
+                    message: "Cat already exists"
+                })
+            } else {
+                repo.create(id, name, age, color, breed, weight, ownerId)
+                res.send({
+                    success: true,
+                    message: "Cat created successfully"
+                })
+            }
         })
     },
 
     delete: function (req, res) {
         var id = req.params.id
 
-        repo.delete(id)
-        res.send({
-            success: true,
-            message: "Cat deleted successfully"
+        repo.getOne(id).then(cat => {
+            if (cat) {
+                repo.delete(id)
+                res.send({
+                    success: true,
+                    message: "Cat deleted successfully"
+                })
+            } else {
+                res.send({
+                    success: false,
+                    message: "Cat not found"
+                })
+            }
         })
     },
 
@@ -70,10 +87,19 @@ module.exports = {
         var weight = req.body.weight
         var ownerId = req.body.ownerId
 
-        repo.update(id, name, age, color, breed, weight, ownerId)
-        res.send({
-            success: true,
-            message: "Cat updated successfully"
+        repo.getOne(id).then(cat => {
+            if (cat) {
+                repo.update(id, name, age, color, breed, weight, ownerId)
+                res.send({
+                    success: true,
+                    message: "Cat updated successfully"
+                })
+            } else {
+                res.send({
+                    success: false,
+                    message: "Cat not found"
+                })
+            }
         })
     },
 

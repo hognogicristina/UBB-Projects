@@ -42,23 +42,38 @@ module.exports = {
         var phone = req.body.phone
         var email = req.body.email
 
-        repoOwner.createOwner(id, firstName, lastName, address, phone, email)
-
-        res.send({
-            success: true,
-            message: "Owner added successfully"
+        repoOwner.getOneOwner(id).then(owner => {
+            if (owner) {
+                res.send({
+                    success: false,
+                    message: "Owner already exists"
+                })
+            } else {
+                repoOwner.createOwner(id, firstName, lastName, address, phone, email)
+                res.send({
+                    success: true,
+                    message: "Owner created successfully"
+                })
+            }
         })
     },
 
     deleteOwner: function (req, res) {
         var id = req.params.id
-        var newOwners = repoOwner.getOwner().filter(el => el.id != id)
 
-        repoOwner.deleteOwner(id, newOwners)
-
-        res.send({
-            success: true,
-            message: "Owner deleted successfully"
+        repoOwner.getOneOwner(id).then(owner => {
+            if (owner) {
+                repoOwner.deleteOwner(id)
+                res.send({
+                    success: true,
+                    message: "Owner deleted successfully"
+                })
+            } else {
+                res.send({
+                    success: false,
+                    message: "Owner not found"
+                })
+            }
         })
     },
 
@@ -70,11 +85,19 @@ module.exports = {
         var phone = req.body.phone
         var email = req.body.email
 
-        repoOwner.updateOwner(id, firstName, lastName, address, phone, email)
-
-        res.send({
-            success: true,
-            message: "Owner updated successfully"
+        repoOwner.getOneOwner(id).then(owner => {
+            if (owner) {
+                repoOwner.updateOwner(id, firstName, lastName, address, phone, email)
+                res.send({
+                    success: true,
+                    message: "Owner updated successfully"
+                })
+            } else {
+                res.send({
+                    success: false,
+                    message: "Owner not found"
+                })
+            }
         })
     }
 }

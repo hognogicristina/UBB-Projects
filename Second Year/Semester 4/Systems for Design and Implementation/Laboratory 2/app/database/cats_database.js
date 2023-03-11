@@ -22,6 +22,7 @@ async function getCats() {
 
 async function getOneCatById(id) {
     var query = "SELECT * FROM cats WHERE id = ?"
+
     return new Promise((resolve, _) => {
         con.connect(() => {
             con.query(query, [id], function (err, result) {
@@ -34,6 +35,7 @@ async function getOneCatById(id) {
 
 async function countRows() {
     var query = "SELECT COUNT(*) as cnt FROM cats"
+
     return new Promise((resolve, _) => {
         con.connect(() => {
             con.query(query, function (err, result) {
@@ -44,29 +46,43 @@ async function countRows() {
     })
 }
 
-function addCat(cat) {
-    con.connect(() => {
-        con.query("INSERT INTO cats (id, name, age, color, breed, weight, ownerId) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [cat.id, cat.name, cat.age, cat.color, cat.breeds, cat.weight, cat.ownerId], function (err) {
+async function addCat(cat) {
+    var query = "INSERT INTO cats (id, name, age, color, breed, weight, ownerId) VALUES (?, ?, ?, ?, ?, ?, ?)"
+
+    return new Promise((resolve, _) => {
+        con.connect(() => {
+            con.query(query, [cat.id, cat.name, cat.age, cat.color, cat.breed, cat.weight, cat.ownerId], function (err, result) {
                 if (err) throw err;
+                resolve(result)
             });
+        })
     })
 }
 
-function deleteCat(id) {
-    con.connect(() => {
-        con.query("DELETE FROM cats WHERE id = ?", [id], function (err) {
-            if (err) throw err;
-        });
+async function deleteCat(id) {
+    var query = "DELETE FROM cats WHERE id = ?"
+
+    return new Promise((resolve, _) => {
+        con.connect(() => {
+            con.query(query, [id], function (err, result) {
+                if (err) throw err;
+                resolve(result)
+            });
+        })
     })
 }
 
-function updateCat(cat) {
-    con.connect(() => {
-        con.query("UPDATE cats SET name = ?, age = ?, color = ?, breed = ?, weight = ?, ownerId = ? WHERE id = ?",
-            [cat.name, cat.age, cat.color, cat.breed, cat.weight, cat.ownerId, cat.id], function (err) {
-                if (err) throw err;
-            });
+async function updateCat(cat) {
+    var query = "UPDATE cats SET name = ?, age = ?, color = ?, breed = ?, weight = ?, ownerId = ? WHERE id = ?"
+
+    return new Promise((resolve, _) => {
+        con.connect(() => {
+            con.query(query, [cat.name, cat.age, cat.color, cat.breed, cat.weight, cat.ownerId, cat.id], function (err, result) {
+                    if (err) throw err;
+                    resolve(result)
+                }
+            );
+        })
     })
 }
 

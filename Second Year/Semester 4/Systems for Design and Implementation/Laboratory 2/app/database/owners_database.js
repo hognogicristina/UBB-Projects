@@ -44,29 +44,42 @@ async function countRows() {
     })
 }
 
-function addOwner(owner) {
-    con.connect(() => {
-        con.query("INSERT INTO owners (id, firstName, lastName, address, phone, email) VALUES (?, ?, ?, ?, ?, ?)",
-            [owner.id, owner.firstName, owner.lastName, owner.address, owner.phone, owner.email], function (err) {
+async function addOwner(owner) {
+    var query = "INSERT INTO owners (firstName, lastName, address, phone, email) VALUES (?, ?, ?, ?, ?)"
+
+    return new Promise((resolve, _) => {
+        con.connect(() => {
+            con.query(query, [owner.firstName, owner.lastName, owner.address, owner.phone, owner.email], function (err, result) {
                 if (err) throw err;
+                resolve(result)
             });
+        })
     })
 }
 
-function deleteOwner(id) {   
-    con.connect(() => {
-        con.query("DELETE FROM owners WHERE id = ?", [id], function (err) {
-            if (err) throw err;
-        });
+async function deleteOwner(id) {   
+    var query = "DELETE FROM owners WHERE id = ?"
+
+    return new Promise((resolve, _) => {
+        con.connect(() => {
+            con.query(query, [id], function (err, result) {
+                if (err) throw err;
+                resolve(result)
+            });
+        })
     })
 }
 
-function updateOwner(owner) {
-    con.connect(() => {
-        con.query("UPDATE owners SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ? WHERE id = ?",
-            [owner.firstName, owner.lastName, owner.address, owner.phone, owner.email, owner.id], function (err) {
+async function updateOwner(owner) {
+    var query = "UPDATE owners SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ? WHERE id = ?"
+
+    return new Promise((resolve, _) => {
+        con.connect(() => {
+            con.query(query, [owner.firstName, owner.lastName, owner.address, owner.phone, owner.email, owner.id], function (err, result) {
                 if (err) throw err;
+                resolve(result)
             });
+        })
     })
 }
 
