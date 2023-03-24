@@ -1,0 +1,84 @@
+@startuml
+
+class CatsController {
+    + getCat()
+    + genCat()
+    + getOneCat()
+    + createCat()
+    + deleteCat()
+    + updateCat()
+    + filterCat()
+    + getStatistics()
+}
+
+class CatsRepository {
+    + genCat()
+    + getCat()
+    + getOneCat()
+    + createCat()
+    + deleteCat()
+    + updateCat()
+    + filterCatByWeight()
+    + getStatisticReport()
+}
+
+class OwnersController {
+    + genOwner()
+    + getOwner()
+    + getOneOwner()
+    + createOwner()
+    + deleteOwner()
+    + updateOwner()
+}
+
+class OwnersRepository {
+    + genOwner()
+    + getOwner()
+    + getOneOwner()
+    + createOwner()
+    + deleteOwner()
+    + updateOwner()
+}
+
+class FoodsController {
+    + getFood()
+    + genFood()
+    + getOneFood()
+    + createFood()
+    + deleteFood()
+    + updateFood()
+}
+
+class FoodsRepository {
+    + genFood()
+    + getFood()
+    + getOneFood()
+    + createFood()
+    + deleteFood()
+    + updateFood()
+}
+
+class FoodsForCatsController {
+    + getFoodCat()
+    + genFoodCat()
+    + getOneFoodCat()
+    + createFoodCat()
+    + deleteFoodCat()
+    + updateFoodCat()
+}
+
+class FoodsForCatsRepository {
+    + genFoodCat()
+    + getFoodCat()
+    + getOneFoodCat()
+    + createFoodCat()
+    + deleteFoodCat()
+    + updateFoodCat()
+}
+
+CatsController -- CatsRepository
+OwnersController -- OwnersRepository
+FoodsController -- FoodsRepository
+FoodsForCatsController -- FoodsForCatsRepository
+
+@enduml
