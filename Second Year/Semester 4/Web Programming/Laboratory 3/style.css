@@ -1,0 +1,486 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+    background: #0e0e0e;
+}
+
+.youtube-dash {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 450;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    height: 65px;
+    width: 100%;
+    padding: 0 15px;
+    white-space: nowrap;
+}
+
+.logo a {
+    color: #fff;
+    font-size: 20px;
+}
+
+.logo i {
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.logo a i {
+    background-color: red;
+    font-size: 15px;
+    width: 35px;
+    height: 25px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 7px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.logo .region {
+    position: relative;
+    width: 19px;
+    height: 19px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    color: #ffffffa4;
+    left: 165px;
+    cursor: pointer;
+    bottom: 37px;
+}
+
+.circle-animation {
+    border-radius: 50px;
+    background-color: #0e0e0e;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.circle-animation:hover {
+    background-color: #1b1c1d;
+}
+
+.circle-animation-bars {
+    border-radius: 50px;
+    background-color: #0e0e0e;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-animation-bars:hover {
+    background-color: #1b1c1d;
+}
+
+.search-bar {
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 650px;
+}
+
+.search-bar-config {
+    width: 100%;
+    background: #0e0e0e;
+    color: #e5e5e5;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    border: 1px solid #575757af;
+}
+
+.search-bar-config input {
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 11px 20px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.search-bar-config button {
+    border: 0;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    font-size: 16px;
+    width: 70px;
+    height: 43px;
+    background: #282828;
+    color: #fff;
+    cursor: pointer;
+}
+
+.microphone-circle {
+    border-radius: 50px;
+    background-color: #1b1b1b;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.microphone-circle:hover {
+    background-color: #2a2a2a;
+}
+
+.fa-microphone {
+    color: #fff;
+    font-size: 20px;
+    padding-left: 25px;
+    cursor: pointer;
+    margin-right: 25px;
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 40px;
+    cursor: pointer;
+}
+
+.header-profile i {
+    font-size: 19px;
+    color: #f9fafb;
+}
+
+.notification {
+    position: relative;
+    margin-left: 12px;
+}
+
+.notification .notification-number {
+    position: absolute;
+    background-color: red;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    border: 1px solid #0e0e0e;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    left: 19px;
+    top: 1px;
+}
+
+.profile-user {
+    width: 37px;
+    height: 37px;
+    border-radius: 50px;
+    margin-left: 12px;
+}
+
+.wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+.left-side {
+    flex-basis: 240px;
+    padding: 25px 10px;
+    padding-top: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: 0.5s;
+}
+
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(113 119 144 / 25%) 
+}
+
+.side-menu a {
+    color: #f9fafb;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 10px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.side-wrapper+.side-wrapper {
+    margin-top: 20px;
+}
+
+.side-menu a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.side-menu a.active:hover {
+    background-color: rgba(255, 255, 255, 0.344);
+}
+
+.side-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.side-menu i {
+    width: 30px;
+    color: white;
+    margin-right: 11px;
+}
+
+.side-title {
+    font-size: 17px;
+    color: rgb(113 119 144 / 78%);
+    margin-bottom: 1px;
+}
+
+#noBorder {
+    border: none;
+}
+
+.yt-user {
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin-left: -8px;
+    margin-right: 11px;
+}
+
+.left-side:hover {
+    overflow: auto;
+}
+
+.right-side {
+    width: 100%;
+    overflow: auto;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    border-radius: 1px solid rgba(113 119 144 / 25%);    
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.main-header .header-menu a {
+    padding: 9px 15px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.main-header-link {
+    color: #f1f1f1;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.main-header-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-header-link-arrow {
+    color: #f1f1f1;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    background-color: #0e0e0e;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.main-header-link-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.header-menu a.active-all {
+    color: #000;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+}
+
+.main-header .header-menu {
+    margin-left: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: #717171;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+.red-color:before {
+    color: red;
+}
+
+.centered {
+    display: inline-flex;
+}
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 18px;
+    padding: 30px 40px;
+    background-color: #0e0e0e;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 116px);
+}
+
+.video-content-cover {
+    position: relative;
+    transition: 0.5s;
+    transition-delay: 0.5s;
+    cursor: pointer;
+}
+
+.video-content {
+    margin-bottom: 25px;
+    position: relative;
+    transition: 0.5s;
+    width: 100%;
+}
+
+.video-box {
+    position: relative;
+}
+
+.video-box img {
+    position: relative;
+    width: auto;
+    height: 215px;
+    display: block;
+    border-radius: 13px;
+}
+
+.video-box:hover > .video-box-image {
+    border-radius: 0px;
+    transition: 0.7s;
+}
+
+.video-details {
+    display: flex;
+    color: #fff;
+    padding-top: 12px;
+}
+
+.channel-logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
+.detail {
+    margin-left: 12px;
+}
+
+.title {
+    font-size: .9rem;
+}
+
+.channel-name {
+    font-size: .8rem;
+    margin-top: 10px;
+    color: #aaa;
+}
+
+.views-upload {
+    display: flex;
+    font-size: .8rem;
+    color: #aaa;
+}
+
+.footer-left {
+    color: #aaa;
+    font-size: .7rem;
+}
+
+.footer-right {
+    color: #aaaaaa93;
+    font-size: .6rem;
+}
+
+.image-number {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 13px;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.video-box:hover > .image-number {
+    display: none;
+    transition: 1s;
+}
