@@ -385,6 +385,10 @@ body {
     display: inline-flex;
 }
 
+.main-container {
+    width: calc(100vw - 240px);
+}
+
 .video-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -412,6 +416,8 @@ body {
 
 .video-box {
     position: relative;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .video-box img {
@@ -420,11 +426,16 @@ body {
     height: 215px;
     display: block;
     border-radius: 13px;
+    transition: transform 0.2s ease-in-out;
 }
 
 .video-box:hover > .video-box-image {
     border-radius: 0px;
     transition: 0.7s;
+}
+
+.video-box:hover .video-box-image {
+    transform: scale(1.02);
 }
 
 .video-details {
