@@ -76,28 +76,26 @@ async function changeOwnerIdOfCats(id_owner, cats_list) {
     return list
 }
 
-// you get as parameter an array of cats and an owner id, in body you get an array of cats with their attributes
-// you need to create cats and assign them to the owner with the id that you get as parameter in the url
 async function createCatForOwner(id_owner, cats_list) {
-    const owner = await Owner.findByPk(id_owner)
     const id_cats = cats_list.cats_list.map(cat => cat.id)
-
     const catsExists = await Cat.findAll({ where: { id: id_cats } })
     
     let list = []
-    if (catsExists) {
-        catsExists.forEach(cat => {
-            cat.ownerId = id_owner
-            cat.save()
-            list.push(cat.dataValues)
-        })
 
-        return list
-    } else {
-        const newCats = cats_list.cats_list.map(cat => ({ ...cat, ownerId: id_owner }))
-        const cats = await Cat.bulkCreate(newCats)
-        return cats
-    }
+    cats_list.cats_list.forEach(cat => {
+        let catExists = catsExists.find(c => c.dataValues.id == cat.id)
+        if (catExists) {
+            catExists.ownerId = id_owner
+            catExists.save()
+            list.push(catExists.dataValues)
+        } else {
+            let newCat = new Cat({ id: cat.id, name: cat.name, age: cat.age, color: cat.color, breed: cat.breed, weight: cat.weight, ownerId: id_owner })
+            newCat.save()
+            list.push(newCat.dataValues)
+        }
+    })
+
+    return list
 }
 
 module.exports = {
