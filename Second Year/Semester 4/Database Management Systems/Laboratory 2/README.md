@@ -11,17 +11,17 @@ You must use core ADO.NET (data sets, data adapters, data readers, etc.). Soluti
 Useful references:
 
 * ADO.NET, data binding
-+ seminars
-+ http://www.youtube.com/playlist?list=PL364D9F01461F5F87
-+ http://www.codeproject.com/Articles/24656/A-Detailed-Data-Binding-Tutorial
-+ http://www.codeproject.com/Articles/8477/Using-ADO-NET-for-beginners
-+ http://csharp-station.com/Tutorial/AdoDotNet/Lesson01
+  + seminars
+  + http://www.youtube.com/playlist?list=PL364D9F01461F5F87
+  + http://www.codeproject.com/Articles/24656/A-Detailed-Data-Binding-Tutorial
+  + http://www.codeproject.com/Articles/8477/Using-ADO-NET-for-beginners
+  + http://csharp-station.com/Tutorial/AdoDotNet/Lesson01
 
 * XML files:
-– http://www.drdobbs.com/windows/parsing-xml-files-in-net-using-c/184416669
-– http://support.microsoft.com/kb/307548
+  + http://www.drdobbs.com/windows/parsing-xml-files-in-net-using-c/184416669
+  + http://support.microsoft.com/kb/307548
 
 * configuration files:
-– http://support.microsoft.com/kb/815786
-– http://msdn.microsoft.com/en-us/library/system.configuration.configuration.aspx
-– http://www.codeproject.com/Articles/6538/Configuration-Settings-File-for-providing-applicat
+  + http://support.microsoft.com/kb/815786
+  + http://msdn.microsoft.com/en-us/library/system.configuration.configuration.aspx
+  + http://www.codeproject.com/Articles/6538/Configuration-Settings-File-for-providing-applicat
