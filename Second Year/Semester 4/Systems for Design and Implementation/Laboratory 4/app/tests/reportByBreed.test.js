@@ -18,12 +18,12 @@ const reportBreedTest = function () {
 
     test("Report first owner's name by breed: Tabby", async () => {
         const result = await contCat.getStatisticsBreed("Tabby", undefined)
-        expect(result[0].Owner.dataValues.firstName).toEqual("April")
+        expect(result[0].owner.dataValues.firstName).toEqual("April")
     })
 
     test("Report last owner's first name by breed: Siamese", async () => {
         const result = await contCat.getStatisticsBreed("Siamese", undefined)
-        expect(result[result.length - 1].Owner.dataValues.firstName).toEqual("John")
+        expect(result[result.length - 1].owner.dataValues.firstName).toEqual("John")
     })
 }
 

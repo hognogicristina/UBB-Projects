@@ -1,37 +1,39 @@
-const Foods = require('../models/foods_model.js')
+const foods = require('../models/foods_model.js')
+const mysql2 = require('mysql2')
 
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('meow', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
+    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
     dialect: 'mysql',
-    port: 3307,
+    dialectModule: mysql2,
+    port: 3306
 })
 
 sequelize.authenticate()
 
 async function getFoods() {
-    return Foods.findAll()
+    return foods.findAll()
 }
 
 async function getOneFoodById(id) {
-    return Foods.findOne({ where: { id: id } })
+    return foods.findOne({ where: { id: id } })
 }
 
 async function countRowsFood() {
-    return Foods.count()
+    return foods.count()
 }
 
 async function addFood(food) {
-    return Foods.create(food)
+    return foods.create(food)
 }
 
 async function deleteFood(id) {
-    return Foods.destroy({ where: { id: id } })
+    return foods.destroy({ where: { id: id } })
 }
 
 async function updateFood(food) {
-    return Foods.update(
+    return foods.update(
         { name: food.name, brand: food.brand, price: food.price, quantity: food.quantity, type: food.type },
         { where: { id: food.id } })
 }

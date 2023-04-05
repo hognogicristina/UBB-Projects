@@ -1,14 +1,16 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
+const mysql2 = require('mysql2')
 
-const sequelize = new Sequelize('meow', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
+    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
     dialect: 'mysql',
-    port: 3307,
+    dialectModule: mysql2,
+    port: 3306
 })
 
-class Cat extends Model { }
+class cat extends Model { }
 
-Cat.init({
+cat.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -38,14 +40,14 @@ Cat.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Owner',
+            model: 'owner',
             key: 'id'
         }
     }
 }, {
     sequelize,
-    modelName: 'Cat',
+    modelName: 'cat',
     timestamps: false
 })
 
-module.exports = Cat
+module.exports = cat

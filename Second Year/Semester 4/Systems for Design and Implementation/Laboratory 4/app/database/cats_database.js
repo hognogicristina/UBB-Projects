@@ -1,57 +1,59 @@
-const Cat = require('../models/cats_model.js')
-const Owner = require('../models/owners_model.js')
+const cat = require('../models/cats_model.js')
+const owner = require('../models/owners_model.js')
+const mysql2 = require('mysql2')
 
-const { Sequelize, Model, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('meow', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
+    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
     dialect: 'mysql',
-    port: 3307,
+    dialectModule: mysql2,
+    port: 3306
 })
 
 sequelize.authenticate()
 
 async function getCats() {
-    return Cat.findAll()
+    return cat.findAll()
 }
 
 async function getOneCatById(id) {
-    return Cat.findOne({ where: { id: id } })
+    return cat.findOne({ where: { id: id } })
 }
 
 async function countRowsCats() {
-    return Cat.count()
+    return cat.count()
 }
 
-async function addCat(cat) {
-    return Cat.create(cat)
+async function addCat(cats) {
+    return cat.create(cats)
 }
 
 async function deleteCat(id) {
-    return Cat.destroy({ where: { id: id } })
+    return cat.destroy({ where: { id: id } })
 }
 
-async function updateCat(cat) {
-    return Cat.update(
-        { name: cat.name, age: cat.age, color: cat.color, breed: cat.breed, weight: cat.weight, ownerId: cat.ownerId },
-        { where: { id: cat.id } })
+async function updateCat(cats) {
+    return cat.update(
+        { name: cats.name, age: cats.age, color: cats.color, breed: cats.breed, weight: cats.weight, ownerId: cats.ownerId },
+        { where: { id: cats.id } })
 }
 
 async function filterCatsByWeight(weight) {
-    return Cat.findAll({ where: { weight: { [Sequelize.Op.gt]: weight } } })
+    return cat.findAll({ where: { weight: { [Sequelize.Op.gt]: weight } } })
 }
 
 async function getByTypeCat(typeName, type) {
-    return Cat.findAll({ where: { [typeName]: type } })
+    return cat.findAll({ where: { [typeName]: type } })
 }
 
 async function getStatisticReportBreed(breed) {
-    Cat.belongsTo(Owner, { foreignKey: 'ownerId' })
+    cat.belongsTo(owner, { foreignKey: 'ownerId' })
 
-    const result = await Cat.findAll({
+    const result = await cat.findAll({
         attributes: ['id', [sequelize.fn('AVG', sequelize.col('owner.age')), 'avgAge']],
         include: [{
-            model: Owner,
+            model: owner,
             attributes: ['firstName', 'lastName']
         }],
         where: { breed: breed },

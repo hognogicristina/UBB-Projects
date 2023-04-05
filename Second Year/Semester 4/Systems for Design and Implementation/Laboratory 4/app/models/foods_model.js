@@ -1,14 +1,16 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
+const mysql2 = require('mysql2')
 
-const sequelize = new Sequelize('meow', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
+    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
     dialect: 'mysql',
-    port: 3307,
+    dialectModule: mysql2,
+    port: 3306
 })
 
-class Foods extends Model { }
+class foods extends Model { }
 
-Foods.init({
+foods.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -36,8 +38,8 @@ Foods.init({
     }
 }, {
     sequelize,
-    modelName: 'Foods',
+    modelName: 'foods',
     timestamps: false
 })
 
-module.exports = Foods
+module.exports = foods

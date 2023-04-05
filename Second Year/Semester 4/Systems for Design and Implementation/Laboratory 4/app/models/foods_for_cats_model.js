@@ -2,16 +2,18 @@
 // many cats can eat the same food, and many foods can be eaten by the same cat
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
+const mysql2 = require('mysql2')
 
-const sequelize = new Sequelize('meow', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
+    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
     dialect: 'mysql',
-    port: 3307,
+    dialectModule: mysql2,
+    port: 3306
 })
 
-class Foods_for_cats extends Model { }
+class foods_for_cats extends Model { }
 
-Foods_for_cats.init({
+foods_for_cats.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -43,8 +45,8 @@ Foods_for_cats.init({
     },
 }, {
     sequelize,
-    modelName: 'Foods_for_cats',
+    modelName: 'foods_for_cats',
     timestamps: false
 })
 
-module.exports = Foods_for_cats
+module.exports = foods_for_cats

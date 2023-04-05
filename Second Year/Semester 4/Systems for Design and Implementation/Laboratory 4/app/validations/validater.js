@@ -1,7 +1,7 @@
-const Owner = require('../models/owners_model.js')
-const Cat = require('../models/cats_model.js')
-const Food = require('../models/foods_model.js')
-const FoodCat = require('../models/foods_for_cats_model.js')
+const owner = require('../models/owners_model.js')
+const cat = require('../models/cats_model.js')
+const food = require('../models/foods_model.js')
+const foodCat = require('../models/foods_for_cats_model.js')
 
 class Validation {
     static validateEmail(email) {
@@ -42,22 +42,22 @@ class Validation {
     }
 
     static isEmailInUse(email) {
-        return Owner.findOne({ where: { email: email } })
+        return owner.findOne({ where: { email: email } })
     }
 
     static isPhoneInUse(phone) {
-        return Owner.findOne({ where: { phone: phone } })
+        return owner.findOne({ where: { phone: phone } })
     }
 
     static async isIdInUse(id, type) {
         if (type == "owner") {
-            return Owner.findOne({ where: { id: id } })
+            return owner.findOne({ where: { id: id } })
         } else if (type == "cat") {
-            return Cat.findOne({ where: { id: id } })
+            return cat.findOne({ where: { id: id } })
         } else if (type == "food") {
-            return Food.findOne({ where: { id: id } })
+            return food.findOne({ where: { id: id } })
         } else if (type == "foodForCat") {
-            return FoodCat.findOne({ where: { id: id } })
+            return foodCat.findOne({ where: { id: id } })
         }
 
         return null

@@ -1,12 +1,14 @@
-const Owner = require('../models/owners_model.js')
-const Cat = require('../models/cats_model.js')
+const owner = require('../models/owners_model.js')
+const cat = require('../models/cats_model.js')
+const mysql2 = require('mysql2')
 
-const { Sequelize, Model, DataTypes } = require('sequelize')
+const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('meow', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
+    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
     dialect: 'mysql',
-    port: 3307,
+    dialectModule: mysql2,
+    port: 3306
 })
 
 sequelize.authenticate()
@@ -14,44 +16,44 @@ sequelize.authenticate()
     .catch(error => console.error('Unable to connect to the database:', error))
 
 async function getOwners() {
-    return Owner.findAll()
+    return owner.findAll()
 }
 
 async function getOneOwnerById(id) {
-    return Owner.findOne({ where: { id: id } })
+    return owner.findOne({ where: { id: id } })
 }
 
 async function countRowsOwner() {
-    return Owner.count()
+    return owner.count()
 }
 
-async function addOwner(owner) {
-    return Owner.create(owner)
+async function addOwner(owners) {
+    return owner.create(owners)
 }
 
 async function deleteOwner(id) {
-    return Owner.destroy({ where: { id: id } })
+    return owner.destroy({ where: { id: id } })
 }
 
-async function updateOwner(owner) {
-    return Owner.update(
-        { firstName: owner.firstName, lastName: owner.lastName, address: owner.address, phone: owner.phone, email: owner.email, age: owner.age },
-        { where: { id: owner.id } }
+async function updateOwner(owners) {
+    return owner.update(
+        { firstName: owners.firstName, lastName: owners.lastName, address: owners.address, phone: owners.phone, email: owners.email, age: owners.age },
+        { where: { id: owners.id } }
     )
 }
 
 async function getByTypeOwner(typeName, type) {
-    return Owner.findAll({ where: { [typeName]: type } })
+    return owner.findAll({ where: { [typeName]: type } })
 }
 
 async function getStatisticReport() {
-    Owner.hasMany(Cat, { foreignKey: 'ownerId' })
-    Cat.belongsTo(Owner)
+    owner.hasMany(cat, { foreignKey: 'ownerId' })
+    cat.belongsTo(owner)
 
-    const result = await Owner.findAll({
+    const result = await owner.findAll({
         attributes: ['id', 'firstName', 'lastName', 'address', 'phone', 'email', 'age', [sequelize.fn('AVG', sequelize.col('Cats.age')), 'avgAge']],
         include: [{
-            model: Cat,
+            model: cat,
             attributes: [],
             as: 'Cats'
         }],
@@ -64,32 +66,32 @@ async function getStatisticReport() {
 
 async function changeOwnerIdOfCats(id_owner, cats_list) {
     id_owner = parseInt(id_owner)
-    const cats = await Cat.findAll({ where: { id: cats_list } })
+    const cats = await cat.findAll({ where: { id: cats_list } })
     let list = []
 
-    cats.forEach(cat => {
-        cat.ownerId = id_owner
-        cat.save()
-        list.push(cat.dataValues)
+    cats.forEach(cats => {
+        cats.ownerId = id_owner
+        cats.save()
+        list.push(cats.dataValues)
     })
 
     return list
 }
 
 async function createCatForOwner(id_owner, cats_list) {
-    const id_cats = cats_list.cats_list.map(cat => cat.id)
-    const catsExists = await Cat.findAll({ where: { id: id_cats } })
+    const id_cats = cats_list.cats_list.map(cats => cats.id)
+    const catsExists = await cat.findAll({ where: { id: id_cats } })
     
     let list = []
 
-    cats_list.cats_list.forEach(cat => {
+    cats_list.cats_list.forEach(cats => {
         let catExists = catsExists.find(c => c.dataValues.id == cat.id)
         if (catExists) {
             catExists.ownerId = id_owner
             catExists.save()
             list.push(catExists.dataValues)
         } else {
-            let newCat = new Cat({ id: cat.id, name: cat.name, age: cat.age, color: cat.color, breed: cat.breed, weight: cat.weight, ownerId: id_owner })
+            let newCat = new cat({ id: cats.id, name: cats.name, age: cats.age, color: cats.color, breed: cats.breed, weight: cats.weight, ownerId: id_owner })
             newCat.save()
             list.push(newCat.dataValues)
         }
