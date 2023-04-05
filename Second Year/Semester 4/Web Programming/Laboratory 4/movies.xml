@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <title>Avengers: Endgame</title>
+        <actors>Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth</actors>
+        <genre>Action</genre>
+        <playing_date>2023-04-10</playing_date>
+        <duration>3 hours</duration>
+    </movie>
+    <movie>
+        <title>La La Land</title>
+        <actors>Ryan Gosling, Emma Stone, John Legend, Rosemarie DeWitt</actors>
+        <genre>Musical</genre>
+        <playing_date>2023-04-12</playing_date>
+        <duration>2 hours 8 minutes</duration>
+    </movie>
+</movies>
