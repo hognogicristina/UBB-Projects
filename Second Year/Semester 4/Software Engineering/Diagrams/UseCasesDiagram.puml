@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+actor Admin
+actor User
+
+rectangle "Destination Management" {
+  Admin --> (Add Destination)
+  Admin --> (Modify Destination)
+  Admin --> (Remove Destination)
+  User --> (Add Public Destination)
+  User --> (Add Private Destination)
+  User --> (Modify User Destination)
+  User --> (Remove User Destination)
+  (Add Public Destination)
+}
+
+rectangle "Account Management" {
+  User --> (Create Account)
+  User --> (Modify Account)
+  User --> (Remove Account)
+  (Create Account) --> (AuthenticationException)/ : extends
+  (Create Account) --> (DataValidationException)/ : extends
+  (Modify Account) --> (AuthenticationException)/ : extends
+  (Modify Account) --> (DataValidationException)/ : extends
+  (Remove Account) --> (AuthenticationException)/ : extends
+  (Remove Account) --> (AuthorizationException)/ : extends
+}
+
+rectangle "Item Management" {
+  Admin --> (Display items)
+  User --> (Display items)
+}
+
+(Add Public Destination) --> (Add Private Destination) : includes
+(Modify Destination) --> (Add Destination) : includes
+(Remove Destination) --> (Modify Destination) : includes
+(Modify User Destination) --> (Add Public Destination) : includes
+(Modify User Destination) --> (Add Private Destination) : includes
+(Modify User Destination) --> (Remove User Destination) : includes
+(Modify Account) --> (Create Account) : includes
+(Modify Account) --> (Remove Account) : includes
+@enduml
