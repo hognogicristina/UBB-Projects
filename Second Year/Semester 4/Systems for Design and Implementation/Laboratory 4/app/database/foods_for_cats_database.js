@@ -1,16 +1,5 @@
 const foods_for_cats = require('../models/foods_for_cats_model.js')
-const mysql2 = require('mysql2')
-
-const { Sequelize } = require('sequelize')
-
-const sequelize = new Sequelize('bo8dhdnecmi9kqgy6joa', 'utjidt7rdyxmke4r', 'YRtSHxz0xzXW2m5UY4rT', {
-    host: 'bo8dhdnecmi9kqgy6joa-mysql.services.clever-cloud.com',
-    dialect: 'mysql',
-    dialectModule: mysql2,
-    port: 3306
-})
-
-sequelize.authenticate()
+require('./database.js')
 
 async function getFoodCat() {
     return foods_for_cats.findAll()

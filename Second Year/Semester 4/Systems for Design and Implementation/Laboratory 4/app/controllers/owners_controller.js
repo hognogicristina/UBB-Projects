@@ -173,8 +173,7 @@ module.exports = {
                 repoOwner.createCatForOwner(ownerid, cats_list).then(list => {
                     res.send({
                         success: true,
-                        message: "Cats created successfully",
-                        data: list
+                        message: "For owner created cats successfully and updated owner id of cats"
                     })
                 })
             } else {
