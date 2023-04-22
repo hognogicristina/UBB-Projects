@@ -17,7 +17,8 @@ foods_for_cats.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     catId: {
         type: DataTypes.INTEGER,

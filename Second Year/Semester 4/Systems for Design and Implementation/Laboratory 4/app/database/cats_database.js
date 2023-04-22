@@ -1,5 +1,6 @@
 const cat = require('../models/cats_model.js')
 const owner = require('../models/owners_model.js')
+const { Sequelize } = require('sequelize')
 require('./database.js')
 
 async function getCats() {

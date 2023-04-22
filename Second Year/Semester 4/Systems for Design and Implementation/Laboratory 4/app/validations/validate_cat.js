@@ -2,7 +2,6 @@ const Validation = require('../validations/validater.js')
 
 class ValidationCat {
     static async validateCatAdd(cat) {
-        var id = cat.id
         var name = cat.name
         var age = cat.age
         var color = cat.color
@@ -10,9 +9,7 @@ class ValidationCat {
         var weight = cat.weight
         var ownerId = cat.ownerId
 
-        if (id == null) {
-            return "Id is required"
-        } else if (name == null) {
+        if (name == null) {
             return "Name is required"
         } else if (age == null) {
             return "Age is required"
@@ -34,8 +31,6 @@ class ValidationCat {
             return "Weight is a number greater than 0"
         } else if (!Validation.validateName(color)) {
             return "Color should have at least 3 letters"
-        } else if (await Validation.isIdInUse(id, "cat")) {
-            return "Id is already in use"
         } else if (!await Validation.isIdInUse(ownerId, "owner")) {
             return "Owner id does not exist"
         } else {

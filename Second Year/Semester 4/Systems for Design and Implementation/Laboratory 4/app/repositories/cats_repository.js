@@ -56,8 +56,8 @@ module.exports = {
         return await db.getOneCatById(id)
     },
 
-    createCat: async function (id, name, age, color, breed, weight, ownerId) {
-        let newCat = new cat({ id: id, name: name, age: age, color: color, breed: breed, weight: weight, ownerId: ownerId })
+    createCat: async function (name, age, color, breed, weight, ownerId) {
+        let newCat = new cat({ name: name, age: age, color: color, breed: breed, weight: weight, ownerId: ownerId })
         return await db.addCat(newCat.dataValues)
     },
 

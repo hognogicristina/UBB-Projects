@@ -14,7 +14,8 @@ owner.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     firstName: {
         type: DataTypes.STRING(100),

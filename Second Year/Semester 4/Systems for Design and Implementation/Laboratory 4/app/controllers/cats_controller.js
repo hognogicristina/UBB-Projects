@@ -42,7 +42,6 @@ module.exports = {
     },
 
     createCat: function (req, res) {
-        var id = req.body.id
         var name = req.body.name
         var age = req.body.age
         var color = req.body.color
@@ -52,7 +51,7 @@ module.exports = {
 
         validationCat.validateCat(req.body, "add").then(result => {
             if (result == null) {
-                repo.createCat(id, name, age, color, breed, weight, ownerId)
+                repo.createCat(name, age, color, breed, weight, ownerId)
                 res.send({
                     success: true,
                     message: "Cat created successfully"
@@ -65,7 +64,7 @@ module.exports = {
             }
         })
     },
-
+    
     deleteCat: function (req, res) {
         var id = req.params.id
 
