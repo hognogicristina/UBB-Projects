@@ -1,0 +1,21 @@
+{
+  "name": "lab-2-hognogicristina",
+  "version": "1.0.0",
+  "description": "**Points**: 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "i": "^0.3.7",
+    "jest": "^29.5.0",
+    "mysql2": "^3.2.0",
+    "sequelize": "^6.30.0",
+    "swagger-ui-express": "^4.6.2"
+  }
+}

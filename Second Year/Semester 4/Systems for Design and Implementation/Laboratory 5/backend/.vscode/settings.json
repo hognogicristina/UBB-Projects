@@ -1,0 +1,5 @@
+{
+    "editor.formatOnType": true,
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/7b80299e-94c6-4c93-8739-34d03266983a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/adopt-a-cat",
+    "appService.deploySubpath": "."
+}
