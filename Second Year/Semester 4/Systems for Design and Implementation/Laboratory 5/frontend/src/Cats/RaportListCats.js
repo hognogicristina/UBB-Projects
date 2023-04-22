@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react"
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from "@mui/material"
+import React, { useState, useEffect } from 'react'
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+import axios from 'axios'
 
-function NewListCats(props) {
-    const [cats, setCats] = useState([])
+function RaportListCats(props) {
+    const [catData, setCatData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        setIsLoading(true)
-        fetch("http://localhost:8000/cats_filter/" + props.weight)
-            .then((response) => response.json())
-            .then((data) => {
-                setCats(data.data)
+        axios.get("http://localhost:8000/cats_statistic/" + props.breed)
+            .then(response => {
+                setCatData(response.data.data)
                 setIsLoading(false)
             })
-    }, [props.weight])
+    }, [props.breed])
 
     const pStyle = {
         fontSize: '1.2rem',
@@ -25,7 +24,7 @@ function NewListCats(props) {
 
     return (
         <>
-            {cats.length === 0 ? (
+            {catData.length === 0 ? (
                 <Typography variant="body1" align="center" sx={{ ...pStyle }}>
                     No cats found.
                 </Typography>
@@ -37,20 +36,20 @@ function NewListCats(props) {
                                 <TableCell sx={{ fontWeight: 'bold' }}>Name</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Age</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Color</TableCell>
-                                <TableCell sx={{ fontWeight: 'bold' }}>Breed</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Weight</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold' }}>Owner</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold' }}>Avg. Age</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {cats.map(cat => (
+                            {catData.map(cat => (
                                 <TableRow key={cat.id}>
                                     <TableCell>{cat.name}</TableCell>
                                     <TableCell>{cat.age}</TableCell>
                                     <TableCell>{cat.color}</TableCell>
-                                    <TableCell>{cat.breed}</TableCell>
                                     <TableCell>{cat.weight}</TableCell>
-                                    <TableCell>{cat.ownerId}</TableCell>
+                                    <TableCell>{cat.owner.firstName}</TableCell>
+                                    <TableCell>{cat.avgAge}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -62,4 +61,4 @@ function NewListCats(props) {
     )
 }
 
-export default NewListCats
+export default RaportListCats
