@@ -64,7 +64,7 @@ module.exports = {
             }
         })
     },
-    
+
     deleteCat: function (req, res) {
         var id = req.params.id
 
@@ -112,32 +112,50 @@ module.exports = {
     filterCat: function (req, res) {
         var weight
 
-        if (res === undefined) {
-            weight = req
-        } else {
-            weight = req.params.weight
-        }
-
-        const listCats = repo.filterCatByWeight(weight).then(cats => {
+        try {
             if (res === undefined) {
-                return cats
-            } else {
-                if (cats) {
-                    res.send({
-                        success: true,
-                        message: "Cats found successfully",
-                        data: cats
-                    })
-                } else {
-                    res.send({
-                        success: false,
-                        message: "Cats not found"
-                    })
+                if (req < 0) {
+                    throw new Error()
                 }
+                weight = parseInt(req);
+            } else {
+                if (req.params.weight < 0) {
+                    throw new Error()
+                }
+                weight = parseInt(req.params.weight)
             }
-        })
-        
-        return listCats
+
+            if (weight === 0 || weight % 1 === 0) {
+                const listCats = repo.filterCatByWeight(weight).then(cats => {
+                    if (res === undefined) {
+                        return cats
+                    } else {
+                        if (cats) {
+                            res.send({
+                                success: true,
+                                message: "Cats found successfully",
+                                data: cats
+                            })
+                        } else {
+                            res.send({
+                                success: false,
+                                message: "Cats not found"
+                            })
+                        }
+                    }
+                })
+    
+                return listCats
+            } else {
+                throw new Error()
+            }
+        } catch (err) {
+            res.send({
+                success: false,
+                message: "Cats not found",
+            })
+            return
+        }
     },
 
     getStatisticsBreed: function (req, res) {
@@ -156,7 +174,7 @@ module.exports = {
                 if (cats) {
                     res.send({
                         success: true,
-                        message: "All owners owning cats with the " + breed + " breed have been found successfully",
+                        message: "All cats with the " + breed + " breed have been found successfully",
                         data: cats
                     })
                 } else {
