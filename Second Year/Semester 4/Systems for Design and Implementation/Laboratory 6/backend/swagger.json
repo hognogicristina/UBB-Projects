@@ -1,0 +1,860 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "4.2.0",
+        "title": "Adopt a Cat API",
+        "description": "Project SDI for Adopt a Cat API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "https://adopt-a-cat.onrender.com",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Cats",
+            "description": "API for cats"
+        },
+        {
+            "name": "Owners",
+            "description": "API for owners"
+        },
+        {
+            "name": "Foods",
+            "description": "API for foods"
+        },
+        {
+            "name": "FoodsForCats",
+            "description": "API for foods for cats"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/cats": {
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Get all cats",
+                "responses": {
+                    "200": {
+                        "description": "All cats",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/cats/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the cat that we want to get",
+                    "type": "number"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Get a cat by a given ID",
+                "responses": {
+                    "200": {
+                        "description": "Cat By ID",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/cats_filter/{weight}": {
+            "parameters": [
+                {
+                    "name": "weight",
+                    "in": "path",
+                    "required": true,
+                    "description": "Weight that we want to filter by",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Get all cats that have a weight greater than a given weight",
+                "responses": {
+                    "200": {
+                        "description": "Filter Cats",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/cats_statistic/{breed}": {
+            "parameters": [
+                {
+                    "name": "breed",
+                    "in": "path",
+                    "required": true,
+                    "description": "Breed that we want to filter by",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Get all owners owning cats with the specified breed",
+                "responses": {
+                    "200": {
+                        "description": "Statistic Report By Breed",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/cats_add": {
+            "post": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Add a new cat",
+                "parameters": [
+                    {
+                        "name": "cat",
+                        "in": "body",
+                        "description": "Cat that we want to add",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add Cat"
+                    }
+                }
+            }
+        },
+        "/cats_update/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the cat that we want to update",
+                    "type": "number"
+                }
+            ],
+            "put": {
+                "summary": "Update cat with given ID",
+                "tags": [
+                    "Cats"
+                ],
+                "parameters": [
+                    {
+                        "name": "cat",
+                        "in": "body",
+                        "description": "Cat with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Cat",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/cats_delete/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the cat that we want to delete",
+                    "type": "number"
+                }
+            ],
+            "delete": {
+                "summary": "Delete the cat with the given ID",
+                "tags": [
+                    "Cats"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete Cat",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners": {
+            "get": {
+                "tags": [
+                    "Owners"
+                ],
+                "summary": "Get all owners",
+                "responses": {
+                    "200": {
+                        "description": "All owners",
+                        "schema": {
+                            "$ref": "#/definitions/Owners"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the owner that we want to get",
+                    "type": "number"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Owners"
+                ],
+                "summary": "Get an owner by a given ID",
+                "responses": {
+                    "200": {
+                        "description": "Owner By ID",
+                        "schema": {
+                            "$ref": "#/definitions/Owner"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners_statistic": {
+            "get": {
+                "tags": [
+                    "Owners"
+                ],
+                "summary": "Get all cats owned by each owner and the average age of the cats",
+                "responses": {
+                    "200": {
+                        "description": "Statistic Report By Age",
+                        "schema": {
+                            "$ref": "#/definitions/Owner"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners_add": {
+            "post": {
+                "tags": [
+                    "Owners"
+                ],
+                "summary": "Add a new owner",
+                "parameters": [
+                    {
+                        "name": "owner",
+                        "in": "body",
+                        "description": "Owner that we want to add",
+                        "schema": {
+                            "$ref": "#/definitions/Owner"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add Owner"
+                    }
+                }
+            }
+        },
+        "/owners/{id}/cats_list": {
+            "post": {
+                "tags": [
+                    "Owners"
+                ],
+                "summary": "Update all given cats' ownerId's and return the list of updated cats",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of owner that we want to be given to cats' ownerId to be updated",
+                        "type": "number"
+                    },
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "List of cats id whose ownerId's we will update",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Change Cats Owner",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners/{id}/cats_create": {
+            "post": {
+                "tags": [
+                    "Owners"
+                ],
+                "summary": "Create all given cats and return the list of created cats",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of owner that we want to be given to cats' ownerId to be updated",
+                        "type": "number"
+                    },
+                    {
+                        "name": "cats",
+                        "in": "body",
+                        "description": "List of cats whose ownerId's we will update or create if they don't exist",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "cats_list": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Cat"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Create Cats",
+                        "schema": {
+                            "$ref": "#/definitions/Cat"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners_update/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the owner that we want to update",
+                    "type": "number"
+                }
+            ],
+            "put": {
+                "summary": "Update owner with given ID",
+                "tags": [
+                    "Owners"
+                ],
+                "parameters": [
+                    {
+                        "name": "owner",
+                        "in": "body",
+                        "description": "Owner with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Owner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Owner",
+                        "schema": {
+                            "$ref": "#/definitions/Owner"
+                        }
+                    }
+                }
+            }
+        },
+        "/owners_delete/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the owner that we want to delete",
+                    "type": "number"
+                }
+            ],
+            "delete": {
+                "summary": "Delete the owner with the given ID",
+                "tags": [
+                    "Owners"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete Owner",
+                        "schema": {
+                            "$ref": "#/definitions/Owner"
+                        }
+                    }
+                }
+            }
+        },
+        "/foods": {
+            "get": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Get all foods",
+                "responses": {
+                    "200": {
+                        "description": "All Foods",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                }
+            }
+        },
+        "/foods/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the food that we want to get",
+                    "type": "number"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Get a food by a given ID",
+                "responses": {
+                    "200": {
+                        "description": "Food By ID",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                }
+            }
+        },
+        "/foods_add": {
+            "post": {
+                "tags": [
+                    "Foods"
+                ],
+                "summary": "Add a new food",
+                "parameters": [
+                    {
+                        "name": "food",
+                        "in": "body",
+                        "description": "Food that we want to add",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add Food"
+                    }
+                }
+            }
+        },
+        "/foods_update/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the food that we want to update",
+                    "type": "number"
+                }
+            ],
+            "put": {
+                "summary": "Update food with given ID",
+                "tags": [
+                    "Foods"
+                ],
+                "parameters": [
+                    {
+                        "name": "food",
+                        "in": "body",
+                        "description": "Food with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Food",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                }
+            }
+        },
+        "/foods_delete/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the food that we want to delete",
+                    "type": "number"
+                }
+            ],
+            "delete": {
+                "summary": "Delete the food with the given ID",
+                "tags": [
+                    "Foods"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete Food",
+                        "schema": {
+                            "$ref": "#/definitions/Food"
+                        }
+                    }
+                }
+            }
+        },
+        "/foodcat": {
+            "get": {
+                "tags": [
+                    "FoodsForCats"
+                ],
+                "summary": "Get all foodcat",
+                "responses": {
+                    "200": {
+                        "description": "All FoodCat",
+                        "schema": {
+                            "$ref": "#/definitions/FoodForCat"
+                        }
+                    }
+                }
+            }
+        },
+        "/foodcat/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the foodcat that we want to get",
+                    "type": "number"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "FoodsForCats"
+                ],
+                "summary": "Get a foodcat by a given ID",
+                "responses": {
+                    "200": {
+                        "description": "FoodCat By ID",
+                        "schema": {
+                            "$ref": "#/definitions/FoodForCat"
+                        }
+                    }
+                }
+            }
+        },
+        "/foodcat_add": {
+            "post": {
+                "tags": [
+                    "FoodsForCats"
+                ],
+                "summary": "Add a new foodcat",
+                "parameters": [
+                    {
+                        "name": "foodcat",
+                        "in": "body",
+                        "description": "FoodCat that we want to add",
+                        "schema": {
+                            "$ref": "#/definitions/FoodForCat"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add FoodCat"
+                    }
+                }
+            }
+        },
+        "/foodcat_update/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the foodcat that we want to update",
+                    "type": "number"
+                }
+            ],
+            "put": {
+                "summary": "Update foodcat with given ID",
+                "tags": [
+                    "FoodsForCats"
+                ],
+                "parameters": [
+                    {
+                        "name": "foodcat",
+                        "in": "body",
+                        "description": "FoodCat with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/FoodForCat"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update FoodCat",
+                        "schema": {
+                            "$ref": "#/definitions/FoodForCat"
+                        }
+                    }
+                }
+            }
+        },
+        "/foodcat_delete/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the foodcat that we want to delete",
+                    "type": "number"
+                }
+            ],
+            "delete": {
+                "summary": "Delete the foodcat with the given ID",
+                "tags": [
+                    "FoodsForCats"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete FoodCat",
+                        "schema": {
+                            "$ref": "#/definitions/FoodForCat"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Cat": {
+            "required": [
+                "id",
+                "name",
+                "age",
+                "color",
+                "breed",
+                "weight",
+                "ownerId"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "primaryKey": true
+                },
+                "name": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "age": {
+                    "type": "integer",
+                    "allowNull": false
+                },
+                "color": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "breed": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "weight": {
+                    "type": "integer",
+                    "allowNull": false
+                },
+                "ownerId": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "foreignKey": true
+                }
+            }
+        },
+        "Owner": {
+            "required": [
+                "id",
+                "firstName",
+                "lastName",
+                "address",
+                "phone",
+                "email",
+                "age"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "primaryKey": true
+                },
+                "firstName": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "lastName": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "address": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "phone": {
+                    "type": "integer",
+                    "allowNull": false
+                },
+                "email": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "age": {
+                    "type": "integer",
+                    "allowNull": false
+                }
+            }
+        },
+        "Food": {
+            "required": [
+                "id",
+                "name",
+                "brand",
+                "price",
+                "quantity",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "primaryKey": true
+                },
+                "name": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "brand": {
+                    "type": "string",
+                    "allowNull": false
+                },
+                "price": {
+                    "type": "integer",
+                    "allowNull": false
+                },
+                "quantity": {
+                    "type": "integer",
+                    "allowNull": false
+                },
+                "type": {
+                    "type": "string",
+                    "allowNull": false
+                }
+            }
+        },
+        "FoodForCat": {
+            "required": [
+                "id",
+                "catId",
+                "foodId",
+                "purchased",
+                "place"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "primaryKey": true
+                },
+                "catId": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "foreignKey": true
+                },
+                "foodId": {
+                    "type": "integer",
+                    "allowNull": false,
+                    "foreignKey": true
+                },
+                "purchased": {
+                    "type": "integer",
+                    "allowNull": false
+                },
+                "place": {
+                    "type": "string",
+                    "allowNull": false
+                }
+            }
+        }
+    }
+}
