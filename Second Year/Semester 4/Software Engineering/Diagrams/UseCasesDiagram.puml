@@ -1,4 +1,4 @@
-@startuml
+@startuml UseCases
 left to right direction
 actor Admin
 actor User
@@ -18,12 +18,13 @@ rectangle "Account Management" {
   User --> (Create Account)
   User --> (Modify Account)
   User --> (Remove Account)
-  (Create Account) --> (AuthenticationException)/ : extends
-  (Create Account) --> (DataValidationException)/ : extends
-  (Modify Account) --> (AuthenticationException)/ : extends
-  (Modify Account) --> (DataValidationException)/ : extends
-  (Remove Account) --> (AuthenticationException)/ : extends
-  (Remove Account) --> (AuthorizationException)/ : extends
+  (Create Account) --> (AuthenticationException)
+  (Create Account) --> (DataValidationException) : extends
+  (Create Account) --> (DataValidationException) : extends
+  (Modify Account) --> (AuthenticationException) : extends
+  (Modify Account) --> (DataValidationException) : extends
+  (Remove Account) --> (AuthenticationException) : extends
+  (Remove Account) --> (AuthorizationException): extends
 }
 
 rectangle "Item Management" {

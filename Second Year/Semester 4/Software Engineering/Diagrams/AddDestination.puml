@@ -1,0 +1,10 @@
+@startuml
+actor User
+participant System
+participant Destination
+
+User -> System: Enter destination details
+System -> System: Validate details
+System -> Destination: Create destination
+System -> User: Confirmation message
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+actor User
+participant System
+object Account
+object Destination
+
+User -> System: Select destination to modify
+System -> Account: Retrieve user account details
+Account -> System: User account details
+System -> System: Validate account details
+System -> Destination: Retrieve destination details
+Destination -> System: Destination details
+User -> System: Modify destination details
+System -> System: Validate details
+System -> Destination: Update destination
+System -> User: Confirmation message
+@enduml

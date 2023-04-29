@@ -1,0 +1,17 @@
+@startuml SE
+!include .\\SE\Program.puml
+!include .\\SE\Controllers\AccountController.puml
+!include .\\SE\Controllers\DestinationController.puml
+!include .\\SE\Controllers\DestinationControllerAdmin.puml
+!include .\\SE\Controllers\DestinationControllerUser.puml
+!include .\\SE\Exceptions\AuthenticationException.puml
+!include .\\SE\Exceptions\AuthorizationException.puml
+!include .\\SE\Exceptions\DataValidationException.puml
+!include .\\SE\Models\Admin.puml
+!include .\\SE\Models\Destination.puml
+!include .\\SE\Models\User.puml
+!include .\\SE\View\ItemManagement.puml
+' !include .\\SE\obj\Debug\net7.0\.NETCoreApp,Version=v7.0.AssemblyAttributes.puml
+' !include .\\SE\obj\Debug\net7.0\SE.AssemblyInfo.puml
+' !include .\\SE\obj\Debug\net7.0\SE.GlobalUsings.g.puml
+@enduml

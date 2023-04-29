@@ -1,0 +1,9 @@
+@startuml
+actor User
+participant System
+
+User -> System: Enter account details
+System -> System: Validate details
+System -> Account: Create account
+System -> User: Confirmation message
+@enduml
