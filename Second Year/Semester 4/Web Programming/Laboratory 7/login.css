@@ -1,0 +1,98 @@
+body {
+    background-color: #f9d9f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.login-container {
+    background-color: #c59dcf;
+    padding: 20px;
+    margin: auto;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin: 0;
+}
+
+p {
+    text-align: center;
+    color: #8e26a5;
+    margin: 0;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+input[type=text],
+input[type=password] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type=submit] {
+    background-color: #993399;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #773377;
+}
+
+.password-container {
+    position: relative;
+}
+
+#show-password-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 8px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    color: #993399;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.error-container {
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    color: #721c24;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 10px;
+    display: none;
+}
+
+.error-container.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.error-container.show {
+    display: block;
+}

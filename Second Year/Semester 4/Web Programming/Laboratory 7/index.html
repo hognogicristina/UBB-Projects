@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Guest Book Log In</h1>
+        <p>Log in with your username and password.</p>
+        <form id="login-form" action="login.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password">
+                <button type="button" id="show-password-btn">Show Password</button>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+        <div class="error-container"></div>
+        <div id="message-container"></div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Guest Entry</title>
+    <link rel="stylesheet" href="modify.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Modify Guest Entry</h1>
+        <div id="message" class="message"></div>
+        <form action="modify.php" method="post">
+            <input type="hidden" id="entryId" name="entryId" value="">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author">
+            <div id="author-error" class="field-error"></div>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            <div id="email-error" class="field-error"></div>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+            <div id="title-error" class="field-error"></div>
+
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment"></textarea>
+            <div id="comment-error" class="field-error"></div>
+
+            <div class="datetime">
+                <label for="date">Date and Time:</label>
+                <input type="datetime-local" id="date" name="date">
+                <div id="date-error" class="field-error"></div>
+            </div>
+
+            <input type="submit" value="Save & Submit">
+        </form>
+
+        <button onclick="goBack()" class="button go-back">Go Back</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="modify.js"></script>
+</body>
+
+</html>

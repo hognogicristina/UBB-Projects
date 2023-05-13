@@ -1,0 +1,115 @@
+body {
+    background-color: #f9d9f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    background-color: #c59dcf;
+    padding: 20px;
+    margin: auto;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin: 0;
+}
+
+#filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+    flex-basis: 30%;
+}
+
+select {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.buttons-container button {
+    background-color: #993399;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.buttons-container button:hover {
+    background-color: #773377;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+.entry {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.entry h3 {
+    margin: 0;
+}
+
+.entry p {
+    margin: 0;
+}
+
+#pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    background-color: #993399;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.pagination button:hover {
+    background-color: #773377;
+}
+
+.go-back {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}

@@ -1,0 +1,103 @@
+body {
+    background-color: #f9d9f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    background-color: #c59dcf;
+    padding: 20px;
+    margin: auto;
+    width: 1000px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin: 0;
+}
+
+table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #993399;
+    color: #fff;
+}
+
+.modify-btn,
+.delete-btn {
+    background-color: #993399;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.modify-btn:hover,
+.delete-btn:hover {
+    background-color: #773377;
+}
+
+.delete-btn {
+    background-color: #ff6666;
+}
+
+.delete-btn:hover {
+    background-color: #dd5555;
+}
+
+td button {
+    display: block;
+    margin: 10px auto;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    background-color: #993399;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.pagination button:hover {
+    background-color: #773377;
+}
+
+button.go-back {
+    background-color: #993399;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+button.go-back:hover {
+    background-color: #773377;
+}

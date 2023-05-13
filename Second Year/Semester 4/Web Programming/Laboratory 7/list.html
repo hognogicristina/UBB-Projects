@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Guest Book List</title>
+    <link rel="stylesheet" href="list.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Guest Book List</h1>
+
+        <table id="guestbook">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Email</th>
+                    <th>Title</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
+        <div class="pagination">
+            <button id="first-page">First Page</button>
+            <button id="prev-page">Previous Page</button>
+            <span class="page-number"></span>
+            <button id="next-page">Next Page</button>
+            <button id="last-page">Last Page</button>
+        </div>
+
+        <button onclick="goBack()" class="button go-back">Go Back</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="list.js"></script>
+
+    <script>
+        function goBack() {
+            window.location.href = "admin.html"
+        }
+    </script>
+</body>
+
+</html>
