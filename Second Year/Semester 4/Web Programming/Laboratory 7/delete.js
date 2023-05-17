@@ -43,20 +43,21 @@ function getEntryIdFromURL() {
 function displaySuccessMessage(message) {
     var container = $(".container")
     container.empty()
-    container.append($("<h1>", { text: "Success" }))
-    container.append($("<p>", { text: message }))
+    container.append($("<h1>", { text: "Success", class: "success-title" }))
+    container.append($("<p>", { text: message, class: "success-text" }))
 }
 
 function displayErrorMessage(message) {
     var container = $(".container")
     container.empty()
-    container.append($("<h1>", { text: "Error" }))
-    container.append($("<p>", { text: message }))
+    container.append($("<h1>", { text: "Error", class: "error-title" }))
+    container.append($("<p>", { text: message, class: "error-text" }))
 }
 
 function displayCancelMessage(message) {
     var container = $(".container")
     container.empty()
-    container.append($("<h1>", { text: "Canceled" }))
-    container.append($("<p>", { text: message }))
+    container.append($("<h1>", { text: "Canceled", class: "cancel-title" }))
+    container.append($("<p>", { text: message, class: "cancel-text" }))
 }
+

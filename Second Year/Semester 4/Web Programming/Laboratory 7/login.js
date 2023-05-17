@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     showPasswordBtn.addEventListener("click", function () {
         if (passwordInput.type === "password") {
             passwordInput.type = "text"
-            showPasswordBtn.textContent = "Hide Password"
+            showPasswordBtn.innerHTML = '<i class="fa fa-eye-slash" id="password-icon"></i>'
         } else {
             passwordInput.type = "password"
-            showPasswordBtn.textContent = "Show Password"
+            showPasswordBtn.innerHTML = '<i class="fa fa-eye" id="password-icon"></i>'
         }
     })
 
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response.success) {
                     window.location.href = response.redirect
                 } else {
-                    errorContainer.textContent = response.message
+                    errorContainer.innerHTML = '<i class="fa fa-exclamation-circle"></i> ' + response.message
                     errorContainer.classList.add("error")
                     errorContainer.classList.add("show")
                 }

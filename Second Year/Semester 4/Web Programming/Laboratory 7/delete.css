@@ -24,7 +24,6 @@ p {
     color: #8e26a5;
     margin: 0;
 }
-
 .buttons-container {
     display: flex;
     justify-content: center;
@@ -32,43 +31,49 @@ p {
 }
 
 .buttons-container button {
-    background-color: #993399;
-    color: #fff;
     padding: 8px 16px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     margin: 0 10px;
+}
+
+#confirm-delete {
+    background-color: #61366d;
+    color: #fff;
+}
+
+#cancel-delete {
+    background-color: #797477;
+    color: #fff;
 }
 
 .buttons-container button:hover {
-    background-color: #773377;
+    opacity: 0.8;
+    border-radius: 50px;
+    transition: 0.3s;
 }
 
-.button {
-    background-color: #993399;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    margin: 0 10px;
+.success-title {
+    color: #9fe4a1;
 }
 
-.button:hover {
-    background-color: #773377;
+.success-text {
+    color: #457447;
 }
 
-.button-go-back {
-    background-color: #993399;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
+.error-title {
+    color: #ff938b;
 }
 
-.button-go-back:hover {
-    background-color: #773377;
+.error-text {
+    color: #7f3731;
+}
+
+.cancel-title {
+    color: #f0c4eb;
+}
+
+.cancel-text {
+    color: #4d2f4a;
 }

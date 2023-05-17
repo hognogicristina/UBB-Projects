@@ -1,12 +1,12 @@
 $(document).ready(function () {
     function showSuccessMessage(message) {
-        $('#message').text(message).addClass('success').removeClass('error').show()
+        $('#message').html('<i class="fas fa-check-circle"></i> ' + message).addClass('success').removeClass('error').show()
         $('.field-error').text('').removeClass('error').hide()
-    }
+    }    
 
     function showErrorMessage(message, field) {
         $('#' + field).addClass('error')
-        $('#' + field + '-error').text(message).addClass('error').show()
+        $('#' + field + '-error').html('<i class="fas fa-exclamation-circle"></i> ' + message).addClass('error').show()
         $('#message').text('').removeClass('success').hide()
     }
 
@@ -35,7 +35,6 @@ $(document).ready(function () {
                     }
                 } else if (response.hasOwnProperty('success')) {
                     showSuccessMessage(response.success)
-                    $('form')[0].reset()
                 } else if (response.hasOwnProperty('error')) {
                     showErrorMessage(response.error, 'author')
                     $('#author').addClass('error')

@@ -48,13 +48,15 @@ input[type=submit] {
     background-color: #993399;
     color: #fff;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
 }
 
 input[type=submit]:hover {
     background-color: #773377;
+    border-radius: 5px;
+    transition: 0.3s;
 }
 
 .password-container {
@@ -80,7 +82,7 @@ input[type=submit]:hover {
     border-radius: 3px;
     border-style: solid;
     border-width: 1px;
-    color: #721c24;
+    color: red;
     font-size: 14px;
     font-weight: 400;
     margin-top: 10px;
@@ -89,8 +91,7 @@ input[type=submit]:hover {
 }
 
 .error-container.error {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+    background-color: #ffe4e4;
 }
 
 .error-container.show {

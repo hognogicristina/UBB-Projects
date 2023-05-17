@@ -136,13 +136,6 @@ $(document).ready(function () {
         window.location.href = 'list.html'
     })
 
-    $('#first-page').on('click', function () {
-        if (currentPage > 1) {
-            currentPage = 1
-            applyFilters()
-        }
-    })
-
     $('#prev-page').on('click', function () {
         if (currentPage > 1) {
             currentPage--
@@ -153,13 +146,6 @@ $(document).ready(function () {
     $('#next-page').on('click', function () {
         if (currentPage < totalPages) {
             currentPage++
-            applyFilters()
-        }
-    })
-
-    $('#last-page').on('click', function () {
-        if (currentPage < totalPages) {
-            currentPage = totalPages
             applyFilters()
         }
     })

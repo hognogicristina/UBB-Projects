@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
@@ -17,11 +18,15 @@
             <label for="password">Password:</label>
             <div class="password-container">
                 <input type="password" id="password" name="password">
-                <button type="button" id="show-password-btn">Show Password</button>
+                <button id="show-password-btn" type="button">
+                    <i class="fa fa-eye" id="password-icon"></i>
+                </button>
             </div>
             <input type="submit" value="Login">
         </form>
-        <div class="error-container"></div>
+        <div class="error-container">
+            <i class="fa fa-exclamation-circle"></i>
+        </div>
         <div id="message-container"></div>
     </div>
 

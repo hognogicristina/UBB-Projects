@@ -11,13 +11,17 @@
     <div class="container">
         <h1>Client Page</h1>
         <p>Welcome to the client page. You can add new guest entries to the guest book by clicking the button below.</p>
-        <a href="add.html" class="button add-entry">Add New Guest Entry</a>
+        <a onclick="goAdd()" class="button add-entry">Add New Guest Entry</a>
         <button onclick="goBack()" class="button go-back">Go Back</button>
     </div>
 
     <script>
         function goBack() {
             window.location.href = "index.html"
+        }
+
+        function goAdd() {
+            window.location.href = "add.html"
         }
     </script>
 </body>

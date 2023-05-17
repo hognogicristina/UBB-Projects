@@ -75,11 +75,6 @@ $(document).ready(function () {
             showErrorMessage("Error retrieving data from server: " + textStatus)
         }
     })
-    $("#first-page").on("click", function () {
-        if (currentPage !== 1) {
-            getData(1)
-        }
-    })
 
     $("#prev-page").on("click", function () {
         if (currentPage > 1) {
@@ -90,12 +85,6 @@ $(document).ready(function () {
     $("#next-page").on("click", function () {
         if (currentPage < totalPages) {
             getData(currentPage + 1)
-        }
-    })
-
-    $("#last-page").on("click", function () {
-        if (currentPage !== totalPages) {
-            getData(totalPages)
         }
     })
 

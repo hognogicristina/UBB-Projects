@@ -1,9 +1,14 @@
 const urlParams = new URLSearchParams(window.location.search)
 const entryId = urlParams.get('id')
 
+function showSuccessMessage(message) {
+    $('#message').html('<i class="fas fa-check-circle"></i> ' + message).addClass('success').removeClass('error').show()
+    $('.field-error').text('').removeClass('error').hide()
+}    
+
 function showErrorMessage(message, field) {
     $('#' + field).addClass('error')
-    $('#' + field + '-error').text(message).addClass('error').show()
+    $('#' + field + '-error').html('<i class="fas fa-exclamation-circle"></i> ' + message).addClass('error').show()
     $('#message').text('').removeClass('success').hide()
 }
 
@@ -58,7 +63,7 @@ function submitModifiedData() {
                 $('#author').addClass('error')
             } else if (response.hasOwnProperty('success')) {
                 $('#message').text('Guest entry modified successfully!').removeClass('error').addClass('success').show()
-                $('.field-error').text('').removeClass('error').hide()
+                showSuccessMessage(response.success)
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

@@ -51,6 +51,12 @@ input[type="datetime-local"] {
     flex-basis: 70%;
 }
 
+input[type=text].error,
+textarea.error,
+input[type="datetime-local"].error {
+    border: 1px solid red;
+}
+
 input[type=submit] {
     background-color: var(--button-color);
     color: white;
@@ -64,6 +70,8 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: var(--button-hover-color);
+    border-radius: 50px;
+    transition: 0.3s;
 }
 
 @media only screen and (max-width: 600px) {
@@ -74,7 +82,7 @@ input[type=submit]:hover {
 }
 
 button.go-back {
-    background-color: var(--button-color);
+    background-color: #9060a5;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -86,7 +94,9 @@ button.go-back {
 }
 
 button.go-back:hover {
-    background-color: var(--button-hover-color);
+    background-color: #694677;
+    border-radius: 50px;
+    transition: 0.3s;
 }
 
 .datetime {
@@ -127,6 +137,8 @@ form input[type=submit] {
     background-color: #ffe4e4;
     padding: 5px;
     border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
     margin-bottom: 10px;
 }
 
@@ -138,4 +150,26 @@ form input[type=submit] {
 
 textarea {
     min-height: 80px;
+}
+
+.field-error {
+    position: relative;
+}
+
+.field-error i.fa {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: red;
+    display: none;
+}
+
+.field-error.error-show i.fa {
+    display: inline-block;
+}
+
+.field-error .error-message {
+    margin-left: 20px;
+    color: red;
 }
