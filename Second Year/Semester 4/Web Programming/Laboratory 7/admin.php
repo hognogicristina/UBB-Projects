@@ -1,4 +1,8 @@
 <?php
+
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 
 $servername = "localhost";
@@ -71,6 +75,13 @@ $response['pagination'] = array(
     'currentPage' => $page,
     'totalPages' => $totalPages,
 );
+
+if (isset($_GET['count']) && $_GET['count'] === 'true') {
+    $countSql = "SELECT COUNT(*) as count FROM ($totalEntriesSql) as subquery";
+    $countResult = $conn->query($countSql);
+    $countRow = $countResult->fetch_assoc();
+    $response['count'] = $countRow['count'];
+}
 
 echo json_encode($response);
 

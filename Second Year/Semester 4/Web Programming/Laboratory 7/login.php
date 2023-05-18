@@ -1,4 +1,10 @@
 <?php
+
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -13,8 +19,8 @@ if ($conn->connect_error) {
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     if (empty($username) || empty($password)) {
         $response["success"] = false;

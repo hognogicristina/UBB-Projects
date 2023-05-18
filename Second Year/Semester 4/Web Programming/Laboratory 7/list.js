@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var currentPage = 1
     var totalPages = 0
+    $("#count-pages").show()
 
     function showErrorMessage(message) {
         var container = $(".container")
@@ -56,6 +57,8 @@ $(document).ready(function () {
             $("#next-page").prop("disabled", false)
             $("#last-page").prop("disabled", false)
         }
+
+        $("#count-pages").text(currentPage + " / " + totalPages)
     }
 
     $.ajax({
@@ -79,12 +82,14 @@ $(document).ready(function () {
     $("#prev-page").on("click", function () {
         if (currentPage > 1) {
             getData(currentPage - 1)
+            updatePagination()
         }
     })
 
     $("#next-page").on("click", function () {
         if (currentPage < totalPages) {
             getData(currentPage + 1)
+            updatePagination()
         }
     })
 

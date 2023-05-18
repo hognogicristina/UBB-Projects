@@ -52,6 +52,10 @@ $(document).ready(function () {
         var author = $('#author-filter').val()
         var title = $('#title-filter').val()
         var results = $('#results')
+        var count = $('#count') 
+
+        $("#count-pages").show()
+        $("#count").show()
 
         results.empty()
 
@@ -82,6 +86,16 @@ $(document).ready(function () {
             }
         })
 
+        $.ajax({
+            url: 'admin.php',
+            data: { author: author, title: title, count: true },
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                count.text('Nr. Of Guest Entries: ' + data.count)
+            }
+        })
+
         $("#pagination").show()
     }
 
@@ -98,6 +112,7 @@ $(document).ready(function () {
             if (currentPage > 1) {
                 currentPage--
                 applyFilters()
+                updatePaginationButtons()
             }
         })
 
@@ -105,15 +120,11 @@ $(document).ready(function () {
             if (currentPage < totalPages) {
                 currentPage++
                 applyFilters()
+                updatePaginationButtons()
             }
         })
 
-        lastButton.off('click').on('click', function () {
-            if (currentPage < totalPages) {
-                currentPage = totalPages
-                applyFilters()
-            }
-        })
+        $("#count-pages").text(currentPage + " / " + totalPages);
     }
 
     function goBack() {
