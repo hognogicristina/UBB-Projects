@@ -1,0 +1,27 @@
+USE AppleStore;
+DROP TABLE Available_Categories;
+DROP TABLE Colour;
+DROP TABLE Categories;
+
+CREATE TABLE Categories (
+	catID INT PRIMARY KEY NOT NULL,
+	catName VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE Colour (
+	colID INT PRIMARY KEY NOT NULL,
+	colName VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE Available_Categories (
+	colID INT FOREIGN KEY REFERENCES Colour(colID) ON DELETE CASCADE ON UPDATE CASCADE,
+	catID INT FOREIGN KEY REFERENCES Categories(catID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT PK_Available_Categories PRIMARY KEY (colID, catID)
+);
+
+INSERT INTO Categories Values(7, 'Apple TV')
+DELETE FROM Categories WHERE catID = 7
+
+SELECT * FROM Categories
+SELECT * FROM Colour
+SELECT * FROM Available_Categories
