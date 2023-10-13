@@ -1,0 +1,21 @@
+// Compute the sum of n numbers, computer the max/min of n numbers
+
+n: int
+number: int
+
+sys.write("How many numbers do you want to sum?\n")
+sys.read(n)
+
+sum: int
+sum = 0
+index: int
+index = 1
+
+wihle index <= n
+begin:
+	sys.read(number)
+	sum = sum + number
+end;
+
+sys.write("The sum is")
+sys.write(sum)

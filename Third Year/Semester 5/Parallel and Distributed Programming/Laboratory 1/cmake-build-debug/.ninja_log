@@ -1,0 +1,7 @@
+# ninja log v5
+3	1801	1697178113535573917	CMakeFiles/Laboratory_1.dir/Example/CPP/threading.cpp.o	bb8c6cd6a6da5f80
+1	1807	1697178113541721029	CMakeFiles/Laboratory_1.dir/Example/CPP/mutex.cpp.o	85bc94fc104db6e2
+1	1840	1697178113575259256	CMakeFiles/Laboratory_1.dir/Example/CPP/recursive_mutex.cpp.o	20e75b9b2d9d9ae6
+0	1842	1697178113579290930	CMakeFiles/Laboratory_1.dir/Example/CPP/atomic.cpp.o	54d4ba77a9cac038
+0	1845	1697178113581078711	CMakeFiles/Laboratory_1.dir/Example/CPP/deadlock.cpp.o	3442f9639acf49e
+3	1500	1697178147354228837	CMakeFiles/Laboratory_1.dir/main.cpp.o	dfdff21c139af930
