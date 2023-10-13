@@ -46,21 +46,21 @@ This repository includes my homeworks and projects from college.
 <h2>Third Year</h2>
 <ul><li><b>5<sup>rd</sup> Semester</b></li>
 <ul>
-	<li><a href="">Formal Languages and Compiler Techniques</a></li>
-	<li><a href="">Mobile Applications</a></li>
-	<li><a href="">Parallel and Distributed Programming</a></li>
-	<li><a href="">Public-key Cryptography</a></li>
-	<li><a href="">Team Project</a></li>
-	<li><a href="">Virtual Reality</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Formal%20Languages%20and%20Compiler%20Techniques">Formal Languages and Compiler Techniques</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Mobile%20Applications">Mobile Applications</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Parallel%20and%20Distributed%20Programming">Parallel and Distributed Programming</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Public-key%20Cryptography">Public-key Cryptography</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Team%20Project">Team Project</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Virtual%20Reality">Virtual Reality</a></li>
 </ul>
 
 <br>
 <li><b>6<sup>th</sup> Semester</b></li>
 <ul>
-	<li><a href="">Academic ethics and integrity (in Computer Science)</a></li>
-	<li><a href="">Blockchain: Smart Contracts</a></li>
-	<li><a href="">Business Intelligence</a></li>
-	<li><a href="">Elaboration of the Bachelor's Thesis</a></li>
-	<li><a href="">Numerical Calculus</a></li>
-	<li><a href="">Software Systems Validation and Verification</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Academic%20ethics%20and%20integrity%20(in%20Computer%20Science)">Academic ethics and integrity (in Computer Science)</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Blockchain:%20Smart%20Contracts">Blockchain: Smart Contracts</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Business%20Intelligence">Business Intelligence</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Elaboration%20of%20the%20Bachelor's%20Thesis">Elaboration of the Bachelor's Thesis</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Numerical%20Calculus">Numerical Calculus</a></li>
+	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Software%20Systems%20Validation%20and%20Verification">Software Systems Validation and Verification</a></li>
 </ul>
