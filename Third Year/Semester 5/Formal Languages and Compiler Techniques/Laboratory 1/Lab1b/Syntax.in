@@ -1,6 +1,6 @@
 The words - predefined tokens are specified between " and ":
 Sintactical rules: (file Syntax.in)
-program ::= "prog {" stmtlist "}"
+program ::= "prog" "{" stmtlist "}"
 declaration ::= IDENTIFIER ":" type
 type1 ::= "char" | "int" | "str" | "bool"
 arraydecl ::= "arr" "(" type1 ")" "[" INTCONST "]"
@@ -8,6 +8,8 @@ type  ::= type1|arraydecl
 stmtlist ::= stmt | stmt ";" stmtlist
 stmt ::= simplstmt | structstmt
 simplstmt ::= assignstmt | iostmt | declaration
+forstmt ::= "for" assignstmt ";" condition ";" assignstmt "begin" ":" stmt "end" ";'
+foreachstmt ::= "foreach" IDENTIFIER "in" IDENTIFIER "begin" ":" stmt "end" ";"
 assignstmt ::= IDENTIFIER "=" expression
 expression ::= expression "+" term | expression "-" term | term
 term ::= term "*" factor | term "/" factor | factor
@@ -15,6 +17,6 @@ factor ::= "(" expression ")" | IDENTIFIER | CONST
 iostmt ::= "sys" "." "read" "(" IDENTIFIER ")" | "sys" "." "write" "(" IDENTIFIER ")" | "sys" "." "write" "(" CONST ")" 
 structstmt ::= stmtlist | ifstmt | whilestmt
 ifstmt ::= "if" condition "begin" ":" stmtlist "end" ";" ["else" "begin" ":" stmtlist "end" ";"]
-whilestmt ::= "while" condition "begin" ":" stmtlist "end" ";"
+whilestmt ::= "while" condition "do" "begin" ":" stmtlist "end" ";"
 condition ::= expression RELATION expression
 RELATION ::= "<" | "<=" | "==" | "<>" | ">=" | ">"

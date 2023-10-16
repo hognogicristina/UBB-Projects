@@ -1,10 +1,60 @@
-// Verify if a number is prime, compute gcd of 2 numbers, compute the solutions for a 2nd order equation
+// Verify if a number is prime, compute gcd of 2 numbers, compute the solutions for a 2nd order equation using Syntax.in and Lexic.txt
+
+x: int
+i: int 
+#prime: int
+
+sys.read(x)
+
+i = 2
+prime = 1
+
+// Verify if a number is prime
+while i * i < x and #prime == 1 do
+begin:
+    if x % i == 0
+    begin:
+        #prime = 0
+    else begin:
+        i = i + 1
+    end;
+end;
+
+if #prime == 1
+begin:
+    sys.write("The number is prime\n")
+else begin:
+    sys.write("The number is not prime\n")
+end;
 
 a: int
-b: int 
+b: int
+
+sys.write("a=")
+sys.read(a)
+
+sys.write("b=")
+sys.read(b)
+
+$remind: int
+
+// Compute gcd of 2 numbers
+while b != 0 do
+begin:
+    $remind = a % b
+    a = b
+    b = $remind
+end;
+
+sys.write("gcd=")
+sys.write(a)
+
+// Compute the solutions for a 2nd order equation
+a: int
+b: int
 c: int
 
-sys.write("The ecuation: a*x^2 + b*x + c = 0\n")
+sys.write("The equation is ax^2 + bx + c = 0\n")
 
 sys.write("a=")
 sys.read(a)
@@ -15,26 +65,24 @@ sys.read(b)
 sys.write("c=")
 sys.read(c)
 
-d: int 
-d = b*b - 4*a*c
+#delta: int
+#d = b * b - 4 * a * c
 
 sol1: real
 sol2: real
 
 if d < 0
-bwgin:
+begin:
 	sys.write("No real solutions.")
 end;
 
 if d = 0
 begin:
-	sol1 = (-b)/(2*a)
-	sys.write("Unique solution ")
-	sys.write(sol1)
+	sol1 = (negb) / (2 * a)
 end;
 
-sol1 = ((-b)-(\/d))/(2*a)
-sol2 = ((-b)+(\/d))/(2*a)
+sol1 = ((negb) - (rad d)) / (2 * a)
+sol2 = ((negb) + (rad d)) / (2 * a)
 
 sys.write("2 solutions ")
 sys.write(sol1)
