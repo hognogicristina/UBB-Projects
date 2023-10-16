@@ -44,7 +44,7 @@ This repository includes my homeworks and projects from college.
 </ul>
 
 <h2>Third Year</h2>
-<ul><li><b>5<sup>rd</sup> Semester</b></li>
+<ul><li><b>5<sup>th</sup> Semester</b></li>
 <ul>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Formal%20Languages%20and%20Compiler%20Techniques">Formal Languages and Compiler Techniques</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Mobile%20Applications">Mobile Applications</a></li>
