@@ -5,7 +5,11 @@ Meow - Adopt a Cat: a Mobile Application for helping homeless cats get a home1
 - Read: When online, the application reads the entities from the server. When offline, it reads them from the database.
 - Update: Whenever an entity is updated, the updates are transmitted both to the database and to the server.
 - Delete: Whenever an entity is deleted, it gets deleted both from the database and from the server.
-5. Details on what is happening when the device is offline.- In this case, we want to develop an application which lets the user to add, remove and modify entries locally. In this way, changes will persist only locally in the database. When the application is used offline, all the operations performed store the information locally:- update and delete: a message will be displayed, that the application is offline and the operation is not available.
-- read: the content from the local database will be displayed, with a note that the server connection is down.
-- create: the input will be persisted in the local database and when the application will detect that the device is able to connect again to the server will 
-push only the created entries, while the device was offline.
+5. Details on what is happening when the device is offline.- In this case, we want to develop an application which lets the user to add, remove and modify entries locally. In this way, changes will persist only locally in the database. When the application is used offline, all the operations performed store the information locally:
+- the entities created are stored in the local database
+- the read operation is performed on the locally saved entities
+- the update operation goes for the locally saved entities
+- the delete operation is performed on the local database
+
+When the application goes back online, all the changes on the local database are transmitted to the server. As long as there is no internet connection, 
+the notes are available only with the properties previously saved in the database.
