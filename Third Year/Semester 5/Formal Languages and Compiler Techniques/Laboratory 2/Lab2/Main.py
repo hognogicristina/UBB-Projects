@@ -27,3 +27,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''
+Output: 
+Is 'variable1' an identifier? True
+Is 'variable2' an identifier? True
+Is 'variable3' an identifier? False
+Is '42' a constant? True
+Is '3' a constant? True
+Position of 'variable1' in identifiers: 8
+Position of 'variable2' in identifiers: 9
+Position of '42' in constants: 2
+Position of '3' in constants: 3
+SymbolTable{identifiers_hash_table=[[], [], [], [], [], [], [], [], ['variable1'], ['variable2']]
+constants_hash_table=[[], [], [42], [3], [], [], [], [], [], []]}
+'''
