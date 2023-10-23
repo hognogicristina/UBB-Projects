@@ -35,12 +35,10 @@ class HashTable:
             hash_value = self.hash(key)
         return hash_value
 
-    # Add a key to the hash table
+    # # Add a key to the hash table
     def add(self, key):
         hash_value = self.get_hash_value(key)
-        # If the key is not already in the hash table, add it to the corresponding bucket
-        if not self.contains(key):
-            self.hashTable[hash_value].append(key)
+        self.hashTable[hash_value].append(key)
 
     # Get the position (bucket index) for a key
     def get_position(self, key):
