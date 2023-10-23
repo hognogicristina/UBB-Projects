@@ -1,6 +1,6 @@
 Alphabet:
     a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
-    b. Hastag (#) and underscore (_) symbols
+    b. Hashtag (#) and underscore (_) symbols
     c. Decimal digits (0-9)
 Lexic:
 	a. special symbols, representing:
