@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/cmake-build-debug"
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1"
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -819,7 +819,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Laboratory_1"
+			"value" : "Lab1"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1102,7 +1102,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Laboratory_1_BINARY_DIR",
+			"name" : "Lab1_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1111,10 +1111,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/cmake-build-debug"
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1/cmake-build-debug"
 		},
 		{
-			"name" : "Laboratory_1_IS_TOP_LEVEL",
+			"name" : "Lab1_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1126,7 +1126,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Laboratory_1_SOURCE_DIR",
+			"name" : "Lab1_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1135,7 +1135,43 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1"
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1"
+		},
+		{
+			"name" : "Project_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1/cmake-build-debug"
+		},
+		{
+			"name" : "Project_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "Project_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1"
 		}
 	],
 	"kind" : "cache",
