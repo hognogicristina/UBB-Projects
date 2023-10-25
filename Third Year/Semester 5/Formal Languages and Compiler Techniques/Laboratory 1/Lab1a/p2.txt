@@ -7,7 +7,7 @@ i: int
 sys.read(x)
 
 i = 2
-prime = 1
+#prime = 1
 
 // Verify if a number is prime
 while i * i < x and #prime == 1 do
@@ -36,14 +36,14 @@ sys.read(a)
 sys.write("b=")
 sys.read(b)
 
-$remind: int
+remind: int
 
 // Compute gcd of 2 numbers
 while b != 0 do
 begin:
-    $remind = a % b
+    remind = a % b
     a = b
-    b = $remind
+    b = remind
 end;
 
 sys.write("gcd=")
@@ -66,23 +66,23 @@ sys.write("c=")
 sys.read(c)
 
 #delta: int
-#d = b * b - 4 * a * c
+#delta = b * b - 4 * a * c
 
 sol1: real
 sol2: real
 
-if d < 0
+if #delta < 0
 begin:
 	sys.write("No real solutions.")
 end;
 
-if d = 0
+if #delta = 0
 begin:
 	sol1 = (negb) / (2 * a)
 end;
 
-sol1 = ((negb) - (rad d)) / (2 * a)
-sol2 = ((negb) + (rad d)) / (2 * a)
+sol1 = ((negb) - (rad #delta)) / (2 * a)
+sol2 = ((negb) + (rad #delta)) / (2 * a)
 
 sys.write("2 solutions ")
 sys.write(sol1)
