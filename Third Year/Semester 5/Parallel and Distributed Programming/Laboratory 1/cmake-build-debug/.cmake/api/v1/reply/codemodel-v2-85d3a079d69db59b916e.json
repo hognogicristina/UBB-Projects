@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1/cmake-build-debug",
-		"source" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/Lab1"
+		"build" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1/cmake-build-debug",
+		"source" : "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 1"
 	},
 	"version" : 
 	{
