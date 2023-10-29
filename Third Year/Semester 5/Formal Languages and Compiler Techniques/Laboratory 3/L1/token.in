@@ -5,8 +5,8 @@
 <
 >
 %
-=
 ==
+=
 >=
 <=
 <>
@@ -21,14 +21,13 @@
 ,
 :
 ;
+'
+"
+_
 space
 newline
 begin
 end
-'
-"
-_
-#
 prog
 int
 real
@@ -47,6 +46,7 @@ fun
 sys
 for
 foreach
+in
 and
 or
 not

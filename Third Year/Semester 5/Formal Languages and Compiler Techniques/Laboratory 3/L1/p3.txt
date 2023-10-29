@@ -23,7 +23,7 @@ max: int
 min: int
 
 sys.read(#nr)
-max = neg999999
+max = -999999
 min = 999999
 
 // Compute the max/min of n numbers

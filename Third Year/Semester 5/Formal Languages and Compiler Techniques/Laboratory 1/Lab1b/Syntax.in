@@ -14,7 +14,8 @@ assignstmt ::= IDENTIFIER "=" expression
 expression ::= expression "+" term | expression "-" term | term
 term ::= term "*" factor | term "/" factor | factor
 factor ::= "(" expression ")" | IDENTIFIER | CONST
-iostmt ::= "sys" "." "read" "(" IDENTIFIER ")" | "sys" "." "write" "(" IDENTIFIER ")" | "sys" "." "write" "(" CONST ")" 
+iostmt ::= "sys" "." "read" "(" IDENTIFIER ")" | "sys" "." "write" "(" IDENTIFIER ")" | "sys" "." "write" "(" CONST ")"
+radstmt ::= "rad" "(" IDENTIFIER ")"
 structstmt ::= stmtlist | ifstmt | whilestmt
 ifstmt ::= "if" condition "begin" ":" stmtlist "end" ";" ["else" "begin" ":" stmtlist "end" ";"]
 whilestmt ::= "while" condition "do" "begin" ":" stmtlist "end" ";"

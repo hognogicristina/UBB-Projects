@@ -6,14 +6,14 @@ Lexic:
 	a. special symbols, representing:
 		- operators: + - * / > < = == >= <= <>
 		- separators: [ ] ( ) { } . , : ; space newline begin end
-		- reserved words: prog int real str char bool read if else write do while arr const sys for foreach in and or not rad
+		- reserved words: prog int real str char bool read if else write do while arr const sys for foreach in and or rad
         - comments: //comment
 	b. identifiers: a sequence of letters and digits, such that the first character is a letter; the rule is:
         - identifier: ("#" | letter){letter|digit}
         - letter: "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
         - digit: "0" | "1" | "2" | ... | "9"
     c. constants:
-        1. intconst = "0" | ["poz"|"neg"]nz_digit{digit}
+        1. intconst = "0" | ["+"|"-"]nz_digit{digit}
 		2. nz_digit = "1" | "2" | ... | "9"
 		3. strconst = """{letter|digit|"_"|" "}"""
 		4. charconst = "'"(letter|digit)"'"
