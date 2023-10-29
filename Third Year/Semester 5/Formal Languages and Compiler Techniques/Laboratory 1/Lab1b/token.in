@@ -53,6 +53,7 @@ z
 +
 -
 *
+%
 /
 <
 >
@@ -107,7 +108,10 @@ fun
 sys
 for
 foreach
+in
 and
 or
 not
 rad
+poz
+neg
