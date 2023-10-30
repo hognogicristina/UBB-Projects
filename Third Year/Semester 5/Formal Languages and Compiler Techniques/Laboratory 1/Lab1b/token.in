@@ -72,8 +72,7 @@ z
 ,
 :
 ;
-space
-newline
+endl
 begin
 end
 '
@@ -100,15 +99,10 @@ read
 if
 else
 write
-do
 while
 arr
 const
-fun
 sys
-for
-foreach
-in
 and
 or
 rad

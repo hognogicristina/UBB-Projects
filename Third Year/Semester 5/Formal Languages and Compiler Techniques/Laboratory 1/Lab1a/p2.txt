@@ -10,7 +10,7 @@ sys.read(x)
 i = 2
 #prime = 1
 
-while i * i < x and #prime == 1 do
+while i * i < x and #prime == 1
 begin:
     if x % i == 0
     begin:
@@ -22,31 +22,33 @@ end;
 
 if #prime == 1
 begin:
-    sys.write("The number is prime\n")
+    sys.write("The number is prime")
+    sys.write(endl)
 else begin:
-    sys.write("The number is not prime\n")
+    sys.write("The number is not prime")
+    sys.write(endl)
 end;
 
 // Compute gcd of 2 numbers
 n: int
 m: int
 
-sys.write("n=")
+sys.write("n = ")
 sys.read(n)
 
-sys.write("m=")
+sys.write("m = ")
 sys.read(m)
 
 remind: int
 
-while m != 0 do
+while m != 0
 begin:
     remind = n % m
     n = m
     m = remind
 end;
 
-sys.write("gcd=")
+sys.write("gcd = ")
 sys.write(n)
 
 // Compute the solutions for a 2nd order equation
@@ -54,15 +56,16 @@ a: int
 b: int
 c: int
 
-sys.write("The equation is ax^2 + bx + c = 0\n")
+sys.write("The equation is ax^2 + bx + c = 0")
+sys.write(endl)
 
-sys.write("a=")
+sys.write("a = ")
 sys.read(a)
 
-sys.write("b=")
+sys.write("b = ")
 sys.read(b)
 
-sys.write("c=")
+sys.write("c = ")
 sys.read(c)
 
 #delta: int

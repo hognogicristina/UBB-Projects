@@ -1,5 +1,6 @@
 // Compute the sum of n numbers, computer the max/min of n numbers
 
+// Compute the sum of n numbers
 n: int
 sum: int
 i: int
@@ -8,8 +9,7 @@ sys.read(n)
 sum = 0
 i = 1
 
-// Compute the sum of n numbers
-while i <= n do
+while i <= n
 begin:
 	sum = sum + i
 	i = i + 1
@@ -18,26 +18,33 @@ end;
 sys.write("Sum: ")
 sys.write(sum)
 
+// Compute the max/min of n numbers
 #nr: arr(int) [10]
 max: int
 min: int
+
+num: int
+i: int
 
 sys.read(#nr)
 max = -999999
 min = 999999
 
-// Compute the max/min of n numbers
-foreach num in #nr
+while i < 10
 begin:
-	if num > max
-	begin:
-		max = num
-	end;
+    num = #nr[i]
 
-	if num < min
-	begin:
-		min = num
-	end;
+    if num > max
+    begin:
+        max = num
+    end;
+
+    if num < min
+    begin:
+        min = num
+    end;
+
+    i = i + 1
 end;
 
 sys.write("Max: ")

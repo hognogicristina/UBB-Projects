@@ -8,8 +8,6 @@ type  ::= type1|arraydecl
 stmtlist ::= stmt | stmt ";" stmtlist
 stmt ::= simplstmt | structstmt
 simplstmt ::= assignstmt | iostmt | declaration
-forstmt ::= "for" assignstmt ";" condition ";" assignstmt "begin" ":" stmt "end" ";'
-foreachstmt ::= "foreach" IDENTIFIER "in" IDENTIFIER "begin" ":" stmt "end" ";"
 assignstmt ::= IDENTIFIER "=" expression
 expression ::= expression "+" term | expression "-" term | term
 term ::= term "*" factor | term "/" factor | factor
@@ -18,6 +16,6 @@ iostmt ::= "sys" "." "read" "(" IDENTIFIER ")" | "sys" "." "write" "(" IDENTIFIE
 radstmt ::= "rad" "(" IDENTIFIER ")"
 structstmt ::= stmtlist | ifstmt | whilestmt
 ifstmt ::= "if" condition "begin" ":" stmtlist "end" ";" ["else" "begin" ":" stmtlist "end" ";"]
-whilestmt ::= "while" condition "do" "begin" ":" stmtlist "end" ";"
+whilestmt ::= "while" condition "begin" ":" stmtlist "end" ";"
 condition ::= expression RELATION expression
-RELATION ::= "<" | "<=" | "==" | "<>" | ">=" | ">"
+RELATION ::= "<" | "<=" | "==" | "<>" | ">=" | ">" | "!="

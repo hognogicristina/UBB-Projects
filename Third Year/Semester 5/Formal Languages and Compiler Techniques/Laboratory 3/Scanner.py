@@ -2,6 +2,7 @@ from SymbolTable import SymbolTable
 
 import os
 import re
+import ast
 
 
 class Scanner:
@@ -22,8 +23,8 @@ class Scanner:
                 lines = file.read().splitlines()
                 for i, line in enumerate(lines, start=1):
                     token = line.split()[0]
-                    if token in ["prog", "int", "real", "str", "char", "arr", "bool", "read", "if", "else", "write", "do", "begin", "end",
-                                 "while", "const", "sys", "for", "foreach", "in", "and", "or", "rad"]:
+                    if token in ["prog", "int", "real", "str", "char", "arr", "bool", "read", "if", "else", "write", "begin", "end",
+                                 "while", "const", "sys", "and", "or", "rad", "endl"]:
                         self.reserved_words.append(token)
                     else:
                         self.tokens.append(token)
@@ -52,10 +53,6 @@ class Scanner:
         regex_for_string_constant = re.compile(r'^"[a-zA-z0-9_ ?:*^+=.!]*"')
         match = regex_for_string_constant.match(self.program[self.index:])
         if not match:
-            if re.compile(r'^"[^"]"').match(self.program[self.index:]):
-                raise Exception(f"Invalid string constant at line {self.current_line}")
-            if re.compile(r'^"[^"]').match(self.program[self.index:]):
-                raise Exception(f"Missing \" at line {self.current_line}")
             return False
         string_constant = match.group(0)
         if not self.symbol_table.has_hash(string_constant):
@@ -67,10 +64,14 @@ class Scanner:
         return True
 
     def treat_int_constant(self):
-        regex_for_int_constant = re.compile(r'^\d+')
+        regex_for_int_constant = re.compile(r'^[-+]?(\d+)')
         match = regex_for_int_constant.match(self.program[self.index:])
         if not match:
             return False
+
+        if re.compile(r'^[-+]?(\d+)[a-zA-Z]').match(self.program[self.index:]):
+            return False
+
         int_constant = match.group(0)
         if not self.symbol_table.has_hash(int_constant):
             position, hash_value = self.symbol_table.add_hash(int_constant)
@@ -83,40 +84,31 @@ class Scanner:
     def check_if_valid(self, possible_identifier, program_substring):
         if possible_identifier in self.reserved_words:
             return False
-        if re.compile(r'^[A-Za-z_][A-Za-z0-9_]*: (int|char|str|real|arr)').search(program_substring):
+        if re.compile(r'^[#]?[A-Za-z_][A-Za-z0-9_]*: (int|char|str|real|arr)').search(program_substring):
             return True
         return self.symbol_table.has_hash(possible_identifier)
 
     def treat_identifier(self):
-        regex_for_identifier = re.compile(r'^[#]?[a-zA-Z_][a-zA-Z0-9_]*')
+        regex_for_identifier = re.compile(r'^([#]?[a-zA-Z_][a-zA-Z0-9_]*)')
         match = regex_for_identifier.match(self.program[self.index:])
         if not match:
             return False
-        identifier = match.group(0)
+        identifier = match.group(1)
 
-        if identifier in self.reserved_words:
+        if not self.check_if_valid(identifier, self.program[self.index:]):
             return False
 
-        next_index = self.index + len(identifier)
-        if next_index < len(self.program) and not self.program[next_index].isalnum():
-            if not self.symbol_table.has_hash(identifier):
-                position, hash_value = self.symbol_table.add_hash(identifier)
-            else:
-                position, hash_value = self.symbol_table.get_position_hash(identifier)
-            self.index += len(identifier)
-            self.PIF.append([position, hash_value])
-            return True
+        if not self.symbol_table.has_hash(identifier):
+            position, hash_value = self.symbol_table.add_hash(identifier)
+        else:
+            position, hash_value = self.symbol_table.get_position_hash(identifier)
+        self.index += len(identifier)
+        self.PIF.append([position, hash_value])
 
-        return False
+        return True
 
     def treat_from_token_list(self):
         possible_token = self.program[self.index:].split(" ")[0]
-
-        if possible_token == "foreach":
-            self.index += len(possible_token)
-            position = self.token_positions[possible_token]
-            self.PIF.append([possible_token, position])
-            return True
 
         for reserved_token in self.reserved_words:
             if possible_token.startswith(reserved_token):
