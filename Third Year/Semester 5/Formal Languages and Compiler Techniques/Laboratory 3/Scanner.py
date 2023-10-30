@@ -2,7 +2,6 @@ from SymbolTable import SymbolTable
 
 import os
 import re
-import ast
 
 
 class Scanner:
@@ -54,13 +53,17 @@ class Scanner:
         match = regex_for_string_constant.match(self.program[self.index:])
         if not match:
             return False
+
         string_constant = match.group(0)
         if not self.symbol_table.has_hash(string_constant):
             position, hash_value = self.symbol_table.add_hash(string_constant)
         else:
             position, hash_value = self.symbol_table.get_position_hash(string_constant)
+
+        token_position = self.token_positions["constant"]
+
         self.index += len(string_constant)
-        self.PIF.append([position, hash_value])
+        self.PIF.append([token_position, hash_value])
         return True
 
     def treat_int_constant(self):
@@ -77,8 +80,11 @@ class Scanner:
             position, hash_value = self.symbol_table.add_hash(int_constant)
         else:
             position, hash_value = self.symbol_table.get_position_hash(int_constant)
+
+        token_position = self.token_positions["constant"]
+
         self.index += len(int_constant)
-        self.PIF.append([position, hash_value])
+        self.PIF.append([token_position, hash_value])
         return True
 
     def check_if_valid(self, possible_identifier, program_substring):
@@ -102,8 +108,11 @@ class Scanner:
             position, hash_value = self.symbol_table.add_hash(identifier)
         else:
             position, hash_value = self.symbol_table.get_position_hash(identifier)
+
+        token_position = self.token_positions["identifier"]
+
         self.index += len(identifier)
-        self.PIF.append([position, hash_value])
+        self.PIF.append([token_position, hash_value])
 
         return True
 
@@ -117,19 +126,19 @@ class Scanner:
                     return False
                 self.index += len(reserved_token)
                 position = self.token_positions[reserved_token]
-                self.PIF.append([reserved_token, position])
+                self.PIF.append([position, -1])
                 return True
 
         for token in self.tokens:
             if token == possible_token:
                 self.index += len(token)
                 position = self.token_positions[token]
-                self.PIF.append([token, position])
+                self.PIF.append([position, -1])
                 return True
             elif possible_token.startswith(token):
                 self.index += len(token)
                 position = self.token_positions[token]
-                self.PIF.append([token, position])
+                self.PIF.append([position, -1])
                 return True
 
         return False

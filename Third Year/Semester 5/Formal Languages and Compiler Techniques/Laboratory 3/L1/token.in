@@ -1,3 +1,5 @@
+identifier
+constant
 +
 -
 *
@@ -39,7 +41,6 @@ else
 write
 while
 arr
-const
 sys
 and
 or

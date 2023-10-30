@@ -6,7 +6,7 @@ Lexic:
 	a. special symbols, representing:
 		- operators: + - * / > < = == >= <= <> % !
 		- separators: [ ] ( ) { } . , : ; endl begin end
-		- reserved words: prog int real str char bool read if else write while arr const sys and or rad
+		- reserved words: prog int real str char bool read if else write while arr sys and or rad
         - comments: //comment
 	b. identifiers: a sequence of letters and digits, such that the first character is a letter; the rule is:
         - identifier: ("#" | letter){letter|digit}
