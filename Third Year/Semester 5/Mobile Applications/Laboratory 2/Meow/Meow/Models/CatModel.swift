@@ -1,6 +1,6 @@
 import Foundation
 
-struct Cat: Identifiable, Equatable {
+struct Cat: Identifiable, Equatable, Codable {
     var id: String
     var name: String
     var breed: String

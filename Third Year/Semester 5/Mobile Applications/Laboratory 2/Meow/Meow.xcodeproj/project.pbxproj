@@ -19,7 +19,7 @@
 		EDAC01902AF65FCD00E6E1A0 /* MeowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC018F2AF65FCD00E6E1A0 /* MeowTests.swift */; };
 		EDAC019A2AF65FCD00E6E1A0 /* MeowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC01992AF65FCD00E6E1A0 /* MeowUITests.swift */; };
 		EDAC019C2AF65FCD00E6E1A0 /* MeowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC019B2AF65FCD00E6E1A0 /* MeowUITestsLaunchTests.swift */; };
-		EDAC01BD2AF69B1D00E6E1A0 /* CatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC01BC2AF69B1D00E6E1A0 /* CatViewModel.swift */; };
+		EDAC01BD2AF69B1D00E6E1A0 /* CatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC01BC2AF69B1D00E6E1A0 /* CatModel.swift */; };
 		EDE1ED2C2AF7A856007DC7AB /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1ED2B2AF7A856007DC7AB /* EditView.swift */; };
 		EDE1ED2F2AF810BD007DC7AB /* CatBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1ED2E2AF810BD007DC7AB /* CatBreed.swift */; };
 		EDE1ED312AF8132F007DC7AB /* CatGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1ED302AF8132F007DC7AB /* CatGender.swift */; };
@@ -59,7 +59,7 @@
 		EDAC01952AF65FCD00E6E1A0 /* MeowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDAC01992AF65FCD00E6E1A0 /* MeowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowUITests.swift; sourceTree = "<group>"; };
 		EDAC019B2AF65FCD00E6E1A0 /* MeowUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EDAC01BC2AF69B1D00E6E1A0 /* CatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatViewModel.swift; sourceTree = "<group>"; };
+		EDAC01BC2AF69B1D00E6E1A0 /* CatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatModel.swift; sourceTree = "<group>"; };
 		EDE1ED2B2AF7A856007DC7AB /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		EDE1ED2E2AF810BD007DC7AB /* CatBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreed.swift; sourceTree = "<group>"; };
 		EDE1ED302AF8132F007DC7AB /* CatGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatGender.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		EDAC01C22AF6E6FD00E6E1A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EDAC01BC2AF69B1D00E6E1A0 /* CatViewModel.swift */,
+				EDAC01BC2AF69B1D00E6E1A0 /* CatModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,7 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDAC01BD2AF69B1D00E6E1A0 /* CatViewModel.swift in Sources */,
+				EDAC01BD2AF69B1D00E6E1A0 /* CatModel.swift in Sources */,
 				ED5C14162AF79A1400DCD33A /* ListView.swift in Sources */,
 				EDE1ED332AF82C17007DC7AB /* EditCat.swift in Sources */,
 				EDAC01812AF65FCC00E6E1A0 /* ContentView.swift in Sources */,
