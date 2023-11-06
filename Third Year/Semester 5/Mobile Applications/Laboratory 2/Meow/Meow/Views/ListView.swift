@@ -33,6 +33,10 @@ struct ListView: View {
             }
             .navigationTitle("Cats for adoption")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(
+                trailing: NavigationLink(destination: AddView()) {
+                        Image(systemName: "plus.square.on.square.fill")
+                })
         }
     }
 }

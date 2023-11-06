@@ -28,10 +28,7 @@ struct ContentView: View {
             leading: 
                 NavigationLink(destination: ListView()) {
                     Image(systemName: "list.bullet.clipboard")
-                },
-            trailing: NavigationLink(destination: AddView()) {
-                    Image(systemName: "plus.square.on.square.fill")
-            })
+                })
     }
 }
 

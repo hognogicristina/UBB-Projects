@@ -9,6 +9,8 @@ class ListViewModel: ObservableObject {
         getCats()
     }
     
+    // TODO: do not rebuild the list for the next laboratory - Observable
+    
     func getCats() {
         let newCats = [
             Cat(name: "Whiskers", breed: "Siamese", gender: "Male", age: "38 months", healthProblem: "None", description: "A playful Siamese cat with a love for climbing."),
