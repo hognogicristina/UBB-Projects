@@ -35,7 +35,7 @@ struct ListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
                 trailing: NavigationLink(destination: AddView()) {
-                        Image(systemName: "plus.square.on.square.fill")
+                        Image(systemName: "plus.circle")
                 })
         }
     }

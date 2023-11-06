@@ -22,13 +22,17 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
         
                 Spacer()
+                
+                NavigationLink(destination: ListView()) {
+                    Text("Get Started")
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 100)
+                        .padding(.vertical, 10)
+                        .background(Color.accentColor)
+                        .cornerRadius(8)
+                }
             }
         }
-        .navigationBarItems(
-            leading: 
-                NavigationLink(destination: ListView()) {
-                    Image(systemName: "list.bullet.clipboard")
-                })
     }
 }
 

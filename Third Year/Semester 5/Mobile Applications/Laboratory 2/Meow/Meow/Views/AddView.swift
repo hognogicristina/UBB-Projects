@@ -62,8 +62,7 @@ struct AddView: View {
                 presentationMode.wrappedValue.dismiss()
             }
         }) {
-            Image(systemName: "plus.circle")
-                .font(.headline)
+            Text("Add")
         })
         .alert(isPresented: $showAlert, content: getAlert)
     }

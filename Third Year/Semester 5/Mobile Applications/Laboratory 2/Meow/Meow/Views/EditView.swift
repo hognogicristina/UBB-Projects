@@ -54,22 +54,23 @@ struct EditView: View {
                 TextField("Required", text: $editedCat.description)
             }
             
-            Section(header: Text("")) {
-                Button(action: {
-                    if validateInput() {
-                        cat = editedCat
-                        listViewModel.updateCat(cat: cat)
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }) {
-                    Text("Save")
+            Button(action: {
+                if validateInput() {
+                    cat = editedCat
+                    listViewModel.updateCat(cat: cat)
+                    presentationMode.wrappedValue.dismiss()
                 }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.horizontal)
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Save")
+                    Spacer()
+                }
             }
+            .foregroundColor(.white)
+            .padding(10)
+            .background(Color.accentColor)
+            .cornerRadius(8)
         }
         .navigationTitle("Edit this Cat")
         .navigationBarTitleDisplayMode(.inline)

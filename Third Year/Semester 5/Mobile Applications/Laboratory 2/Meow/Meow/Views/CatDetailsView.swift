@@ -33,7 +33,6 @@ struct CatDetailsView: View {
             isConfirmationDialogPresented.toggle()
         }) {
             Image(systemName: "paperplane.circle")
-                .font(.headline)
         }
         .alert(isPresented: $isConfirmationDialogPresented) {
             Alert(
