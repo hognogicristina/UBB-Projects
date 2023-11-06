@@ -11,9 +11,6 @@ struct AddView: View {
     @State var newCatHealthProblem: String = ""
     @State var newCatDescription: String = ""
     
-    @State var newCatAgeValue: Int = 1
-    @State var newCatAgeUnit: String = "month"
-    
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
 
@@ -41,9 +38,9 @@ struct AddView: View {
                 }
                 
                 Section(header: Text("Age")) {
-                    Picker("Select Age", selection: $newCatAgeValue) {
+                    Picker("Select Age", selection: $newCatAge) {
                         ForEach(1...240, id: \.self) { age in
-                            Text("\(age) " + (age == 1 ? "month" : "months")).tag(age)
+                            Text("\(age) " + (age == 1 ? "month" : "months")).tag("\(age) " + (age == 1 ? "month" : "months"))
                         }
                     }
                 }
@@ -61,14 +58,7 @@ struct AddView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: {
             if areAllFieldsCompleted() && textIsAppropiate() && descIsAppropiate() {
-                if newCatAgeValue > 1 {
-                    newCatAgeUnit = "months"
-                } else {
-                    newCatAgeUnit = "month"
-                }
-                
-                let newAge = "\(newCatAgeValue) \(newCatAgeUnit)"
-                listViewModel.addCat(name: newCatName, breed: newCatBreed, gender: newCatGender, age: newAge, healthProblem: newCatHealthProblem, description: newCatDescription)
+                listViewModel.addCat(name: newCatName, breed: newCatBreed, gender: newCatGender, age: newCatAge, healthProblem: newCatHealthProblem, description: newCatDescription)
                 presentationMode.wrappedValue.dismiss()
             }
         }) {

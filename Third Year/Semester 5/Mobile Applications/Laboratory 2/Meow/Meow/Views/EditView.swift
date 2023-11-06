@@ -5,6 +5,7 @@ struct EditView: View {
     @EnvironmentObject var listViewModel: ListViewModel
 
     @Binding var cat: Cat
+    
     @State var editedCat: Cat
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false

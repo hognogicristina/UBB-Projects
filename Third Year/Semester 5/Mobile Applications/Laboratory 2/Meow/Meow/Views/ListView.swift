@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ListView: View {
-    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var listViewModel: ListViewModel
     
     @State var selectedCat: EditCat?
