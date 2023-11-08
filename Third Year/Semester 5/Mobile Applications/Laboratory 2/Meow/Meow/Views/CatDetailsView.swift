@@ -21,19 +21,35 @@ struct CatDetailsView: View {
                 .padding(.vertical, 20)
             
             List {
-                Section(header: Text("Cat Information")) {
-                    Text("Name: \(cat.name)")
-                    Text("Breed: \(cat.breed)")
-                    Text("Gender: \(cat.gender)")
-                    Text("Age: \(cat.age)")
+                Section(header: Text("Cat Informations")) {
+                    HStack {
+                        Image(systemName: "pawprint.fill")
+                        Text(cat.breed)
+                    }
+                    
+                    HStack {
+                        Image(systemName: "figure.dress.line.vertical.figure")
+                        Text(cat.gender)
+                    }
+                    
+                    HStack {
+                        Image(systemName: "moon")
+                        Text(cat.age)
+                    }
                 }
                 
                 Section(header: Text("Health Problem")) {
-                    Text(cat.healthProblem)
+                    HStack {
+                        Image(systemName: "stethoscope")
+                        Text(cat.healthProblem)
+                    }
                 }
                 
                 Section(header: Text("Description")) {
-                    Text(cat.description)
+                    HStack {
+                        Image(systemName: "doc.on.clipboard")
+                        Text(cat.description)
+                    }
                 }
             }
             
@@ -72,7 +88,7 @@ struct CatDetailsView: View {
 struct CatDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CatDetailsView(cat: Cat(id: "1", name: "Fluffy", breed: "Persian", gender: "Female", age: "5 years", healthProblem: "Asthma", description: "A beautiful and fluffy Persian cat with a gentle temperament"))
+            CatDetailsView(cat: Cat(id: "1", name: "Fluffy", breed: "Persian", gender: "Female", age: "5 months", healthProblem: "Asthma", description: "A beautiful and fluffy Persian cat with a gentle temperament"))
         }
         .environmentObject(ListViewModel())
     }

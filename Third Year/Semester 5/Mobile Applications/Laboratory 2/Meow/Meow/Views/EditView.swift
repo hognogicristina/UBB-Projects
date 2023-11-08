@@ -122,7 +122,7 @@ struct EditView: View {
 }
 
 struct EditView_Previews: PreviewProvider {
-    @State static var cat = Cat(id: "1", name: "Fluffy", breed: "Persian", gender: "Female", age: "5 years", healthProblem: "Asthma", description: "A beautiful and fluffy Persian cat with a gentle temperament")
+    @State static var cat = Cat(id: "1", name: "Fluffy", breed: "Persian", gender: "Female", age: "5 months", healthProblem: "Asthma", description: "A beautiful and fluffy Persian cat with a gentle temperament")
     
     static var previews: some View {
         NavigationView {
