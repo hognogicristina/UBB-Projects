@@ -13,6 +13,7 @@ struct AddView: View {
     
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
+    @State var showingBreedGrid = false
 
     var body: some View {
         VStack {
@@ -22,12 +23,28 @@ struct AddView: View {
                 }
                 
                 Section(header: Text("Breed")) {
-                    Picker("Select Breed", selection: $newCatBreed) {
-                        ForEach(CatBreed.allCases) { breed in
-                            Text(breed.rawValue)
-                        }
+                    HStack {
+                        Text("Select Breed")
+                            .foregroundColor(Color("ColorText"))
+                        Spacer()
+                        Text(newCatBreed)
+                            .foregroundColor(Color("ColorGray"))
+                        Image(systemName: "photo.on.rectangle.angled")
+                            .foregroundColor(Color("ColorText"))
+                            .onTapGesture {
+                                showingBreedGrid.toggle()
+                            }
                     }
                 }
+                .sheet(isPresented: $showingBreedGrid) {
+                    ForEach(0..<4) { _ in
+                        Spacer()
+                    }
+                    BreedGridView(selectBreed: { selectedBreed in
+                        newCatBreed = selectedBreed
+                    })
+                }
+                
                 Section(header: Text("Gender")) {
                     Picker("", selection: $newCatGender) {
                         ForEach(CatGender.allCases) { gender in

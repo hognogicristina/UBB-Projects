@@ -9,6 +9,7 @@ struct EditView: View {
     @State var editedCat: Cat
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
+    @State var showingBreedGrid = false
 
     init(cat: Binding<Cat>) {
         _cat = cat
@@ -16,65 +17,88 @@ struct EditView: View {
     }
 
     var body: some View {
-        Form {
-            Section(header: Text("Name")) {
-                TextField("Required", text: $editedCat.name)
-            }
-
-            Section(header: Text("Breed")) {
-                Picker("Select Breed", selection: $editedCat.breed) {
-                    ForEach(CatBreed.allCases) { breed in
-                        Text(breed.rawValue)
+        VStack{
+            Form {
+                Section(header: Text("Name")) {
+                    TextField("Required", text: $editedCat.name)
+                }
+                
+                Section(header: Text("Breed")) {
+                    Button(action: {
+                        showingBreedGrid.toggle()
+                    }) {
+                        HStack {
+                            Text("Select Breed")
+                                .foregroundColor(Color("ColorText"))
+                            Spacer()
+                            Text(editedCat.breed)
+                                .foregroundColor(Color("ColorGray"))
+                            Image(systemName: "photo.on.rectangle.angled")
+                                .foregroundColor(Color("ColorText"))
+                                .onTapGesture {
+                                    showingBreedGrid.toggle()
+                                }
+                        }
+                    }
+                    .sheet(isPresented: $showingBreedGrid) {
+                        ForEach(0..<4) { _ in
+                            Spacer()
+                        }
+                        BreedGridView(selectBreed: { selectedBreed in
+                            editedCat.breed = selectedBreed
+                        })
                     }
                 }
-            }
-            
-            Section(header: Text("Gender")) {
-                Picker("", selection: $editedCat.gender) {
-                    ForEach(CatGender.allCases) { gender in
-                        Text(gender.rawValue)
+                
+                Section(header: Text("Gender")) {
+                    Picker("", selection: $editedCat.gender) {
+                        ForEach(CatGender.allCases) { gender in
+                            Text(gender.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+                
+                Section(header: Text("Age")) {
+                    Picker("Select Age", selection: $editedCat.age) {
+                        ForEach(1...240, id: \.self) { age in
+                            Text("\(age) " + (age == 1 ? "month" : "months")).tag("\(age) " + (age == 1 ? "month" : "months"))
+                        }
                     }
                 }
-                .pickerStyle(.segmented)
-            }
-
-            Section(header: Text("Age")) {
-                Picker("Select Age", selection: $editedCat.age) {
-                    ForEach(1...240, id: \.self) { age in
-                        Text("\(age) " + (age == 1 ? "month" : "months")).tag("\(age) " + (age == 1 ? "month" : "months"))
-                    }
+                
+                Section(header: Text("Health Problem")) {
+                    TextField("Required", text: $editedCat.healthProblem)
                 }
-            }
-            
-            Section(header: Text("Health Problem")) {
-                TextField("Required", text: $editedCat.healthProblem)
-            }
-        
-            Section(header: Text("Description")) {
-                TextField("Required", text: $editedCat.description)
-            }
-            
-            Button(action: {
-                if validateInput() {
-                    cat = editedCat
-                    listViewModel.updateCat(cat: cat)
-                    presentationMode.wrappedValue.dismiss()
+                
+                Section(header: Text("Description")) {
+                    TextField("Required", text: $editedCat.description)
                 }
-            }) {
-                HStack {
-                    Spacer()
-                    Text("Save")
-                    Spacer()
-                }
+                
+                
             }
-            .foregroundColor(.white)
-            .padding(10)
-            .background(Color.accentColor)
-            .cornerRadius(8)
+            .navigationTitle("Edit this Cat")
+            .navigationBarTitleDisplayMode(.inline)
+            .alert(isPresented: $showAlert, content: getAlert)
         }
-        .navigationTitle("Edit this Cat")
-        .navigationBarTitleDisplayMode(.inline)
-        .alert(isPresented: $showAlert, content: getAlert)
+        
+        Button(action: {
+            if validateInput() {
+                cat = editedCat
+                listViewModel.updateCat(cat: cat)
+                presentationMode.wrappedValue.dismiss()
+            }
+        }) {
+            Text("Save")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
+                .background(Color.accentColor)
+                .cornerRadius(10)
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 20)
     }
     
     func validateInput() -> Bool {

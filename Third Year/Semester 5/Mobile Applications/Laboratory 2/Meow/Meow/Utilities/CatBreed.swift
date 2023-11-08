@@ -1,3 +1,5 @@
+import SwiftUI
+
 enum CatBreed: String, CaseIterable, Identifiable {
     case none = "None"
     case abyssinian = "Abyssinian"
@@ -17,8 +19,12 @@ enum CatBreed: String, CaseIterable, Identifiable {
     case russianBlue = "Russian Blue"
     case scottishFold = "Scottish Fold"
     case siamese = "Siamese"
-    case spynx = "Sphynx"
+    case sphynx = "Sphynx"
     case toyger = "Toyger"
+    
+    var image: Image {
+        Image(self.rawValue)
+    }
     
     var id: String { self.rawValue }
 }

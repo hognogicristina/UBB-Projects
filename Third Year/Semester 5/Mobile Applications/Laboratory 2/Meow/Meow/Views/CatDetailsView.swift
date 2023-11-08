@@ -8,48 +8,65 @@ struct CatDetailsView: View {
     @State var isConfirmationDialogPresented = false
 
     var body: some View {
-        List {
-            Section(header: Text("Breed")) {
-                Text(cat.breed)
+        VStack {
+            Image(cat.breed)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 120, height: 120)
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .stroke(Color.primary, lineWidth: 2)
+                )
+                .padding(.vertical, 20)
+            
+            List {
+                Section(header: Text("Cat Information")) {
+                    Text("Name: \(cat.name)")
+                    Text("Breed: \(cat.breed)")
+                    Text("Gender: \(cat.gender)")
+                    Text("Age: \(cat.age)")
+                }
+                
+                Section(header: Text("Health Problem")) {
+                    Text(cat.healthProblem)
+                }
+                
+                Section(header: Text("Description")) {
+                    Text(cat.description)
+                }
             }
             
-            Section(header: Text("Gender")) {
-                Text(cat.gender)
+            Button(action: {
+                isConfirmationDialogPresented.toggle()
+            }) {
+                Text("Adopt this Cat")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 10)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.accentColor)
+                    .cornerRadius(10)
             }
-            
-            Section(header: Text("Age")) {
-                Text(cat.age)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
+            .alert(isPresented: $isConfirmationDialogPresented) {
+                Alert(
+                    title: Text("Confirm Adoption"),
+                    message: Text("Are you sure you want to adopt this cat?"),
+                    primaryButton: .destructive(Text("Confirm")) {
+                        if let index = listViewModel.cats.firstIndex(of: cat) {
+                            listViewModel.deleteCat(indexSet: IndexSet([index]))
+                        }
+                        presentationMode.wrappedValue.dismiss()
+                    },
+                    secondaryButton: .cancel()
+                )
             }
-            
-            Section(header: Text("Health Problem")) {
-                Text(cat.healthProblem)
-            }
-            
-            Section(header: Text("Description")) {
-                Text(cat.description)
-            }
+            .listStyle(GroupedListStyle())
+            .navigationBarTitle(cat.name, displayMode: .inline)
         }
-        .navigationBarItems(trailing: Button(action: {
-            isConfirmationDialogPresented.toggle()
-        }) {
-            Image(systemName: "paperplane.circle")
-        }
-        .alert(isPresented: $isConfirmationDialogPresented) {
-            Alert(
-                title: Text("Confirm Adoption"),
-                message: Text("Are you sure you want to adopt this cat?"),
-                primaryButton: .destructive(Text("Confirm")) {
-                    if let index = listViewModel.cats.firstIndex(of: cat) {
-                        listViewModel.deleteCat(indexSet: IndexSet([index]))
-                    }
-                    presentationMode.wrappedValue.dismiss()
-                },
-                secondaryButton: .cancel()
-            )
-        }
-        .navigationTitle(cat.name)
-        .navigationBarTitleDisplayMode(.inline)
-    )}
+    }
 }
 
 struct CatDetailsView_Previews: PreviewProvider {
