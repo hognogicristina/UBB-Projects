@@ -20,6 +20,7 @@
 		EDAC019A2AF65FCD00E6E1A0 /* MeowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC01992AF65FCD00E6E1A0 /* MeowUITests.swift */; };
 		EDAC019C2AF65FCD00E6E1A0 /* MeowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC019B2AF65FCD00E6E1A0 /* MeowUITestsLaunchTests.swift */; };
 		EDAC01BD2AF69B1D00E6E1A0 /* CatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC01BC2AF69B1D00E6E1A0 /* CatModel.swift */; };
+		EDBB14682AFC0B89008D66AD /* BreedGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBB14672AFC0B89008D66AD /* BreedGridView.swift */; };
 		EDE1ED2C2AF7A856007DC7AB /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1ED2B2AF7A856007DC7AB /* EditView.swift */; };
 		EDE1ED2F2AF810BD007DC7AB /* CatBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1ED2E2AF810BD007DC7AB /* CatBreed.swift */; };
 		EDE1ED312AF8132F007DC7AB /* CatGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1ED302AF8132F007DC7AB /* CatGender.swift */; };
@@ -60,6 +61,7 @@
 		EDAC01992AF65FCD00E6E1A0 /* MeowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowUITests.swift; sourceTree = "<group>"; };
 		EDAC019B2AF65FCD00E6E1A0 /* MeowUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EDAC01BC2AF69B1D00E6E1A0 /* CatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatModel.swift; sourceTree = "<group>"; };
+		EDBB14672AFC0B89008D66AD /* BreedGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedGridView.swift; sourceTree = "<group>"; };
 		EDE1ED2B2AF7A856007DC7AB /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		EDE1ED2E2AF810BD007DC7AB /* CatBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreed.swift; sourceTree = "<group>"; };
 		EDE1ED302AF8132F007DC7AB /* CatGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatGender.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				ED5C141C2AF7A15400DCD33A /* CatDetailsView.swift */,
 				ED708C952AF7A6FB00F8E8D9 /* AddView.swift */,
 				EDE1ED2B2AF7A856007DC7AB /* EditView.swift */,
+				EDBB14672AFC0B89008D66AD /* BreedGridView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				ED5C14192AF79C3200DCD33A /* ListViewModel.swift in Sources */,
 				EDAC017F2AF65FCC00E6E1A0 /* MeowApp.swift in Sources */,
 				ED5C141B2AF79F1500DCD33A /* ListRowView.swift in Sources */,
+				EDBB14682AFC0B89008D66AD /* BreedGridView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

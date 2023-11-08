@@ -22,9 +22,9 @@ struct ListRowView: View {
 }
 
 struct ListRowView_Previews: PreviewProvider {
-    static var cat1 = Cat(name: "Fluffy", breed: "Persian", gender: "Female", age: "5 years", healthProblem: "Asthma", description: "A beautiful and fluffy Persian cat with a gentle temperament.")
+    static var cat1 = Cat(name: "Fluffy", breed: "Persian", gender: "Female", age: "5 months", healthProblem: "Asthma", description: "A beautiful and fluffy Persian cat with a gentle temperament.")
     
-    static var cat2 = Cat(name: "Simba", breed: "Bombay", gender: "Male", age: "2 years", healthProblem: "None", description: "A Bombay cat with a sleek black coat and a lot of energy.")
+    static var cat2 = Cat(name: "Simba", breed: "Bombay", gender: "Male", age: "2 months", healthProblem: "None", description: "A Bombay cat with a sleek black coat and a lot of energy.")
     
     static var previews: some View {
         Group {
