@@ -1,111 +1,171 @@
-#include "Matrix.h"
 #include <iostream>
-#include <chrono>
-#include "ThreadPool.h"
-using namespace std;
+#include <vector>
+#include <thread>
+#include <future>
+#include <random>
+#include <stdexcept>
 
-void mult(Matrix a, Matrix b, Matrix *res) {
-    ThreadPool pool(4);
-    vector<future<int>> f;
+const int THREAD_COUNT = 10;
 
-    for (int i = 0; i < a.getRowsNumber(); i++)
-        for (int j = 0; j < a.getColsNumber(); j++) {
-            f.push_back(pool.enqueue([](int line, int column, Matrix a, Matrix b, Matrix *res) {
-                int mul = 0;
-                for (int k = 0; k < a.getRowsNumber(); k++)
-                    mul += a.get(line, k) * b.get(k, column);
-                res->set(line, column, mul);
-                return line;
-            }, i, j, a, b, res));
-        }
-}
+// Class for representing a matrix
+class Matrix {
+private:
+    int rows_;
+    int columns_;
+    std::vector<std::vector<int>> matrix_;
+    const int MAX_INITIAL_VALUE = 100;
+    const int MIN_INITIAL_VALUE = 10;
 
-
-void add(Matrix a, Matrix b, Matrix *res) {
-    ThreadPool pool(4);
-    vector<future<int>> f;
-
-    for (int i = 0; i < a.getRowsNumber(); i++) {
-        f.push_back(pool.enqueue([](int line, Matrix a, Matrix b, Matrix *res) {
-            for (int j = 0; j < a.getColsNumber(); j++)
-                res->set(line, j, (a.get(line, j) + b.get(line, j)));
-            return line;
-        }, i, a, b, res));
+public:
+    Matrix(int rows, int columns) : rows_(rows), columns_(columns) {
+        matrix_ = std::vector<std::vector<int>>(rows, std::vector<int>(columns, 0));
     }
-}
 
+    // Fill the matrix with random values
+    void fillMatrixRandomly() {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> distribution(MIN_INITIAL_VALUE, MAX_INITIAL_VALUE);
 
-void mult_async(Matrix a, Matrix b, Matrix *res) {
-    vector<future<int>> f;
-
-    for (int i = 0; i < a.getRowsNumber(); i++)
-        for (int j = 0; j < a.getColsNumber(); j++) {
-            f.push_back(async([](int line, int column, Matrix a, Matrix b, Matrix *res) {
-                int mul = 0;
-                for (int k = 0; k < a.getRowsNumber(); k++)
-                    mul += a.get(line, k) * b.get(k, column);
-                res->set(line, column, mul);
-                return line;
-            }, i, j, a, b, res));
+        for (int i = 0; i < rows_; i++) {
+            for (int j = 0; j < columns_; j++) {
+                matrix_[i][j] = distribution(gen);
+            }
         }
-}
+    }
 
+    // Reset all elements in the matrix to 0
+    void reset() {
+        for (int i = 0; i < rows_; i++) {
+            for (int j = 0; j < columns_; j++) {
+                matrix_[i][j] = 0;
+            }
+        }
+    }
 
-void add_async(Matrix a, Matrix b, Matrix *res) {
-    vector<future<int>> f;
+    // Get the number of rows in the matrix
+    int getRows() const {
+        return rows_;
+    }
 
-    for (int i = 0; i < a.getRowsNumber(); i++)
-        f.push_back(async([](int line, Matrix a, Matrix b, Matrix *res) {
-            for (int j = 0; j < a.getColsNumber(); j++)
-                res->set(line, j, (a.get(line, j) + b.get(line, j)));
-            return line;
-        }, i, a, b, res));
+    // Get the number of columns in the matrix
+    int getColumns() const {
+        return columns_;
+    }
+
+    // Get the element at a specific position in the matrix
+    int getElementOnPosition(int x, int y) const {
+        if (x < 0 || x >= rows_ || y < 0 || y >= columns_) {
+            throw std::out_of_range("Invalid coordinates");
+        }
+        return matrix_[x][y];
+    }
+
+    // Set the element at a specific position in the matrix
+    void setElementOnPosition(int x, int y, int newValue) {
+        if (x < 0 || x >= rows_ || y < 0 || y >= columns_) {
+            throw std::out_of_range("Invalid coordinates");
+        }
+        matrix_[x][y] = newValue;
+    }
+
+    // Overload the << operator to print the matrix
+    friend std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {
+        for (int i = 0; i < matrix.rows_; i++) {
+            for (int j = 0; j < matrix.columns_; j++) {
+                os << matrix.matrix_[i][j] << ' ';
+            }
+            os << '\n';
+        }
+        return os;
+    }
+};
+
+// Class for performing matrix multiplication in a separate thread
+class MultiplierThread {
+private:
+    const Matrix &m1_;
+    const Matrix &m2_;
+    Matrix &result_;
+    int startRow_;
+    int startColumn_;
+    int positions_;
+
+    // Compute the product of two matrix positions
+    void computeProductOnPosition(int x, int y) {
+        int sum = 0;
+        for (int c = 0; c < m1_.getColumns(); c++) {
+            sum += m1_.getElementOnPosition(x, c) * m2_.getElementOnPosition(c, y);
+        }
+        result_.setElementOnPosition(x, y, sum);
+    }
+
+public:
+    MultiplierThread(const Matrix &m1, const Matrix &m2, Matrix &result, int startRow, int startColumn, int positions)
+            : m1_(m1), m2_(m2), result_(result), startRow_(startRow), startColumn_(startColumn), positions_(positions) {}
+
+    // Overload the () operator to define the thread's execution
+    void operator()() {
+        int currentRow = startRow_;
+        int currentColumn = startColumn_;
+        for (int pos = 0; pos < positions_; pos++) {
+            computeProductOnPosition(currentRow, currentColumn);
+
+            currentColumn++;
+            if (currentColumn >= result_.getColumns()) {
+                currentColumn = 0;
+                currentRow++;
+            }
+        }
+    }
+};
+
+// Generate tasks for matrix multiplication
+std::vector<MultiplierThread> generateTasks(const Matrix &m1, const Matrix &m2, Matrix &result) {
+    std::vector<MultiplierThread> threads;
+    int positions = result.getColumns() * result.getRows();
+    int basePositionsPerThread = positions / THREAD_COUNT;
+    int threadsWithAnExtraPosition = positions % THREAD_COUNT;
+    int coveredPositions = 0;
+
+    for (int threadIndex = 0; threadIndex < THREAD_COUNT; threadIndex++) {
+        int positionsForCurrentThread = basePositionsPerThread;
+        if (threadIndex < threadsWithAnExtraPosition) {
+            positionsForCurrentThread++;
+        }
+        threads.emplace_back(m1, m2, result, coveredPositions / result.getColumns(), coveredPositions % result.getColumns(),
+                             positionsForCurrentThread);
+        coveredPositions += positionsForCurrentThread;
+    }
+
+    return threads;
 }
 
 int main() {
-    Matrix a = Matrix(5, 5);
-    Matrix b = Matrix(5, 5);
-    Matrix res = Matrix(5, 5);
+    // Create matrices and initialize them with random values
+    Matrix m1(4, 3);
+    Matrix m2(3, 7);
+    Matrix result(m1.getRows(), m2.getColumns());
 
-    cout << "Matrix a: \n";
-    cout << a.printMatrix();
+    m1.fillMatrixRandomly();
+    m2.fillMatrixRandomly();
 
-    cout << "\nMatrix b: \n";
-    cout << b.printMatrix();
+    // Generate tasks for matrix multiplication
+    std::vector<MultiplierThread> tasks = generateTasks(m1, m2, result);
 
-    auto start = chrono::high_resolution_clock::now();
+    // Create threads and execute the tasks
+    std::vector<std::thread> threads;
+    for (auto &task: tasks) {
+        threads.emplace_back(task);
+    }
 
-    cout << "\nMatrix sum: \n";
-    add(a, b, &res);
-    cout << res.printMatrix();
+    for (auto &thread: threads) {
+        thread.join();
+    }
 
-    auto finish = chrono::high_resolution_clock::now();
-    cout << "\nAddition " << chrono::duration_cast<chrono::nanoseconds>(finish - start).count() % 1000 << " ms\n\n";
+    // Print the result matrix
+    std::cout << "Result:" << std::endl;
+    std::cout << result << std::endl;
 
-    start = chrono::high_resolution_clock::now();
-
-    cout << "Matrix mult: \n";
-    mult(a, b, &res);
-    cout << res.printMatrix();
-
-    finish = chrono::high_resolution_clock::now();
-    cout << "\nMultiplication " << chrono::duration_cast<chrono::nanoseconds>(finish - start).count() % 1000 << " ms\n";
-
-    start = chrono::high_resolution_clock::now();
-
-    cout << "Matrix sum: \n";
-    add(a, b, &res);
-    cout << res.printMatrix();
-
-    finish = chrono::high_resolution_clock::now();
-    cout << "\nAsync Addition " << chrono::duration_cast<chrono::nanoseconds>(finish - start).count() % 1000 << " ms\n\n";
-
-    start = chrono::high_resolution_clock::now();
-
-    cout << "Matrix mult: \n";
-    mult(a, b, &res);
-    cout << res.printMatrix();
-
-    finish = chrono::high_resolution_clock::now();
-    cout << "\nAsync Multiplication " << chrono::duration_cast<chrono::nanoseconds>(finish - start).count() % 1000 << " ms\n";
+    return 0;
 }

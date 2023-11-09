@@ -55,18 +55,6 @@ build CMakeFiles/Laboratory_3.dir/Main.cpp.o: CXX_COMPILER__Laboratory_3_unscann
   OBJECT_DIR = CMakeFiles/Laboratory_3.dir
   OBJECT_FILE_DIR = CMakeFiles/Laboratory_3.dir
 
-build CMakeFiles/Laboratory_3.dir/Matrix.cpp.o: CXX_COMPILER__Laboratory_3_unscanned_Debug /Users/hognogicristina/Library/Mobile$ Documents/com~apple~CloudDocs/College/Third$ Year/Semester$ 5/Parallel$ and$ Distributed$ Programming/Laboratories/Laboratory$ 3/Matrix.cpp || cmake_object_order_depends_target_Laboratory_3
-  DEP_FILE = CMakeFiles/Laboratory_3.dir/Matrix.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/Laboratory_3.dir
-  OBJECT_FILE_DIR = CMakeFiles/Laboratory_3.dir
-
-build CMakeFiles/Laboratory_3.dir/ThreadPool.cpp.o: CXX_COMPILER__Laboratory_3_unscanned_Debug /Users/hognogicristina/Library/Mobile$ Documents/com~apple~CloudDocs/College/Third$ Year/Semester$ 5/Parallel$ and$ Distributed$ Programming/Laboratories/Laboratory$ 3/ThreadPool.cpp || cmake_object_order_depends_target_Laboratory_3
-  DEP_FILE = CMakeFiles/Laboratory_3.dir/ThreadPool.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/Laboratory_3.dir
-  OBJECT_FILE_DIR = CMakeFiles/Laboratory_3.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Laboratory_3
@@ -75,7 +63,7 @@ build CMakeFiles/Laboratory_3.dir/ThreadPool.cpp.o: CXX_COMPILER__Laboratory_3_u
 #############################################
 # Link the executable Laboratory_3
 
-build Laboratory_3: CXX_EXECUTABLE_LINKER__Laboratory_3_Debug CMakeFiles/Laboratory_3.dir/Main.cpp.o CMakeFiles/Laboratory_3.dir/Matrix.cpp.o CMakeFiles/Laboratory_3.dir/ThreadPool.cpp.o
+build Laboratory_3: CXX_EXECUTABLE_LINKER__Laboratory_3_Debug CMakeFiles/Laboratory_3.dir/Main.cpp.o
   FLAGS = -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
   OBJECT_DIR = CMakeFiles/Laboratory_3.dir
   POST_BUILD = :

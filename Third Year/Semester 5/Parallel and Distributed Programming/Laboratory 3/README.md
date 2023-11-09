@@ -1,8 +1,8 @@
-Goal
+## Goal
 
 Divide a simple task between threads. The task can easily be divided in sub-tasks requiring no cooperation at all. See the caching effects, and the costs of creating threads and of switching between threads.
 
-Requirement
+## Requirement
 
 Write several programs to compute the product of two matrices.
 
