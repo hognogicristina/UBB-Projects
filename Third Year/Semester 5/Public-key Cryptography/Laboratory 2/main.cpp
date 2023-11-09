@@ -52,6 +52,7 @@ int gcd(int a, int b) {
 int main() {
     string plaintext, ciphertext;
     vector<vector<int>> keyMatrix(2, vector<int>(2));
+    vector<vector<int>> keyMatrixInv(2, vector<int>(2));
 
     // Initialize the key matrix (2x2)
     keyMatrix[0][0] = 3;
@@ -59,22 +60,23 @@ int main() {
     keyMatrix[1][0] = 6;
     keyMatrix[1][1] = 5;
 
-//    keyMatrix[0][0] = 2;
-//    keyMatrix[0][1] = 2;
-//    keyMatrix[1][0] = 2;
-//    keyMatrix[1][1] = 13;
+    keyMatrixInv[0][0] = 2;
+    keyMatrixInv[0][1] = 2;
+    keyMatrixInv[1][0] = 2;
+    keyMatrixInv[1][1] = 13;
 
     // Add this check in the main function before the encryption
-    int det = determinant(keyMatrix);
+    int det = determinant(keyMatrixInv);
     int det_gcd = gcd(det, 26);
 
     // If the determinant is 0 or gcd(det, 26) is not 1, the matrix is not invertible
     if (det == 0 || det_gcd != 1) {
-        cout << det << endl;
+        cout << "-------------------- ERROR --------------------" << endl;
+        cout << "Determinant: " << det << ", gcd(det, 26): " << det_gcd << endl;
         cout << "ERROR: Key matrix is not invertible." << endl;
-        return 1;
     }
 
+    cout << endl << "-------------------- CORRECT --------------------" << endl;
     // Input plaintext (uppercase letters only)
     cout << "Enter the plaintext (uppercase letters only): ";
     cin >> plaintext;
