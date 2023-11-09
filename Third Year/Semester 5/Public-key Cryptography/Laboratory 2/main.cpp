@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 
-// Lab3 Pr 4
-
 using namespace std;
 
 // Function to encrypt the plaintext using a 2x2 Hill matrix
