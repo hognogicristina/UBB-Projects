@@ -4,6 +4,8 @@
 #include <future>
 #include <random>
 #include <stdexcept>
+#include <queue>
+#include <condition_variable>
 
 using namespace std;
 const int THREAD_COUNT = 10;
@@ -113,6 +115,70 @@ public:
     }
 };
 
+// ThreadPool class
+class ThreadPool {
+private:
+    vector<thread> workers; // A vector that holds all the worker threads
+    queue<function<void()>> tasks; // A queue that contains all the tasks to be executed
+    mutex queue_mutex; // Mutex for synchronizing access to the task queue
+    condition_variable condition; // Condition variable for task notification
+    bool stop; // A flag to signal the pool to stop accepting tasks and terminate
+
+public:
+    // Constructor: initializes the thread pool and starts the worker threads
+    ThreadPool(size_t threads) : stop(false) {
+        for (size_t i = 0; i < threads; ++i)
+            workers.emplace_back([this] {
+                for (;;) { // Infinite loop for each worker to process tasks
+                    function<void()> task;
+                    { // Acquire lock to take a task from the queue
+                        unique_lock<mutex> lock(this->queue_mutex);
+                        // Wait for a task to be available or for the pool to stop
+                        this->condition.wait(lock, [this] { return this->stop || !this->tasks.empty(); });
+                        if (this->stop && this->tasks.empty())
+                            return; // Exit the loop if the pool is stopped and no tasks are left
+                        task = move(this->tasks.front()); // Take the next task
+                        this->tasks.pop(); // Remove the task from the queue
+                    }
+                    task(); // Execute the task
+                }
+            });
+    }
+
+    // Function to add a task to the pool
+    template<class F, class... Args>
+    future<typename result_of<F(Args...)>::type> enqueue(F &&f, Args &&... args) {
+        using return_type = typename result_of<F(Args...)>::type;
+
+        auto task = make_shared<packaged_task<return_type()> >(
+                bind(forward<F>(f), forward<Args>(args)...)
+        ); // Wrap the function and its arguments into a task
+
+        future<return_type> res = task->get_future(); // Get a future to the result of the task
+        {
+            unique_lock<mutex> lock(queue_mutex); // Lock the queue
+
+            if (stop)
+                throw runtime_error("enqueue on stopped ThreadPool"); // Don't allow new tasks if the pool is stopped
+
+            tasks.emplace([task]() { (*task)(); }); // Add the task to the queue
+        }
+        condition.notify_one(); // Notify one worker thread that a task is available
+        return res; // Return the future
+    }
+
+    // Destructor: stops the pool and joins all worker threads
+    ~ThreadPool() {
+        {
+            unique_lock<mutex> lock(queue_mutex); // Lock the queue to change the stop flag
+            stop = true; // Signal the pool to stop
+        }
+        condition.notify_all(); // Notify all threads to wake up and terminate
+        for (thread &worker: workers)
+            worker.join(); // Wait for all threads to finish
+    }
+};
+
 // Generate tasks for matrix multiplication
 vector<MultiplierThread> generateTasks(const Matrix &m1, const Matrix &m2, Matrix &result) {
     vector<MultiplierThread> threads; // The threads will be stored in a vector
@@ -149,33 +215,31 @@ int main() {
     m5.fillMatrixRandomly();
     m6.fillMatrixRandomly();
 
-    // Perform matrix multiplication and measure the time taken for each operation
-    auto performMultiplication = [](const Matrix& m1, const Matrix& m2, Matrix& result, int matrixNumber) -> void {
+    ThreadPool pool(THREAD_COUNT);
+
+    // Modify the performMultiplication lambda to use the thread pool instead of raw threads
+    auto performMultiplication = [&](const Matrix &m1, const Matrix &m2, Matrix &result, int matrixNumber) -> void {
         auto tasks = generateTasks(m1, m2, result);
-        vector<thread> threads;
-        threads.reserve(tasks.size()); // Reserve space to prevent reallocations
+        vector<future<void>> results;
 
         chrono::steady_clock::time_point begin = chrono::steady_clock::now();
-        for (auto& task : tasks) {
-            threads.push_back(thread(task));
-        }
-        chrono::steady_clock::time_point thread_creation_end = chrono::steady_clock::now();
 
-        for (auto& thread : threads) {
-            if (thread.joinable()) {
-                thread.join();
-            }
+        for (auto &task: tasks) {
+            results.emplace_back(pool.enqueue(task));
         }
+
+        // Wait for all tasks to finish
+        for (auto &result: results) {
+            result.get();
+        }
+
         chrono::steady_clock::time_point end = chrono::steady_clock::now();
 
         cout << "Result matrix " << matrixNumber << ":" << endl;
         cout << result << endl;
-        cout << "Thread creation for matrix " << matrixNumber << " took "
-                  << chrono::duration_cast<chrono::microseconds>(thread_creation_end - begin).count()
-                  << " microseconds." << endl;
         cout << "Total time for matrix multiplication " << matrixNumber << " took "
-                  << chrono::duration_cast<chrono::microseconds>(end - begin).count()
-                  << " microseconds." << endl;
+             << chrono::duration_cast<chrono::microseconds>(end - begin).count()
+             << " microseconds." << endl;
         cout << endl;
     };
 
