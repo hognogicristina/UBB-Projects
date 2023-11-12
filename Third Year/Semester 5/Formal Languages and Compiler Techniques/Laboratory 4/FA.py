@@ -1,24 +1,23 @@
 import re
 from Transition import Transition  # Assuming Transition class is defined in a separate module
 
+
 # Function to print a list of strings enclosed in curly braces
 def print_list_of_string(list_name, lst):
     print(f"{list_name} = {{{', '.join(lst)}}}")
+
 
 # Finite Automaton (FA) class
 class FA:
     def __init__(self, filename):
         # Initialize the FA object with a given filename
         self.filename = filename
-        self.states = []              # List to store states
-        self.alphabet = []            # List to store the alphabet symbols
-        self.transitions = []         # List to store transitions between states
-        self.initial_state = ""       # Initial state of the FA
-        self.output_states = []       # List to store output states
-        try:
-            self.init()  # Initialize the FA by parsing the file
-        except Exception as e:
-            print("Error when initializing FA")
+        self.states = []  # List to store states
+        self.alphabet = []  # List to store the alphabet symbols
+        self.transitions = []  # List to store transitions between states
+        self.initial_state = ""  # Initial state of the FA
+        self.output_states = []  # List to store output states
+        self.init()
 
     def init(self):
         # Initialize the FA by parsing the configuration file
@@ -32,17 +31,17 @@ class FA:
                 if keyword == "states":
                     # Parse and store the states
                     states_with_curly_brackets = line[line.index("=") + 1:]
-                    states = states_with_curly_brackets[1:-1].strip()
+                    states = states_with_curly_brackets[1:-2].strip()
                     self.states = [s.strip() for s in states.split(',')]
                 elif keyword == "alphabet":
                     # Parse and store the alphabet symbols
                     alphabet_with_curly_brackets = line[line.index("=") + 1:]
-                    alphabet = alphabet_with_curly_brackets[1:-1].strip()
+                    alphabet = alphabet_with_curly_brackets[1:-2].strip()
                     self.alphabet = [s.strip() for s in alphabet.split(',')]
                 elif keyword == "out_states":
                     # Parse and store the output states
                     output_states_with_curly_brackets = line[line.index("=") + 1:]
-                    output_states = output_states_with_curly_brackets[1:-1].strip()
+                    output_states = output_states_with_curly_brackets[1:-2].strip()
                     self.output_states = [s.strip() for s in output_states.split(',')]
                 elif keyword == "initial_state":
                     # Parse and store the initial state
@@ -57,7 +56,7 @@ class FA:
                         individual_values = [s.strip() for s in transition_without_parentheses.split(',')]
                         self.transitions.append(Transition(individual_values[0], individual_values[1], individual_values[2]))
                 else:
-                    raise Exception("Invalid line in file")
+                    raise Exception(f"Unexpected keyword '{keyword}' in file")
 
     def print_states(self):
         # Print the list of states
@@ -89,19 +88,42 @@ class FA:
         # Check if a given word is accepted by the FA
         word_as_list = list(word)
         current_state = self.initial_state
+        idx = 0
         for c in word_as_list:
             found = False
-            for transition in self.transitions:
-                if transition.get_from() == current_state and transition.get_label() == c:
-                    current_state = transition.get_to()
-                    found = True
-                    break
+            if idx >= len(self.transitions):
+                return False
+            transition = self.transitions[idx]
+            if transition.get_from() == current_state and transition.get_label() == c:
+                current_state = transition.get_to()
+                idx += 1
+                found = True
             if not found:
                 return False
         return current_state in self.output_states
 
+    # def get_next_accepted(self, word):
+    #     # Get the longest accepted prefix of a given word
+    #     current_state = self.initial_state
+    #     accepted_word = ""
+    #     idx = 0
+    #     for c in word:
+    #         new_state = None
+    #         if idx >= len(self.transitions):
+    #             return accepted_word
+    #         transition = self.transitions[idx]
+    #         if transition.get_from() == current_state and transition.get_label() == c:
+    #             new_state = transition.get_to()
+    #             idx += 1
+    #             accepted_word += c
+    #         if new_state is None:
+    #             if current_state not in self.output_states:
+    #                 return None
+    #             else:
+    #                 return accepted_word
+    #         current_state = new_state
+
     def get_next_accepted(self, word):
-        # Get the longest accepted prefix of a given word
         current_state = self.initial_state
         accepted_word = ""
         for c in word:
