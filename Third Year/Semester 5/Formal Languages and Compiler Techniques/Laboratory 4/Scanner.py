@@ -67,36 +67,13 @@ class Scanner:
         self.PIF.append([token_position, hash_value])
         return True
 
-    # def treat_int_constant(self):
-    #     regex_for_int_constant = re.compile(r'^[-+]?(\d+)')
-    #     match = regex_for_int_constant.match(self.program[self.index:])
-    #     if not match:
-    #         return False
-    #
-    #     if re.compile(r'^[-+]?(\d+)[a-zA-Z]').match(self.program[self.index:]):
-    #         return False
-    #
-    #     int_constant = match.group(0)
-    #     if not self.symbol_table.has_hash(int_constant):
-    #         position, hash_value = self.symbol_table.add_hash(int_constant)
-    #     else:
-    #         position, hash_value = self.symbol_table.get_position_hash(int_constant)
-    #
-    #     token_position = self.token_positions["constant"]
-    #
-    #     self.index += len(int_constant)
-    #     self.PIF.append([token_position, hash_value])
-    #     return True
-
     def treat_int_constant(self):
-        # Use FA to match integer constants instead of regex
         fa = FA("utilities/int_constant.in")
         int_constant = fa.get_next_accepted(self.program[self.index:])
         if int_constant is None:
             return False
 
-        # Additional check to avoid identifiers that start with a number
-        if re.compile(r'^[0-9]+[a-zA-Z]').match(int_constant):
+        if re.compile(r'^[-+]?(\d+)[a-zA-Z]').match(int_constant):
             return False
 
         self.index += len(int_constant)
@@ -117,51 +94,32 @@ class Scanner:
             return True
         return self.symbol_table.has_hash(possible_identifier)
 
-    # def treat_identifier(self):
-    #     regex_for_identifier = re.compile(r'^([#]?[a-zA-Z_][a-zA-Z0-9_]*)')
-    #     match = regex_for_identifier.match(self.program[self.index:])
-    #     if not match:
-    #         return False
-    #     identifier = match.group(1)
-    #
-    #     if not self.check_if_valid(identifier, self.program[self.index:]):
-    #         return False
-    #
-    #     if not self.symbol_table.has_hash(identifier):
-    #         position, hash_value = self.symbol_table.add_hash(identifier)
-    #     else:
-    #         position, hash_value = self.symbol_table.get_position_hash(identifier)
-    #
-    #     token_position = self.token_positions["identifier"]
-    #
-    #     self.index += len(identifier)
-    #     self.PIF.append([token_position, hash_value])
-    #
-    #     return True
-
     def treat_identifier(self):
-        # Use FA to match identifiers instead of regex
         fa = FA("utilities/identifier.in")
-        # Check if the next character is a digit, which is not allowed at the start of an identifier
+
         if self.program[self.index].isdigit():
             return False
 
         identifier = fa.get_next_accepted(self.program[self.index:])
+        if identifier is None:
+            return False
 
         if not self.check_if_valid(identifier, self.program[self.index:]):
             return False
 
-        if identifier:
-            self.index += len(identifier)
-            if not self.symbol_table.has_hash(identifier):
-                position, hash_value = self.symbol_table.add_hash(identifier)
-            else:
-                position, hash_value = self.symbol_table.get_position_hash(identifier)
+        self.index += len(identifier)
 
-            token_position = self.token_positions["identifier"]
-            self.PIF.append([token_position, hash_value])
-            return True
-        return False
+        if identifier[0].isdigit():
+            return False
+
+        if not self.symbol_table.has_hash(identifier):
+            position, hash_value = self.symbol_table.add_hash(identifier)
+        else:
+            position, hash_value = self.symbol_table.get_position_hash(identifier)
+
+        token_position = self.token_positions["identifier"]
+        self.PIF.append([token_position, hash_value])
+        return True
 
     def treat_from_token_list(self):
         possible_token = self.program[self.index:].split(" ")[0]

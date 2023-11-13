@@ -33,20 +33,25 @@ if __name__ == "__main__":
             program3 = "p3.txt"
             program1err = "p1err.txt"
 
-            scanner = Scanner()
-            scanner.read_tokens()
-
             while True:
                 scanner_option = int(input("Enter an option for Scanner: "))
                 if scanner_option == 0:
                     break
                 elif scanner_option == 1:
+                    scanner = Scanner()
+                    scanner.read_tokens()
                     scanner.scan(program1)
                 elif scanner_option == 2:
+                    scanner = Scanner()
+                    scanner.read_tokens()
                     scanner.scan(program2)
                 elif scanner_option == 3:
+                    scanner = Scanner()
+                    scanner.read_tokens()
                     scanner.scan(program3)
                 elif scanner_option == 4:
+                    scanner = Scanner()
+                    scanner.read_tokens()
                     scanner.scan(program1err)
                 else:
                     print("Invalid Scanner option. Please try again.")
