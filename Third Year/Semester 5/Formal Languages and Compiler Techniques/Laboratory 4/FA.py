@@ -102,28 +102,8 @@ class FA:
                 return False
         return current_state in self.output_states
 
-    # def get_next_accepted(self, word):
-    #     # Get the longest accepted prefix of a given word
-    #     current_state = self.initial_state
-    #     accepted_word = ""
-    #     idx = 0
-    #     for c in word:
-    #         new_state = None
-    #         if idx >= len(self.transitions):
-    #             return accepted_word
-    #         transition = self.transitions[idx]
-    #         if transition.get_from() == current_state and transition.get_label() == c:
-    #             new_state = transition.get_to()
-    #             idx += 1
-    #             accepted_word += c
-    #         if new_state is None:
-    #             if current_state not in self.output_states:
-    #                 return None
-    #             else:
-    #                 return accepted_word
-    #         current_state = new_state
-
     def get_next_accepted(self, word):
+        # Get the longest accepted substring of a given word
         current_state = self.initial_state
         accepted_word = ""
         for c in word:

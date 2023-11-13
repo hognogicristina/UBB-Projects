@@ -73,6 +73,10 @@ class Scanner:
         if int_constant is None:
             return False
 
+        next_index = self.index + len(int_constant)
+        if next_index < len(self.program) and self.program[next_index].isalpha():
+            return False
+
         if re.compile(r'^[-+]?(\d+)[a-zA-Z]').match(int_constant):
             return False
 
@@ -108,9 +112,6 @@ class Scanner:
             return False
 
         self.index += len(identifier)
-
-        if identifier[0].isdigit():
-            return False
 
         if not self.symbol_table.has_hash(identifier):
             position, hash_value = self.symbol_table.add_hash(identifier)
