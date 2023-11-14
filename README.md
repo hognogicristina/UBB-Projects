@@ -49,17 +49,11 @@ This repository includes my homeworks and projects from college.
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Formal%20Languages%20and%20Compiler%20Techniques">Formal Languages and Compiler Techniques</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Mobile%20Applications">Mobile Applications</a></li>
 	<li><a href="https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%205/Parallel%20and%20Distributed%20Programming">Parallel and Distributed Programming</a></li>
-	<li>Public-key Cryptography</li>
-	<li>Team Project</li>
-	<li>Virtual Reality</li>
 </ul>
 
 <br>
 <li><b>6<sup>th</sup> Semester</b></li>
 <ul>
-	<li>Academic ethics and integrity (in Computer Science)</li>
-	<li>Blockchain: Smart Contracts</li>
-	<li>Business Intelligence</li>
 	<li><a href="">Elaboration of the Bachelor's Thesis</a></li>
 	<li><a href="">Numerical Calculus</a></li>
 	<li><a href="">Software Systems Validation and Verification</a></li>
