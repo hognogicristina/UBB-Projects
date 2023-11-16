@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 4/implementation/implementation.csproj": {}
+  },
+  "projects": {
+    "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 4/implementation/implementation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 4/implementation/implementation.csproj",
+        "projectName": "implementation",
+        "projectPath": "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 4/implementation/implementation.csproj",
+        "packagesPath": "/Users/hognogicristina/.nuget/packages/",
+        "outputPath": "/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 4/implementation/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hognogicristina/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/hognogicristina/.dotnet/sdk/7.0.306/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

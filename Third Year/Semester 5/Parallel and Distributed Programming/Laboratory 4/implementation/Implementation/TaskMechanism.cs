@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Lab4.Model;
-using Lab4.Utils;
+using implementation.Model;
+using implementation.Utils;
 
-namespace Lab4.Implementation;
+namespace implementation.Implementation;
 
 public class TaskMechanism
 {

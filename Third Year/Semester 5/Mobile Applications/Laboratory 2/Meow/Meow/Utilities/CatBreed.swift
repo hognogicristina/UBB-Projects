@@ -20,6 +20,7 @@ enum CatBreed: String, CaseIterable, Identifiable {
     case devonRex = "Devon Rex"
     case egyptianMau = "Egyptian Mau"
     case gingerTabby = "Ginger Tabby"
+    case havanaBrown = "Havana Brown"
     case khaoManee = "Khao Manee"
     case maineCoon = "Maine Coon"
     case multicolor = "Multicolor"
@@ -35,6 +36,7 @@ enum CatBreed: String, CaseIterable, Identifiable {
     case sphynx = "Sphynx"
     case tonkinese = "Tonkinese"
     case toyger = "Toyger"
+    case tuxedo = "Tuxedo"
     
     var image: Image {
         Image(self.rawValue)

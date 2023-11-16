@@ -61,7 +61,7 @@ struct EditView: View {
                 
                 Section(header: Text("Age")) {
                     Picker("Select Age", selection: $editedCat.age) {
-                        ForEach(1...240, id: \.self) { age in
+                        ForEach(1...600, id: \.self) { age in
                             Text("\(age) " + (age == 1 ? "month" : "months")).tag("\(age) " + (age == 1 ? "month" : "months"))
                         }
                     }

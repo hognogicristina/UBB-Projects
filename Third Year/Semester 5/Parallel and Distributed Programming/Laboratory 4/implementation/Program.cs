@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using Lab4.Implementation;
+using implementation.Implementation;
 
-namespace Lab4;
+namespace implementation;
 
 public class Program
 {

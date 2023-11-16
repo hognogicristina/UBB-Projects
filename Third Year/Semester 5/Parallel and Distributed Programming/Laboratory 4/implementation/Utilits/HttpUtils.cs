@@ -1,6 +1,6 @@
-﻿using Lab4.Model;
+﻿using implementation.Model;
 
-namespace Lab4.Utils;
+namespace implementation.Utils;
 
 public class HttpUtils
 {

@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace Lab4.Model;
+namespace implementation.Model;
 
 public class StateObject
 {
