@@ -1,0 +1,4 @@
+enum CatGender {
+  Male,
+  Female,
+}
