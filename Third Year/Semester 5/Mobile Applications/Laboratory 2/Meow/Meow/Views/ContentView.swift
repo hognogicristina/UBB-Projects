@@ -25,14 +25,15 @@ struct ContentView: View {
                 
                 NavigationLink(destination: ListView()) {
                     Text("Get Started")
-                        .font(.headline)
+                        .font(.title3)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 15)
                         .frame(maxWidth: .infinity)
                         .background(Color.accentColor)
                         .cornerRadius(10)
                 }
-                .padding(.horizontal, 40)
+                .padding(.horizontal, 50)
                 .padding(.bottom, 20)
             }
         }

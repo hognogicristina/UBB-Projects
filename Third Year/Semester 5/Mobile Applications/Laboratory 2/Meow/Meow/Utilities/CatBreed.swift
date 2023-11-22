@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum CatBreed: String, CaseIterable, Identifiable {
-    case none = "None"
+    case mixedBreed = "Mixed Breed"
     case abyssinian = "Abyssinian"
     case americanBobtail = "American Bobtail"
     case americanCurl = "American Curl"

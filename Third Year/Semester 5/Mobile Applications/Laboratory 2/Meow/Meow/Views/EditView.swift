@@ -10,6 +10,10 @@ struct EditView: View {
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
     @State var showingBreedGrid = false
+    
+    @State var filteredBreeds: [String] = []
+    @State private var searchText = ""
+    @State private var selectedBreed: String = "Mixed Breed"
 
     init(cat: Binding<Cat>) {
         _cat = cat
@@ -41,12 +45,9 @@ struct EditView: View {
                         }
                     }
                     .sheet(isPresented: $showingBreedGrid) {
-                        ForEach(0..<4) { _ in
-                            Spacer()
-                        }
                         BreedGridView(selectBreed: { selectedBreed in
                             editedCat.breed = selectedBreed
-                        })
+                        }, searchText: $searchText)
                     }
                 }
                 
@@ -90,14 +91,15 @@ struct EditView: View {
             }
         }) {
             Text("Save")
-                .font(.headline)
+                .font(.title3)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .foregroundColor(.white)
-                .padding(.vertical, 10)
+                .padding(.vertical, 15)
                 .frame(maxWidth: .infinity)
                 .background(Color.accentColor)
                 .cornerRadius(10)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 50)
         .padding(.bottom, 20)
     }
     

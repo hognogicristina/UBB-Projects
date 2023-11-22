@@ -5,7 +5,7 @@ struct AddView: View {
     @EnvironmentObject var listViewModel: ListViewModel
     
     @State var newCatName: String = ""
-    @State var newCatBreed: String = "None"
+    @State var newCatBreed: String = "Mixed Breed"
     @State var newCatGender: String = "Male"
     @State var newCatAge: String = "1 month"
     @State var newCatHealthProblem: String = ""
@@ -14,6 +14,10 @@ struct AddView: View {
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
     @State var showingBreedGrid = false
+    
+    @State var filteredBreeds: [String] = []
+    @State private var searchText = ""
+    @State private var selectedBreed: String = "Mixed Breed"
 
     var body: some View {
         VStack {
@@ -37,13 +41,11 @@ struct AddView: View {
                     }
                 }
                 .sheet(isPresented: $showingBreedGrid) {
-                    ForEach(0..<4) { _ in
-                        Spacer()
-                    }
                     BreedGridView(selectBreed: { selectedBreed in
                         newCatBreed = selectedBreed
-                    })
+                    }, searchText: $searchText)
                 }
+
                 
                 Section(header: Text("Gender")) {
                     Picker("", selection: $newCatGender) {
