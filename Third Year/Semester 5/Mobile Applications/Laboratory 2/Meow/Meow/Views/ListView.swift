@@ -10,8 +10,14 @@ struct ListView: View {
         if searchText.isEmpty {
             return listViewModel.cats
         } else {
-            return listViewModel.cats.filter { $0.breed.lowercased().contains(searchText.lowercased()) }
+            return listViewModel.cats.filter { cat in
+                cat.breed.range(of: searchText, options: .caseInsensitive) != nil
+            }
         }
+    }
+
+    var groupedCats: [String: [Cat]] {
+        Dictionary(grouping: filteredCats, by: { $0.breed })
     }
 
     var body: some View {
@@ -31,21 +37,27 @@ struct ListView: View {
                 Spacer()
             } else {
                 List {
-                    ForEach(filteredCats.indices, id: \.self) { index in
-                        let cat = filteredCats[index]
-                        NavigationLink(destination: CatDetailsView(cat: cat)) {
-                            HStack {
-                                ListRowView(cat: cat)
-                            }
-                            .swipeActions {
-                                Button("Edit") {
-                                    selectedCat = EditCat(id: index, cat: $listViewModel.cats[index])
+                    ForEach(groupedCats.keys.sorted(), id: \.self) { breed in
+                        Section(header: Text(breed)) {
+                            ForEach(groupedCats[breed]!, id: \.id) { cat in
+                                NavigationLink(destination: CatDetailsView(cat: cat)) {
+                                    HStack {
+                                        ListRowView(cat: cat)
+                                    }
+                                    .swipeActions {
+                                        Button("Edit") {
+                                            if let index = listViewModel.cats.firstIndex(where: { $0.id == cat.id }) {
+                                                selectedCat = EditCat(id: index, cat: $listViewModel.cats[index])
+                                            }
+                                        }
+                                        .tint(.blue)
+                                    }
                                 }
-                                .tint(.blue)
                             }
                         }
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
                 .sheet(item: $selectedCat) { editCat in
                     EditView(cat: editCat.cat)
                 }
@@ -60,7 +72,6 @@ struct ListView: View {
         )
     }
 }
-
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {

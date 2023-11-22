@@ -27,26 +27,26 @@ struct AddView: View {
                 }
                 
                 Section(header: Text("Breed")) {
-                    HStack {
-                        Text("Select Breed")
-                            .foregroundColor(Color("ColorText"))
-                        Spacer()
-                        Text(newCatBreed)
-                            .foregroundColor(Color("ColorGray"))
-                        Image(systemName: "photo.on.rectangle.angled")
-                            .foregroundColor(Color("ColorText"))
-                            .onTapGesture {
-                                showingBreedGrid.toggle()
-                            }
+                    Button(action: {
+                        showingBreedGrid.toggle()
+                    }) {
+                        HStack {
+                            Text("Select Breed")
+                                .foregroundColor(Color("ColorText"))
+                            Spacer()
+                            Text(newCatBreed)
+                                .foregroundColor(Color("ColorGray"))
+                            Image(systemName: "photo.on.rectangle.angled")
+                                .foregroundColor(Color("ColorText"))
+                        }
+                    }
+                    .sheet(isPresented: $showingBreedGrid) {
+                        BreedGridView(selectBreed: { selectedBreed in
+                            newCatBreed = selectedBreed
+                        }, searchText: $searchText)
                     }
                 }
-                .sheet(isPresented: $showingBreedGrid) {
-                    BreedGridView(selectBreed: { selectedBreed in
-                        newCatBreed = selectedBreed
-                    }, searchText: $searchText)
-                }
 
-                
                 Section(header: Text("Gender")) {
                     Picker("", selection: $newCatGender) {
                         ForEach(CatGender.allCases) { gender in

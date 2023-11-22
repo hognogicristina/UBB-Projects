@@ -5,7 +5,7 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            TextField("Search Breed", text: $searchText)
+            TextField("Search", text: $searchText)
                 .padding(.leading, 30)
                 .padding(10)
                 .background(Color(.systemGray6))

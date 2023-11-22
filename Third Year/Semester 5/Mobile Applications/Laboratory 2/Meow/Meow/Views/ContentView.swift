@@ -28,7 +28,7 @@ struct ContentView: View {
                         .font(.title3)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
-                        .padding(.vertical, 15)
+                        .padding(.vertical, 12)
                         .frame(maxWidth: .infinity)
                         .background(Color.accentColor)
                         .cornerRadius(10)
