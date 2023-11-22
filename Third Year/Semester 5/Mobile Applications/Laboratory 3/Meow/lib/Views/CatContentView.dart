@@ -43,11 +43,7 @@ class CatContentView extends StatelessWidget {
                     height: 44.0,
                     child: CupertinoButton.filled(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          CupertinoPageRoute(
-                            builder: (context) => const CatListView(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/cat_list_view');
                       },
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       borderRadius: BorderRadius.circular(10),

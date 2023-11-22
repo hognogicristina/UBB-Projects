@@ -160,7 +160,8 @@ class CatDetailsView extends StatelessWidget {
             CupertinoDialogAction(
               onPressed: () {
                 viewModel.deleteCat(int.parse(cat.id));
-                Navigator.of(context).pop();
+                Navigator.popUntil(
+                    context, ModalRoute.withName('/cat_list_view'));
               },
               isDestructiveAction: true,
               child: const Text("Confirm"),

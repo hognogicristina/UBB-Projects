@@ -36,12 +36,11 @@ class CatListViewModel with ChangeNotifier {
   }
 
   void updateCat(int catId, Cat updatedCat) {
-    final index = cats.indexWhere((c) => c.id == catId);
+    final existingCatIndex = cats.indexWhere((c) => c.id == catId.toString());
 
-    if (index != -1) {
-      cats[index] = updatedCat;
+    if (existingCatIndex != -1) {
+      cats[existingCatIndex] = updatedCat;
       notifyListeners();
     }
   }
-
 }

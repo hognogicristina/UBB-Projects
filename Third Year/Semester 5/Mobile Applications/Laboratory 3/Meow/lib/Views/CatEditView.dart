@@ -27,6 +27,13 @@ class _CatEditViewState extends State<CatEditView> {
 
   CatBreed _selectedBreed = CatBreed.None;
 
+  void updateSelectedBreed(CatBreed breed) {
+    setState(() {
+      _selectedBreed = breed;
+      _catBreed = breed.stringValue;
+    });
+  }
+
   void _showValidationAlert(String message) {
     showCupertinoDialog<void>(
       context: context,
@@ -52,22 +59,124 @@ class _CatEditViewState extends State<CatEditView> {
     _catName = widget.cat.name;
     _catBreed = widget.cat.breed;
     _catGender =
-    widget.cat.gender == 'Male' ? CatGender.Male : CatGender.Female;
-    _catAge = widget.cat.age;
-    _catHealthProblem = widget.cat.healthProblem;
-    _catDescription = widget.cat.description;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    _catName = widget.cat.name;
-    _catBreed = widget.cat.breed;
-    _catGender =
         widget.cat.gender == 'Male' ? CatGender.Male : CatGender.Female;
     _catAge = widget.cat.age;
     _catHealthProblem = widget.cat.healthProblem;
     _catDescription = widget.cat.description;
 
+    _selectedBreed = CatBreed.values.firstWhere(
+      (breed) => breed.stringValue == _catBreed,
+      orElse: () => CatBreed.None,
+    );
+  }
+
+  int parseAge(String age) {
+    final ageParts = age.split(' ');
+    if (ageParts.length == 2) {
+      return int.tryParse(ageParts.first) ?? 1;
+    }
+    return 1;
+  }
+
+  void showAgePicker(BuildContext context) {
+    final backgroundColor =
+    CupertinoTheme.of(context).brightness == Brightness.light
+        ? CupertinoColors.systemBackground
+        : CupertinoColors.systemBackground.resolveFrom(context);
+
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 350.0,
+          color: backgroundColor,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              ),
+              Expanded(
+                child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(
+                    initialItem: parseAge(_catAge) - 1,
+                  ),
+                  itemExtent: 32.0,
+                  onSelectedItemChanged: (int index) {
+                    setState(() {
+                      _catAge =
+                      '${index + 1} ${index == 0 ? 'month' : 'months'}';
+                    });
+                  },
+                  children: List<Widget>.generate(240, (int index) {
+                    return Center(
+                      child: Text(
+                        '${index + 1}${index == 0 ? ' month' : ' months'}',
+                        style: const TextStyle(fontSize: 20.0),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void showGenderPicker(BuildContext context) {
+    final backgroundColor =
+    CupertinoTheme.of(context).brightness == Brightness.light
+        ? CupertinoColors.systemBackground
+        : CupertinoColors.systemBackground.resolveFrom(context);
+
+    final genders = [CatGender.Male, CatGender.Female];
+
+    final initialGenderIndex = genders.indexOf(_catGender);
+
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200.0,
+          color: backgroundColor,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              ),
+              Expanded(
+                child: CupertinoPicker(
+                  scrollController: FixedExtentScrollController(
+                    initialItem: initialGenderIndex,
+                  ),
+                  itemExtent: 32.0,
+                  onSelectedItemChanged: (int index) {
+                    setState(() {
+                      _catGender = genders[index];
+                    });
+                  },
+                  children: genders.map((gender) {
+                    return Center(
+                      child: Text(
+                        gender == CatGender.Male ? 'Male' : 'Female',
+                        style: const TextStyle(fontSize: 20.0),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final viewModel = Provider.of<CatListViewModel>(context);
 
     void saveCatIfValid() {
@@ -106,60 +215,7 @@ class _CatEditViewState extends State<CatEditView> {
       }
     }
 
-    int parseAge(String age) {
-      final ageParts = age.split(' ');
-      if (ageParts.length == 2) {
-        return int.tryParse(ageParts.first) ?? 1;
-      }
-      return 1;
-    }
 
-    void showAgePicker(BuildContext context) {
-      final backgroundColor =
-          CupertinoTheme.of(context).brightness == Brightness.light
-              ? CupertinoColors.systemBackground
-              : CupertinoColors.systemBackground.resolveFrom(context);
-
-      showCupertinoModalPopup<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            height: 350.0,
-            color: backgroundColor,
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                ),
-                Expanded(
-                  child: CupertinoPicker(
-                    scrollController: FixedExtentScrollController(
-                      initialItem: parseAge(_catAge) - 1,
-                    ),
-                    itemExtent: 32.0,
-                    onSelectedItemChanged: (int index) {
-                      setState(() {
-                        _catAge =
-                            '${index + 1}${index == 0 ? ' month' : ' months'}';
-                      });
-                    },
-                    children: List<Widget>.generate(240, (int index) {
-                      return Center(
-                        child: Text(
-                          '${index + 1}${index == 0 ? ' month' : ' months'}',
-                          style: const TextStyle(fontSize: 20.0),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    }
 
     void showBreedPicker(BuildContext context) {
       final backgroundColor =
@@ -177,6 +233,8 @@ class _CatEditViewState extends State<CatEditView> {
         return enumString;
       }
 
+      int initialBreedIndex = CatBreed.values.indexOf(_selectedBreed);
+
       showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) {
@@ -192,13 +250,12 @@ class _CatEditViewState extends State<CatEditView> {
                 Expanded(
                   child: CupertinoPicker(
                     scrollController: FixedExtentScrollController(
-                      initialItem: breeds.indexOf(_selectedBreed),
+                      initialItem: initialBreedIndex,
                     ),
                     itemExtent: 32.0,
                     onSelectedItemChanged: (int index) {
-                      setState(() {
-                        _selectedBreed = breeds[index];
-                      });
+                      _selectedBreed = breeds[index];
+                      updateSelectedBreed(_selectedBreed);
                     },
                     children: breeds.map((breed) {
                       return Center(

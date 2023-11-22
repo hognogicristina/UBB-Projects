@@ -73,6 +73,9 @@ class CatListView extends StatelessWidget {
                                     motion: const DrawerMotion(),
                                     children: [
                                       SlidableAction(
+                                        backgroundColor:
+                                            CupertinoColors.systemBlue,
+                                        foregroundColor: CupertinoColors.white,
                                         label: 'Edit',
                                         onPressed: (_) {
                                           Navigator.of(context).push(
