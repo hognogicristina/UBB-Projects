@@ -162,6 +162,7 @@ public class TaskMechanism
                     {
                         // all the data has been received  
                         // signal that all bytes have been received  
+                        HttpUtils.PrintResponse(state);
                         state.receiveDone.Set();
                     }
                 }

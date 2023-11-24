@@ -123,6 +123,7 @@ public class DirectCallback
                 {
                     // all the data has been received, print it
                     Console.WriteLine(state.responseContent);
+                    HttpUtils.PrintResponse(state);
                     
                     // close the connection
                     clientSocket.Shutdown(SocketShutdown.Both);
