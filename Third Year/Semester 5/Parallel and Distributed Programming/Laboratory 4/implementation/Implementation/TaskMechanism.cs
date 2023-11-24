@@ -6,26 +6,30 @@ using implementation.Utils;
 
 namespace implementation.Implementation;
 
+// Wrap the connect/send/receive operations in tasks, with the callback setting the result of the task
 public class TaskMechanism
 {
     private static List<string> HOSTS;
-    private static List<Task> TASKS;
+    private static List<Task> TASKS; // list of tasks for each hostname
 
     public static void Run(List<string> hostnames)
     {
+        // initialize the HOSTS and TASKS
         HOSTS = hostnames;
         TASKS = new List<Task>();
 
         for (var i = 0; i < HOSTS.Count; i++)
         {
+            // start a new task for each host
             TASKS.Add(Task.Factory.StartNew(DoStart, i));
         }
         
-        Task.WaitAll(TASKS.ToArray());
+        Task.WaitAll(TASKS.ToArray()); // wait for all tasks to complete
     }
 
     private static void DoStart(object idObject)
     {
+        // retrieve the id from the object
         var id = (int)idObject;
         StartClient(HOSTS[id], id);
     }
@@ -83,7 +87,6 @@ public class TaskMechanism
 
         // complete the connection  
         clientSocket.EndConnect(ar);
-
         Console.WriteLine("{0}) Socket connected to {1} ({2})", clientId, hostname, clientSocket.RemoteEndPoint);
 
         // signal that the connection has been made 

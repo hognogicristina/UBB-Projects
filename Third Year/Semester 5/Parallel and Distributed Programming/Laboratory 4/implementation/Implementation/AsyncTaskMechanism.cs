@@ -6,6 +6,7 @@ using implementation.Utils;
 
 namespace implementation.Implementation;
 
+// Like the previous, but also use the async/await mechanism
 public class AsyncTaskMechanism
 {
     private static List<string> HOSTS;
@@ -13,17 +14,22 @@ public class AsyncTaskMechanism
 
     public static void Run(List<string> hostnames)
     {
+        // set the hostnames and tasks
         HOSTS = hostnames;
         TASKS = new List<Task>();
+        
         for (var i = 0; i < HOSTS.Count; i++)
         {
+            // start a task for each hostname
             TASKS.Add(Task.Factory.StartNew(DoStart, i));
         }
-        Task.WaitAll(TASKS.ToArray());
+        
+        Task.WaitAll(TASKS.ToArray()); // wait for all tasks to complete
     }
 
     private static void DoStart(object idObject)
     {
+        // get the id of the task
         var id = (int)idObject;
         StartClient(HOSTS[id], id);
     }
@@ -81,7 +87,6 @@ public class AsyncTaskMechanism
         
         //complete the connection
         clientSocket.EndConnect(ar);
-        
         Console.WriteLine("{0}) Socket connected to {1} ({2})", clientID, hostname, clientSocket.RemoteEndPoint);
         
         // signal that the connection has been made
@@ -95,6 +100,7 @@ public class AsyncTaskMechanism
         
         // begin sending the data to the server
         state.socket.BeginSend(byteData, 0, byteData.Length, 0, SendCallback, state);
+        
         await Task.FromResult<object>(state.sendDone.WaitOne());
     }
     
@@ -117,6 +123,7 @@ public class AsyncTaskMechanism
     {
         // begin receiving the data from the server
         state.socket.BeginReceive(state.receiveBuffer, 0, StateObject.BUFFER_SIZE, 0, ReceiveCallback, state);
+        
         await Task.FromResult<object>(state.receiveDone.WaitOne());
     }
     
