@@ -1,0 +1,159 @@
+N = program decllist cmpdstmt declaration type1 arraydecl type stmtlist stmt simplstmt structstmt assignstmt expression term identifier iostmt foreachstmt ifstmt whilestmt condition restIdentifier constanta condition relation letter digit digitlist nonzerodigit strContent nr operator mathOp intExp realExp strExp charExp boolExp factor forstmt foreachstmt
+E = € _ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 adunate stergete oriori orioriinvers estiegal verificaegal verificanuegal maimare maimic maimareegal maimicegal lasuta spatiu sarilinia gatalinia : ; . comma ' " ( ) { } [ ] stergete cvnou daca altfel cattimp fa pentru pentrufiecare oprestete continua scrie citeste in prog de atunci incepe termina intreg real sfoara sir constanta functie intoarce advfals caracter radical nu
+S = program
+program -> cvnou decllist ; cmpdstmt .
+program -> epsilon
+decllist -> declaration
+decllist -> declaration ; decllist
+decllist -> epsilon
+declaration -> identifier : type ;
+identifier -> € letter restIdentifier
+restIdentifier -> letter restIdentifier
+restIdentifier -> digit restIdentifier
+restIdentifier -> _ restIdentifier
+restIdentifier -> epsilon
+letter -> A
+letter -> B
+letter -> C
+letter -> D
+letter -> E
+letter -> F
+letter -> G
+letter -> H
+letter -> I
+letter -> J
+letter -> K
+letter -> L
+letter -> M
+letter -> N
+letter -> O
+letter -> P
+letter -> Q
+letter -> R
+letter -> S
+letter -> T
+letter -> U
+letter -> V
+letter -> W
+letter -> X
+letter -> Y
+letter -> Z
+letter -> a
+letter -> b
+letter -> c
+letter -> d
+letter -> e
+letter -> f
+letter -> g
+letter -> h
+letter -> i
+letter -> j
+letter -> k
+letter -> l
+letter -> m
+letter -> n
+letter -> o
+letter -> p
+letter -> q
+letter -> r
+letter -> s
+letter -> t
+letter -> u
+letter -> v
+letter -> w
+letter -> x
+letter -> y
+letter -> z
+digit -> 0
+digit -> 1
+digit -> 2
+digit -> 3
+digit -> 4
+digit -> 5
+digit -> 6
+digit -> 7
+digit -> 8
+digit -> 9
+nonzerodigit -> 1
+nonzerodigit -> 2
+nonzerodigit -> 3
+nonzerodigit -> 4
+nonzerodigit -> 5
+nonzerodigit -> 6
+nonzerodigit -> 7
+nonzerodigit -> 8
+nonzerodigit -> 9
+type -> type1
+type -> arraydecl
+type -> epsilon
+type1 -> advfals
+type1 -> caracter
+type1 -> intreg
+type1 -> real
+arraydecl -> sir ( nr ) de type1
+nr -> nonzerodigit digitlist
+digitlist -> digit digitlist
+digitlist -> epsilon
+cmpdstmt -> incepe stmtlist termina
+stmtlist -> stmt
+stmtlist -> stmt ; stmtlist
+stmtlist -> epsilon
+stmt -> simplstmt
+stmt -> structstmt
+simplstmt -> assignstmt
+simplstmt -> iostmt
+assignstmt -> identifier estiegal expression
+expression -> expression operator term
+expression -> term
+operator -> adunate
+operator -> stergete
+operator -> oriori
+term -> term mathOp factor
+term -> factor
+mathOp -> oriori
+mathOp -> orioriinvers
+mathOp -> lasuta
+factor -> ( expression )
+factor -> identifier
+factor -> constanta
+constanta -> intExp
+constanta -> realExp
+constanta -> strExp
+constanta -> charExp
+constanta -> boolExp
+intExp -> nr
+intExp -> stergete nr
+intExp -> 0
+realExp -> nr . nr
+realExp -> stergete nr . nr
+realExp -> nr
+realExp -> stergete nr
+strExp -> " strContent "
+strContent -> letter strContent
+strContent -> digit strContent
+strContent -> epsilon
+charExp -> ' letter '
+charExp -> ' digit '
+boolExp -> 1
+boolExp -> 0
+iostmt -> citeste ( identifier )
+iostmt -> scrie ( identifier )
+iostmt -> scrie ( constanta )
+structstmt -> cmpdstmt
+structstmt -> ifstmt
+structstmt -> whilestmt
+structstmt -> forstmt
+structstmt -> foreachstmt
+ifstmt -> daca ( condition ) atunci { stmt }
+ifstmt -> daca ( condition ) atunci { stmt } altfel { stmt }
+condition -> expression relation expression
+relation -> maimare
+relation -> maimic
+relation -> estiegal
+relation -> verificaegal
+relation -> maimareegal
+relation -> maimicegal
+relation -> nu
+whilestmt -> cattimp ( condition ) fa { stmt }
+forstmt -> pentru ( assignstmt ; condition ; assignstmt ) fa { stmt }
+foreachstmt -> pentrufiecare ( identifier in identifier ) fa { stmt }
