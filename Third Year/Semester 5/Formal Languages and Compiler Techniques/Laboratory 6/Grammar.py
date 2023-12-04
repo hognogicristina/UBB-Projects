@@ -1,6 +1,4 @@
 class Grammar:
-    EPSILON = "epsilon"
-
     def __init__(self):
         self.N = []  # non-terminals
         self.E = []  # terminals
@@ -43,7 +41,7 @@ class Grammar:
                     source, productions = line.split(" -> ")
                     source = source.strip()
                     for production in productions.split('|'):
-                        production = production.strip().replace('epsilon', Grammar.EPSILON).split()
+                        production = production.strip().split()
                         if source in self.P:
                             self.P[source].append(production)
                         else:
@@ -62,7 +60,7 @@ class Grammar:
         for production in self.P.values():
             for rhs in production:
                 for value in rhs:
-                    if value not in self.N[0].split() and value not in self.E[0].split() and value != Grammar.EPSILON:
+                    if value not in self.N[0].split() and value not in self.E[0].split():
                         return False
         return True
 

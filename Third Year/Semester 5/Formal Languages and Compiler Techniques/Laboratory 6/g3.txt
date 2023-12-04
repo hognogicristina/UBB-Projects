@@ -1,155 +1,53 @@
-N = program stmtlist stmt simplstmt structstmt declaration arraydecl type type1 assignstmt iostmt expression term identifier restIdentifier factor const radstmt ifstmt whilestmt condition relation letter digit digitlist nonzerodigit strContent number boolean sign operator mathOp intExp realExp strExp charExp boolExp
-E = # _ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 true false + - * / > < = == >= <= <> % ! [ ] ( ) { } . , : ; endl begin end prog int real str char bool read if else write while arr sys and or rad " '
-S = program
+N = PROGRAM STMTLIST STMT SIMPLSTMT STRUCTSTMT DECLARATION ARRAYDECL TYPE TYPE1 ASSIGNSTMT IOSTMT EXPRESSION TERM FACTOR RADSTMT IFSTMT WHILESTMT CONDITION RELATION OPERATOR
+E = # _ identifier const + - * / > < = == >= <= <> % ! [ ] ( ) { } . , : ; endl begin end prog int real str char bool read if else write while arr sys and or rad " '
+S = PROGRAM
 P =
-    program -> prog { stmtlist }
-    program -> epsilon
-    stmtlist -> stmt
-    stmtlist -> stmt ; stmtlist
-    stmtlist -> epsilon
-    stmt -> simplstmt
-    stmt -> structstmt
-    simplstmt -> assignstmt
-    simplstmt -> iostmt
-    simplstmt -> radstmt
-    simplstmt -> declaration
-    assignstmt -> identifier = expression
-    identifier -> # letter restIdentifier
-    restIdentifier -> letter restIdentifier
-    restIdentifier -> digit restIdentifier
-    restIdentifier -> epsilon
-    letter -> A
-    letter -> B
-    letter -> C
-    letter -> D
-    letter -> E
-    letter -> F
-    letter -> G
-    letter -> H
-    letter -> I
-    letter -> J
-    letter -> K
-    letter -> L
-    letter -> M
-    letter -> N
-    letter -> O
-    letter -> P
-    letter -> Q
-    letter -> R
-    letter -> S
-    letter -> T
-    letter -> U
-    letter -> V
-    letter -> W
-    letter -> X
-    letter -> Y
-    letter -> Z
-    letter -> a
-    letter -> b
-    letter -> c
-    letter -> d
-    letter -> e
-    letter -> f
-    letter -> g
-    letter -> h
-    letter -> i
-    letter -> j
-    letter -> k
-    letter -> l
-    letter -> m
-    letter -> n
-    letter -> o
-    letter -> p
-    letter -> q
-    letter -> r
-    letter -> s
-    letter -> t
-    letter -> u
-    letter -> v
-    letter -> w
-    letter -> x
-    letter -> y
-    letter -> z
-    digit -> 0
-    digit -> 1
-    digit -> 2
-    digit -> 3
-    digit -> 4
-    digit -> 5
-    digit -> 6
-    digit -> 7
-    digit -> 8
-    digit -> 9
-    nonzerodigit -> 1
-    nonzerodigit -> 2
-    nonzerodigit -> 3
-    nonzerodigit -> 4
-    nonzerodigit -> 5
-    nonzerodigit -> 6
-    nonzerodigit -> 7
-    nonzerodigit -> 8
-    nonzerodigit -> 9
-    expression -> expression operator term
-    expression -> term
-    operator -> +
-    operator -> -
-    operator -> *
-    operator -> /
-    term -> term mathOp factor
-    term -> factor
-    factor -> ( expression )
-    factor -> identifier
-    factor -> const
-    const -> intExp
-    const -> realExp
-    const -> strExp
-    const -> charExp
-    const -> boolExp
-    intExp -> sign number
-    intExp -> 0
-    sign -> +
-    sign -> -
-    number -> nonzerodigit digitlist
-    digitlist -> digit digitlist
-    digitlist -> epsilon
-    mathOp -> *
-    mathOp -> /
-    mathOp -> %
-    realExp -> sign number . number
-    realExp -> sign number
-    strExp -> " strContent "
-    strContent -> letter strContent
-    strContent -> digit strContent
-    strContent -> epsilon
-    charExp -> ' letter '
-    charExp -> ' digit '
-    boolExp -> true
-    boolExp -> false
-    iostmt -> sys . read ( identifier )
-    iostmt -> sys . write ( identifier )
-    iostmt -> sys . write ( const )
-    radstmt -> rad ( identifier )
-    declaration -> identifier : type
-    type -> type1
-    type -> arraydecl
-    type -> epsilon
-    type1 -> int
-    type1 -> real
-    type1 -> str
-    type1 -> char
-    type1 -> bool
-    arraydecl -> arr ( type1 ) [ intExp ]
-    structstmt -> stmtlist
-    structstmt -> ifstmt
-    structstmt -> whilestmt
-    ifstmt -> if condition begin : stmtlist end ;
-    ifstmt -> if condition begin : stmtlist end ; else begin : stmtlist end ;
-    condition -> expression relation expression
-    relation -> >
-    relation -> <
-    relation -> =
-    relation -> ==
-    relation -> >=
-    relation -> <=
-    relation -> <>
-    whilestmt -> while condition begin : stmtlist end ;
+    PROGRAM -> prog { STMTLIST }
+    STMTLIST -> STMT
+    STMTLIST -> STMT ; STMTLIST
+    STMT -> SIMPLSTMT
+    STMT -> STRUCTSTMT
+    SIMPLSTMT -> DECLARATION
+    SIMPLSTMT -> ASSIGNSTMT
+    SIMPLSTMT -> IOSTMT
+    SIMPLSTMT -> RADSTMT
+    DECLARATION -> identifier : TYPE
+    TYPE -> TYPE1
+    TYPE -> ARRAYDECL
+    TYPE1 -> int
+    TYPE1 -> real
+    TYPE1 -> str
+    TYPE1 -> char
+    TYPE1 -> bool
+    ARRAYDECL -> arr ( TYPE1 ) [ const ]
+    ASSIGNSTMT -> identifier = EXPRESSION
+    EXPRESSION -> TERM
+    EXPRESSION -> EXPRESSION OPERATOR TERM
+    OPERATOR -> +
+    OPERATOR -> -
+    OPERATOR -> *
+    OPERATOR -> /
+    OPERATOR -> %
+    TERM -> TERM OPERATOR FACTOR
+    TERM -> FACTOR
+    FACTOR -> ( EXPRESSION )
+    FACTOR -> identifier
+    FACTOR -> const
+    IOSTMT -> sys . read ( identifier )
+    IOSTMT -> sys . write ( identifier )
+    IOSTMT -> sys . write ( const )
+    RADSTMT -> rad ( identifier )
+    STRUCTSTMT -> STMTLIST
+    STRUCTSTMT -> IFSTMT
+    STRUCTSTMT -> WHILESTMT
+    IFSTMT -> if CONDITION begin : STMTLIST end ;
+    IFSTMT -> if CONDITION begin : STMTLIST end ; else begin : STMTLIST end ;
+    CONDITION -> EXPRESSION RELATION EXPRESSION
+    RELATION -> >
+    RELATION -> <
+    RELATION -> =
+    RELATION -> ==
+    RELATION -> >=
+    RELATION -> <=
+    RELATION -> <>
+    WHILESTMT -> while CONDITION begin : STMTLIST end ;
