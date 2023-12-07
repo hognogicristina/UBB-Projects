@@ -1,116 +1,125 @@
 #include <iostream>
 #include <vector>
-#include <cstdlib>
-#include <ctime>
-
 using namespace std;
 
+/* Pollard’s p − 1 algorithm. It will have an implicit bound B, but it will also allow the use of a bound B given by the user.*/
+
+/// Computes the greatest common divisor of two numbers
 int computeGcd(int x, int y) {
-    // This function implements the Euclidean algorithm to compute GCD
     if (x == 0) {
         return y;
     }
     return computeGcd(y % x, x);
 }
 
-int computeLcm(int x, int y) {
-    // This function takes two integers and returns the LCM
-    int g = computeGcd(x, y);
-    return (x * y) / g;
-}
+/// Computes the least common multiple of a list of numbers
+int computeLcmList(const vector<int>& numbers) {
+    int lcm = numbers[0]; // Initialize lcm to the first number
 
-int computeLcmList(vector<int>& numbers) {
-    // This function takes a vector of integers and returns the LCM of all the numbers
-    if (numbers.empty()) {
-        return -1;
-    } else if (numbers.size() == 1) {
-        return numbers[0];
-    } else {
-        int lcm = computeLcm(numbers[0], numbers[1]);
-        for (size_t i = 2; i < numbers.size(); i++) {
-            lcm = computeLcm(lcm, numbers[i]);
+    for (size_t i = 1; i < numbers.size(); ++i) { // Iterate through the rest of the numbers
+        lcm = (lcm / computeGcd(lcm, numbers[i])) * numbers[i]; // Compute the lcm of the current lcm and the current number
+    }
+
+    cout << "LCM of k = {";
+    for (size_t i = 0; i < numbers.size(); ++i) {
+        cout << numbers[i];
+        if (i != numbers.size() - 1) {
+            cout << ", ";
         }
-        return lcm;
     }
+    cout << "} is " << lcm << endl;
+
+    return lcm;
 }
 
-vector<int> binaryDecomposition(int k) {
-    // This function takes an integer and returns a vector of the orders of powers of 2 that compose it
-    // e.g. 13 = 1101
-    // returns {0, 2, 3}
-    vector<int> decomposition;
-    while (k > 0) {
-        if (k % 2 == 1) {
-            decomposition.push_back(1);
-        } else {
-            decomposition.push_back(0);
+/// Computes the modular exponentiation of a number
+int modExp(int base, int exponent, int modulus) {
+    long long result = 1; // Use long long to prevent overflow
+    long long baseLL = base; // Convert to long long to prevent overflow in calculations
+
+    while (exponent > 0) { // Repeat until exponent is 0
+        if (exponent % 2 == 1) { // If exponent is odd
+            result = (result * baseLL) % modulus; // Multiply result by base and take the modulus
         }
-        k = k / 2;
+        exponent >>= 1; // Divide exponent by 2
+        baseLL = (baseLL * baseLL) % modulus; // Square base and take the modulus
     }
-    return decomposition;
+
+    return static_cast<int>(result); // Convert back to int
 }
 
-int computeModularSquaring(int a, int k, int n) {
-    // This function takes an integer a, an integer k, and an integer n and returns a^k (mod n)
-    vector<int> sum = binaryDecomposition(k);
-    vector<int> rests;
+/// Pollard's p-1 algorithm
+int pollardP1(int n, int a, int B) {
+    vector<int> k_list; // List of k values
+    for (int i = 1; i <= B; i++) { // Iterate from 1 to B
+        k_list.push_back(i); // Add i to the list
+    }
+    int k = computeLcmList(k_list); // Compute the lcm of the list
+    int a_k = modExp(a, k, n); // Compute a^k mod n
+    int d = computeGcd(a_k - 1, n); // Compute GCD(a^k - 1, n)
 
-    int stop = sum.back();
-    int aux = a % n;
-    for (int i = 0; i <= stop; i++) {
-        if (find(sum.begin(), sum.end(), i) != sum.end()) {
-            rests.push_back(aux);
-        }
-        aux = (aux * aux) % n;
-    }
-    int result = 1;
-    for (int i : rests) {
-        result = (result * i) % n;
-    }
-    return result;
-}
+    if (d < 0) d += n; // Ensure d is positive
 
-int pollardP1(int n, int B = 13, int a = 2) {
-    // This function takes an integer n and returns a non-trivial factor of n
-    // B is the bound
-    // a is the base
-    vector<int> k_list;
-    for (int i = 1; i <= B; i++) {
-        k_list.push_back(i);
-    }
-    int k = computeLcmList(k_list);
-    if (a != 2) {
-        a = rand() % (n - 2) + 2;
-    }
-    a = computeModularSquaring(a, k, n);
-    int d = computeGcd(a - 1, n);
+    cout << "Step 1: k = " << k << endl;
+    cout << "Step 2: a^k mod n = " << a_k << endl;
+    cout << "Step 3: GCD(a^k - 1, n) = " << d << endl;
+
     return d;
 }
 
 int getNontrivialFactor(int n) {
     int B;
-    cout << "Enter the bound: ";
+    int a = 2;
+    cout << "Enter the bound (13 for implicit): ";
     cin >> B;
 
     if (B == 0) {
-        int f = pollardP1(n);
-        return f;
-    } else {
-        int f = pollardP1(n, B);
-        if (f == 1 || f == n) {
-            cout << "Failure" << endl;
-            return getNontrivialFactor(n);
-        } else {
-            cout << "Nontrivial factor found: " << f << " => " << n << " = " << f << " * " << (n / f) << endl;
-            return f;
-        }
+        cout << "B cannot be 0." << endl;
     }
+
+    cout << "Factorizing " << n << " using a = " << a << " and B = " << B << endl;
+
+    int f = pollardP1(n, a, B);
+
+    return f;
 }
 
 int main() {
     int n;
-    cout << "Enter an odd composite number: ";
-    cin >> n;
-    int f = getNontrivialFactor(n);
+    char choice;
+
+    do {
+        cout << "Enter a number to factorize n: ";
+        cin >> n;
+
+        if (n % 2 == 0) {
+            cout << "Please enter an odd number." << endl;
+            continue; // Skip the rest of the loop and ask for input again
+        }
+
+        int f = getNontrivialFactor(n);
+
+        while (f == 1 || f == n) {
+            cout << "Failure: No nontrivial factor found." << endl;
+            cout << "Do you want to choose another bound? (y/n): ";
+            cin >> choice;
+            if (choice != 'y' && choice != 'Y') {
+                break;
+            }
+            int B;
+            cout << "Enter a new bound: ";
+            cin >> B;
+            f = pollardP1(n, 2, B);
+        }
+
+        if (f != 1 && f != n) {
+            cout << "Nontrivial factor found: " << f << " => " << n << " = " << f << " * " << (n / f) << endl;
+        }
+
+        cout << "Do you want to factor another number? (y/n): ";
+        cin >> choice;
+
+    } while (choice == 'y' || choice == 'Y');
+
     return 0;
 }

@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Laboratory_3::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Laboratory_3-Debug-093f8f4e01ca2bb53fc5.json",
+					"jsonFile" : "target-Laboratory_3-Debug-cdecfe8dd7994f217449.json",
 					"name" : "Laboratory_3",
 					"projectIndex" : 0
 				}
@@ -55,6 +55,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 5
+		"minor" : 6
 	}
 }
