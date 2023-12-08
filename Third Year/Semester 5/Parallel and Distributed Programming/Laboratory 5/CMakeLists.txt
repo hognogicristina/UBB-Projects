@@ -4,6 +4,4 @@ project(Laboratory_5)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Laboratory_5
-        Main.cpp
-        Model/Polyomial.h
-        Model/Task.h)
+        Main.cpp)

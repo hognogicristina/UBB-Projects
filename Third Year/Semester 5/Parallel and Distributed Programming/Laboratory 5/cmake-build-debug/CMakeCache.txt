@@ -222,6 +222,15 @@ Laboratory_5_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Laboratory_5_SOURCE_DIR:STATIC=/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 5
 
+//Value Computed by CMake
+Laboratory_BINARY_DIR:STATIC=/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 5/cmake-build-debug
+
+//Value Computed by CMake
+Laboratory_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Laboratory_SOURCE_DIR:STATIC=/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 5
+
 
 ########################
 # INTERNAL cache entries
