@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include <algorithm>
+#include <random>
 
 class Polynomial {
 public:
@@ -110,9 +111,7 @@ public:
     }
 
     static Polynomial multiply_karatsuba(const Polynomial &A, const Polynomial &B) {
-        // multiplies two polynomials using Karatsuba's algorithm and returns the result
-        if (A.get_n() < 2 || B.get_n() < 2) {
-            // if the polynomials are small enough, multiply them sequentially
+        if (A.get_n() < 50 || B.get_n() < 50) {
             return multiply_classic(A, B);
         }
 
@@ -175,10 +174,8 @@ public:
     }
 
     static Polynomial multiply_karatsuba_parallel(const Polynomial &A, const Polynomial &B) {
-        // multiplies two polynomials using Karatsuba's algorithm in parallel and returns the result
-        if (A.get_n() < 2 || B.get_n() < 2) {
-            // if the polynomials are small enough, multiply them sequentially
-            return multiply_classic_parallel(A, B);
+        if (A.get_n() < 1000 || B.get_n() < 1000) {
+            return multiply_classic_parallel(A, B); //
         }
 
         int m = std::max(A.get_n(), B.get_n()) / 2; // size of the smaller polynomials
@@ -189,36 +186,51 @@ public:
         Polynomial lowB(m, std::vector<int>(B.get_coefficients().begin(), B.get_coefficients().begin() + m));
         Polynomial highB(B.get_n() - m, std::vector<int>(B.get_coefficients().begin() + m, B.get_coefficients().end()));
 
-        // compute the three products
+        // compute the three products in parallel
         Polynomial result1;
         Polynomial result2;
         Polynomial result3;
 
         std::thread thread1([&]() {
-            // compute the first product in a separate thread
+            // Compute the first part in a separate thread
             result1 = multiply_karatsuba_parallel(lowA, lowB);
         });
+
         std::thread thread2([&]() {
-            // compute the second product in a separate thread
+            // Compute the last part in a separate thread
             result3 = multiply_karatsuba_parallel(highA, highB);
         });
-
-        // compute the third product in the main thread
-        thread1.join();
-        thread2.join();
 
         // compute the three parts of the result
         result2 = multiply_karatsuba_parallel(add(lowA, highA), add(lowB, highB));
 
+        // wait for the two threads to finish
+        thread1.join();
+        thread2.join();
+
         // compute the three parts of the result
+        // shift the result of the product of highA * highB to the left by 2 * m positions (correction of partial result)
         Polynomial r1 = shift(result3, 2 * m);
-        // compute the three parts of the result
+        // calculate the difference between result2 and result3, then shift it left by m positions, and subtract it from result1
         Polynomial r2 = shift(subtract(subtract(result2, result3), result1), m);
 
         return add(add(r1, r2), result1); // return the result
     }
-
 };
+
+std::vector<int> generateRandomCoefficients(int n) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(-10, 10);
+
+    std::vector<int> coefficients(n + 1);
+    for (int i = 0; i <= n; ++i) {
+        coefficients[i] = dis(gen) * dis(gen);
+    }
+
+    return coefficients;
+}
+
 
 int main() {
     int choice;
@@ -235,16 +247,16 @@ int main() {
 
         switch (choice) {
             case 1:
-                A = {-3, -1, 3, 8, 0, 2, -6, 8, -7, -1};
-                B = {-10, -5, 2, -8, -3, -7, -3, -1, -10, 2};
+                A = generateRandomCoefficients(100);
+                B = generateRandomCoefficients(100);
                 break;
             case 2:
-                A = {-14, -1, 31, 8, 0, 22, -16, 8, -7, -11};
-                B = {-10, -5, 12, -7, -3, -17, -3, -1, -15, 21};
+                A = generateRandomCoefficients(10000);
+                B = generateRandomCoefficients(10000);
                 break;
             case 3:
-                A = {-140, -123, 319, 81, 10, 212, -6, 9, -17, -241};
-                B = {78, -567, 13, 90, 78, -678, 12, 90, 78, -678};
+                A = generateRandomCoefficients(100000);
+                B = generateRandomCoefficients(100000);
                 break;
             case 0:
                 std::cout << "Exiting the program.\n";
