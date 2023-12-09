@@ -36,7 +36,7 @@ def main():
 
         parser_output = ParserOutput(grammar, sequence_file)
         parser_output.create_parsing_tree(parser.working)
-        parser_output.write_parsing_tree(parser.state, parser.working)
+        parser_output.write_parsing_tree(parser.state, parser.working, "tree.txt")
 
 
 if __name__ == "__main__":

@@ -65,7 +65,7 @@ class ParserOutput:
                 sum += self.get_len_depth(index + i, working)
         return sum
 
-    def write_parsing_tree(self, state, working):
+    def write_parsing_tree(self, state, working, output_file=None):
         if state != "e":
             table = [["index", "value", "father", "sibling"]]
             for index in range(0, len(working)):
@@ -73,3 +73,9 @@ class ParserOutput:
 
             print("Parsing tree:")
             print(tabulate(table, headers="firstrow", tablefmt="grid"))
+
+            if output_file:
+                with open(output_file, "w") as file:
+                    file.write("Parsing tree:\n")
+                    file.write(tabulate(table, headers="firstrow", tablefmt="grid"))
+
