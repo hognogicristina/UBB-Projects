@@ -1,0 +1,53 @@
+N = PROGRAM STMTLIST STMT SIMPLSTMT STRUCTSTMT DECLARATION ARRAYDECL TYPE TYPE1 ASSIGNSTMT IOSTMT EXPRESSION TERM FACTOR RADSTMT IFSTMT WHILESTMT CONDITION RELATION OPERATOR
+E = # _ identifier const + - * / > < = == >= <= <> % ! [ ] ( ) { } . , : ; endl begin end prog int real str char bool read if else write while arr sys and or rad " '
+S = PROGRAM
+P =
+    PROGRAM -> prog { STMTLIST }
+    STMTLIST -> STMT
+    STMTLIST -> STMT ; STMTLIST
+    STMT -> SIMPLSTMT
+    STMT -> STRUCTSTMT
+    SIMPLSTMT -> DECLARATION
+    SIMPLSTMT -> ASSIGNSTMT
+    SIMPLSTMT -> IOSTMT
+    SIMPLSTMT -> RADSTMT
+    DECLARATION -> identifier : TYPE
+    TYPE -> TYPE1
+    TYPE -> ARRAYDECL
+    TYPE1 -> int
+    TYPE1 -> real
+    TYPE1 -> str
+    TYPE1 -> char
+    TYPE1 -> bool
+    ARRAYDECL -> arr ( TYPE1 ) [ const ]
+    ASSIGNSTMT -> identifier = EXPRESSION
+    EXPRESSION -> TERM
+    EXPRESSION -> EXPRESSION OPERATOR TERM
+    OPERATOR -> +
+    OPERATOR -> -
+    OPERATOR -> *
+    OPERATOR -> /
+    OPERATOR -> %
+    TERM -> TERM OPERATOR FACTOR
+    TERM -> FACTOR
+    FACTOR -> ( EXPRESSION )
+    FACTOR -> identifier
+    FACTOR -> const
+    IOSTMT -> sys . read ( identifier )
+    IOSTMT -> sys . write ( identifier )
+    IOSTMT -> sys . write ( const )
+    RADSTMT -> rad ( identifier )
+    STRUCTSTMT -> STMTLIST
+    STRUCTSTMT -> IFSTMT
+    STRUCTSTMT -> WHILESTMT
+    IFSTMT -> if CONDITION begin : STMTLIST end ;
+    IFSTMT -> if CONDITION begin : STMTLIST end ; else begin : STMTLIST end ;
+    CONDITION -> EXPRESSION RELATION EXPRESSION
+    RELATION -> >
+    RELATION -> <
+    RELATION -> =
+    RELATION -> ==
+    RELATION -> >=
+    RELATION -> <=
+    RELATION -> <>
+    WHILESTMT -> while CONDITION begin : STMTLIST end ;

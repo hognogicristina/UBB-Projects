@@ -1,0 +1,12 @@
+prog
+{
+identifier
+:
+arr
+(
+int
+)
+[
+const
+]
+}
