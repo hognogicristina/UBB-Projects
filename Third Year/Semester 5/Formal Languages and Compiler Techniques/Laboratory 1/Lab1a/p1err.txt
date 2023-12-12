@@ -1,22 +1,25 @@
-a: int
-1b: int // a variable name should start with # or a letter
-c: int
+prog
+{
+    a: int
+    1b: int // a variable name should start with # or a letter
+    c: int
 
-sys.read(a)
-sys.read(1b)
-sys.read(c)
+    sys.read(a)
+    sys.read(1b)
+    sys.read(c)
 
-#smallest: int
-#smallest = a
+    #smallest: int
+    #smallest = a
 
-iff #smallest > 1b // if statement is spelled incorrectly
-begin:
-	#smallest = 1b
-end;
+    iff #smallest > 1b // if statement is spelled incorrectly
+    begin:
+        #smallest = 1b
+    end;
 
-if #smallest > c
-begin:
-	#smallest = c
-end;
+    if #smallest > c
+    begin:
+        #smallest = c
+    end;
 
-sys.write(#smallest)
+    sys.write(#smallest)
+}

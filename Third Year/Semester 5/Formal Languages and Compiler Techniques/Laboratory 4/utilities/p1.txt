@@ -1,24 +1,27 @@
 // Min of 3 numbers
 
-a: int
-#b: int 
-c: int
+prog
+{
+    a: int
+    #b: int
+    c: int
 
-sys.read(a)
-sys.read(#b)
-sys.read(c)
+    sys.read(a)
+    sys.read(#b)
+    sys.read(c)
 
-#smallest: int
-#smallest = a
+    #smallest: int
+    #smallest = a
 
-if #smallest > #b
-begin:
-	#smallest = #b
-end;
+    if #smallest > #b
+    begin:
+        #smallest = #b
+    end;
 
-if #smallest > c
-begin:
-	#smallest = c
-end;
+    if #smallest > c
+    begin:
+        #smallest = c
+    end;
 
-sys.write(#smallest)
+    sys.write(#smallest)
+}
