@@ -1,0 +1,3 @@
+/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 6/cmake-build-debug/CMakeFiles/Laboratory_6.dir
+/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 6/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/hognogicristina/Library/Mobile Documents/com~apple~CloudDocs/College/Third Year/Semester 5/Parallel and Distributed Programming/Laboratories/Laboratory 6/cmake-build-debug/CMakeFiles/rebuild_cache.dir
