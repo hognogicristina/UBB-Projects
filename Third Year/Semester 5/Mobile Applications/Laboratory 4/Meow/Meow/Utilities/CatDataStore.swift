@@ -1,5 +1,6 @@
 import SQLite
 import Foundation
+import Combine
 
 class CatDataStore {
     static let DIR_TASK_DB = "CatDB"
@@ -18,6 +19,8 @@ class CatDataStore {
     static let shared = CatDataStore()
 
     private var db: Connection? = nil
+    
+    @Published var dataChanged: Bool = false
 
     private init() {
         if let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -69,6 +72,7 @@ class CatDataStore {
                                      self.healthProblem <- healthProblem,
                                      self.description <- description)
             let rowID = try database.run(insert)
+            dataChanged.toggle()
             return rowID
         } catch {
             print(error)
@@ -107,6 +111,7 @@ class CatDataStore {
                 self.description <- description
             ])
             if try database.run(update) > 0 {
+                dataChanged.toggle()
                 return true
             }
         } catch {
@@ -123,6 +128,7 @@ class CatDataStore {
         do {
             let delete = cat.delete()
             try database.run(delete)
+            dataChanged.toggle()
             return true
         } catch {
             print(error)

@@ -1,9 +1,16 @@
 import Foundation
+import Combine
 
 class ListViewModel: ObservableObject {
     @Published var cats: [Cat] = []
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
+        CatDataStore.shared.$dataChanged
+                    .sink { [weak self] _ in
+                        self?.getCats()
+                    }
+                    .store(in: &cancellables)
         getCats()
     }
     
