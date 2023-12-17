@@ -81,6 +81,14 @@ struct EditView: View {
             .navigationTitle("Edit this Cat")
             .navigationBarTitleDisplayMode(.inline)
             .alert(isPresented: $showAlert, content: getAlert)
+            .overlay(errorMessageView()
+                    .padding(10)
+                    .background(Color.red)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    .opacity(listViewModel.errorMessage != nil ? 1 : 0)
+                    .offset(y: listViewModel.errorMessage != nil ? 10 : -10)
+            )
         }
         
         Button(action: {
@@ -120,6 +128,12 @@ struct EditView: View {
     
     func getAlert() -> Alert {
         return Alert(title: Text(alertTitle))
+    }
+    
+    func errorMessageView() -> some View {
+        return Text(listViewModel.errorMessage ?? "")
+            .font(.footnote)
+            .multilineTextAlignment(.center)
     }
 }
 

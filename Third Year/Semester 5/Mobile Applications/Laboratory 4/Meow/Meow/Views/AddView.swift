@@ -84,6 +84,14 @@ struct AddView: View {
             Text("Add")
         })
         .alert(isPresented: $showAlert, content: getAlert)
+        .overlay(errorMessageView()
+                .padding(10)
+                .background(Color.red)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
+                .opacity(listViewModel.errorMessage != nil ? 1 : 0)
+                .offset(y: listViewModel.errorMessage != nil ? 10 : -10)
+        )
     }
     
     func areAllFieldsCompleted() -> Bool {
@@ -115,6 +123,12 @@ struct AddView: View {
     
     func getAlert() -> Alert {
         return Alert(title: Text(alertTitle))
+    }
+    
+    func errorMessageView() -> some View {
+        return Text(listViewModel.errorMessage ?? "")
+            .font(.footnote)
+            .multilineTextAlignment(.center)
     }
 }
 

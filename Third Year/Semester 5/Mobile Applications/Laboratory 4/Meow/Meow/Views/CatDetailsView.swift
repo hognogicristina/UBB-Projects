@@ -81,7 +81,21 @@ struct CatDetailsView: View {
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle(cat.name, displayMode: .inline)
+            .overlay(errorMessageView()
+                    .padding(10)
+                    .background(Color.red)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    .opacity(listViewModel.errorMessage != nil ? 1 : 0)
+                    .offset(y: listViewModel.errorMessage != nil ? 10 : -10)
+            )
         }
+    }
+    
+    func errorMessageView() -> some View {
+        return Text(listViewModel.errorMessage ?? "")
+            .font(.footnote)
+            .multilineTextAlignment(.center)
     }
 }
 

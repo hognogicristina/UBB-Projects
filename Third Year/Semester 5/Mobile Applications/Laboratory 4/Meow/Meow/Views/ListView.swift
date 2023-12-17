@@ -61,6 +61,14 @@ struct ListView: View {
                 .sheet(item: $selectedCat) { editCat in
                     EditView(cat: editCat.cat)
                 }
+                .overlay(errorMessageView()
+                        .padding(10)
+                        .background(Color.red)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(10)
+                        .opacity(listViewModel.errorMessage != nil ? 1 : 0)
+                        .offset(y: listViewModel.errorMessage != nil ? 10 : -10)
+                )
             }
         }
         .navigationTitle("Cats for adoption")
@@ -70,6 +78,12 @@ struct ListView: View {
                 Image(systemName: "plus.circle")
             }
         )
+    }
+    
+    func errorMessageView() -> some View {
+        return Text(listViewModel.errorMessage ?? "")
+            .font(.footnote)
+            .multilineTextAlignment(.center)
     }
 }
 
