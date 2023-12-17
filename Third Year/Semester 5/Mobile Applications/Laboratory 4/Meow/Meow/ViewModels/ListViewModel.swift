@@ -15,7 +15,9 @@ class ListViewModel: ObservableObject {
     }
     
     func getCats() {
-        cats = CatDataStore.shared.getAll()
+        CatDataStore.shared.getAllAsync { [weak self] cats in
+           self?.cats = cats
+       }
     }
     
     func deleteCat(indexSet: IndexSet) {

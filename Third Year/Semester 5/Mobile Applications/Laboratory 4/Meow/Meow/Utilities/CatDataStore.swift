@@ -97,6 +97,15 @@ class CatDataStore {
         return cats
     }
     
+    func getAllAsync(completion: @escaping ([Cat]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let cats = self.getAll()
+            DispatchQueue.main.async {
+                completion(cats)
+            }
+        }
+    }
+    
     func update(id: Int64, name: String, breed: String, gender: String, age: String, healthProblem: String, description: String) -> Bool {
         guard let database = db else { return false }
         let cat = cats.filter(self.id == id)
