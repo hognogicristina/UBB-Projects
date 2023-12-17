@@ -14,6 +14,7 @@
 		ED5C141D2AF7A15400DCD33A /* CatDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5C141C2AF7A15400DCD33A /* CatDetailsView.swift */; };
 		ED708C962AF7A6FB00F8E8D9 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED708C952AF7A6FB00F8E8D9 /* AddView.swift */; };
 		ED778A922B2F23720064357F /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = ED778A912B2F23720064357F /* SQLite */; };
+		ED9DDDBD2B2F73F900E37BD3 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9DDDBC2B2F73F900E37BD3 /* DatabaseError.swift */; };
 		EDAC017F2AF65FCC00E6E1A0 /* MeowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC017E2AF65FCC00E6E1A0 /* MeowApp.swift */; };
 		EDAC01812AF65FCC00E6E1A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC01802AF65FCC00E6E1A0 /* ContentView.swift */; };
 		EDAC01832AF65FCD00E6E1A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDAC01822AF65FCD00E6E1A0 /* Assets.xcassets */; };
@@ -104,6 +105,7 @@
 		ED5C141A2AF79F1500DCD33A /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		ED5C141C2AF7A15400DCD33A /* CatDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDetailsView.swift; sourceTree = "<group>"; };
 		ED708C952AF7A6FB00F8E8D9 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		ED9DDDBC2B2F73F900E37BD3 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		EDAC017B2AF65FCC00E6E1A0 /* Meow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDAC017E2AF65FCC00E6E1A0 /* MeowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowApp.swift; sourceTree = "<group>"; };
 		EDAC01802AF65FCC00E6E1A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				EDE1ED302AF8132F007DC7AB /* CatGender.swift */,
 				EDE1ED322AF82C17007DC7AB /* EditCat.swift */,
 				ED1191292B1E076C00BAB1CD /* CatDataStore.swift */,
+				ED9DDDBC2B2F73F900E37BD3 /* DatabaseError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				EDE1ED2C2AF7A856007DC7AB /* EditView.swift in Sources */,
 				ED5C14192AF79C3200DCD33A /* ListViewModel.swift in Sources */,
 				EDAC017F2AF65FCC00E6E1A0 /* MeowApp.swift in Sources */,
+				ED9DDDBD2B2F73F900E37BD3 /* DatabaseError.swift in Sources */,
 				ED5C141B2AF79F1500DCD33A /* ListRowView.swift in Sources */,
 				EDBB14682AFC0B89008D66AD /* BreedGridView.swift in Sources */,
 			);

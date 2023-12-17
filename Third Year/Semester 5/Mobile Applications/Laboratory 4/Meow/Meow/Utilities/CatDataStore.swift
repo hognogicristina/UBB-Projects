@@ -61,8 +61,8 @@ class CatDataStore {
         }
     }
     
-    func insert(name: String, breed: String, gender: String, age: String, healthProblem: String, description: String) -> Int64? {
-        guard let database = db else { return nil }
+    func insert(name: String, breed: String, gender: String, age: String, healthProblem: String, description: String) throws -> Int64? {
+        guard let database = db else { throw DatabaseError.databaseNotInitialized }
         
         do {
             let insert = cats.insert(self.name <- name,
@@ -75,16 +75,14 @@ class CatDataStore {
             dataChanged.toggle()
             return rowID
         } catch {
-            print(error)
+            throw DatabaseError.insertFailed("Cat already in database.")
         }
-        
-        return nil
     }
     
     
-    func getAll() -> [Cat] {
+    func getAll() throws -> [Cat] {
         var cats: [Cat] = []
-        guard let database = db else { return [] }
+        guard let database = db else { throw DatabaseError.databaseNotInitialized }
 
         do {
             for cat in try database.prepare(self.cats) {
@@ -92,22 +90,33 @@ class CatDataStore {
                 cats.append(Cat(id: idString, name: cat[name], breed: cat[breed], gender: cat[gender], age: cat[age], healthProblem: cat[healthProblem], description: cat[description]))
             }
         } catch {
-            print(error)
+            throw DatabaseError.fetchFailed("Couldn't fetch the list.")
         }
         return cats
     }
     
-    func getAllAsync(completion: @escaping ([Cat]) -> Void) {
+    enum CustomResult<T> {
+        case success(T)
+        case failure(Error)
+    }
+
+    func getAllAsync(completion: @escaping (CustomResult<[Cat]>) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            let cats = self.getAll()
-            DispatchQueue.main.async {
-                completion(cats)
+            do {
+                let cats = try self.getAll()
+                DispatchQueue.main.async {
+                    completion(.success(cats))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             }
         }
     }
     
-    func update(id: Int64, name: String, breed: String, gender: String, age: String, healthProblem: String, description: String) -> Bool {
-        guard let database = db else { return false }
+    func update(id: Int64, name: String, breed: String, gender: String, age: String, healthProblem: String, description: String) throws -> Bool {
+        guard let database = db else { throw DatabaseError.databaseNotInitialized }
         let cat = cats.filter(self.id == id)
         
         do {
@@ -124,14 +133,14 @@ class CatDataStore {
                 return true
             }
         } catch {
-            print(error)
+            throw DatabaseError.updateFailed("Cat does not exist.")
         }
         
         return false
     }
 
-    func delete(id: Int64) -> Bool {
-        guard let database = db else { return false }
+    func delete(id: Int64) throws -> Bool {
+        guard let database = db else { throw DatabaseError.databaseNotInitialized }
         let cat = cats.filter(self.id == id)
         
         do {
@@ -140,9 +149,7 @@ class CatDataStore {
             dataChanged.toggle()
             return true
         } catch {
-            print(error)
+            throw DatabaseError.deleteFailed("Cat does not exist.")
         }
-        
-        return false
     }
 }
