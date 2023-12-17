@@ -1,0 +1,22 @@
+Alphabet:
+    a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+    b. Hashtag (#) and underscore (_) symbols
+    c. Decimal digits (0-9)
+Lexic:
+	a. special symbols, representing:
+		- operators: + - * / > < = == >= <= <> % !
+		- separators: [ ] ( ) { } . , : ; endl begin end
+		- reserved words: prog int real str char bool read if else write while arr sys and or rad
+        - comments: //comment
+	b. identifiers: a sequence of letters and digits, such that the first character is a letter; the rule is:
+        - identifier: ("#" | letter){letter|digit}
+        - letter: "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+        - digit: "0" | "1" | "2" | ... | "9"
+    c. constants:
+        1. intconst = "0" | ["+"|"-"]nz_digit{digit}
+		2. nz_digit = "1" | "2" | ... | "9"
+		3. strconst = """{letter|digit|"_"|"signs"}"""
+		4. charconst = "'"(letter|digit)"'"
+		5. signs = " " | "!" | "#" | "%" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | "<" | "=" | ">" |
+		"[" | "]" | "_" | {" | "}"
+		6. boolconst = "1" | "0"

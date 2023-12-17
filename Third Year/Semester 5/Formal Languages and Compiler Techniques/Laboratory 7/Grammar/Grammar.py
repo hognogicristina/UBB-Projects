@@ -1,9 +1,9 @@
 class Grammar:
     def __init__(self):
-        self.N = []  # non-terminals
-        self.E = []  # terminals
-        self.S = ""  # starting symbol/axiom
-        self.P = {}  # finite set of productions
+        self.N = []
+        self.E = []
+        self.S = ""
+        self.P = {}
 
     def rebuild(self):
         self.N = []

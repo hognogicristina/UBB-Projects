@@ -2,11 +2,8 @@ prog
 {
 identifier
 :
-arr
-(
 int
-)
-[
-const
-]
+identifier
+:
+real
 }

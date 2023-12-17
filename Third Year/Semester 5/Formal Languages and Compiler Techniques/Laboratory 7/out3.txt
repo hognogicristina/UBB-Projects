@@ -1,0 +1,52 @@
+(q, 0, [], ['PROGRAM'])
+|--- expand
+(q, 0, [('PROGRAM', 0)], ['prog', '{', 'STMTLIST', '}'])
+|--- advance
+(q, 1, [('PROGRAM', 0), 'prog'], ['{', 'STMTLIST', '}'])
+|--- advance
+(q, 2, [('PROGRAM', 0), 'prog', '{'], ['STMTLIST', '}'])
+|--- expand
+(q, 2, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0)], ['STMT', 'STMTLIST', '}'])
+|--- expand
+(q, 2, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0)], ['SIMPLSTMT', 'STMTLIST', '}'])
+|--- expand
+(q, 2, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0)], ['DECLARATION', 'STMTLIST', '}'])
+|--- expand
+(q, 2, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0)], ['identifier', ':', 'TYPE', 'STMTLIST', '}'])
+|--- advance
+(q, 3, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier'], [':', 'TYPE', 'STMTLIST', '}'])
+|--- advance
+(q, 4, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':'], ['TYPE', 'STMTLIST', '}'])
+|--- expand
+(q, 4, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0)], ['TYPE1', 'STMTLIST', '}'])
+|--- expand
+(q, 4, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0)], ['int', 'STMTLIST', '}'])
+|--- advance
+(q, 5, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int'], ['STMTLIST', '}'])
+|--- expand
+(q, 5, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0)], ['STMT', 'STMTLIST', '}'])
+|--- expand
+(q, 5, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0)], ['SIMPLSTMT', 'STMTLIST', '}'])
+|--- expand
+(q, 5, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0)], ['DECLARATION', 'STMTLIST', '}'])
+|--- expand
+(q, 5, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0)], ['identifier', ':', 'TYPE', 'STMTLIST', '}'])
+|--- advance
+(q, 6, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier'], [':', 'TYPE', 'STMTLIST', '}'])
+|--- advance
+(q, 7, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':'], ['TYPE', 'STMTLIST', '}'])
+|--- expand
+(q, 7, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0)], ['TYPE1', 'STMTLIST', '}'])
+|--- expand
+(q, 7, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0)], ['int', 'STMTLIST', '}'])
+|--- momentary insuccess
+(b, 7, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0)], ['int', 'STMTLIST', '}'])
+|--- another try
+(q, 7, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 1)], ['real', 'STMTLIST', '}'])
+|--- advance
+(q, 8, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 1), 'real'], ['STMTLIST', '}'])
+|--- momentary insuccess
+(b, 8, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 1), 'real'], ['STMTLIST', '}'])
+|--- back
+(b, 7, [('PROGRAM', 0), 'prog', '{', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 0), 'int', ('STMTLIST', 0), ('STMT', 0), ('SIMPLSTMT', 0), ('DECLARATION', 0), 'identifier', ':', ('TYPE', 0), ('TYPE1', 1)], ['real', 'STMTLIST', '}'])
+|--- another try

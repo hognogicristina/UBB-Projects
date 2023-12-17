@@ -1,25 +1,15 @@
 from tabulate import tabulate
-
-
-class Node:
-    def __init__(self, value):
-        self.father = -1
-        self.sibling = -1
-        self.value = value
-        self.production = -1
-
-    def __str__(self):
-        return str(self.value) + "  " + str(self.father) + "  " + str(self.sibling)
+from DS.Node import Node
 
 
 class ParserOutput:
-    def __init__(self, grammar, sequence_file):
+    def __init__(self, grammar, sequence_file, out_file):
         self.grammar = grammar
+        self.out_file = out_file
         self.sequence = self.read_sequence(sequence_file)
         self.tree = []
 
-    @staticmethod
-    def read_sequence(seq_file):
+    def read_sequence(self, seq_file):
         seq = []
         with open(seq_file) as f:
             line = f.readline()
@@ -65,7 +55,7 @@ class ParserOutput:
                 sum += self.get_len_depth(index + i, working)
         return sum
 
-    def write_parsing_tree(self, state, working, output_file=None):
+    def write_parsing_tree(self, state, working):
         if state != "e":
             table = [["index", "value", "father", "sibling"]]
             for index in range(0, len(working)):
@@ -74,8 +64,6 @@ class ParserOutput:
             print("Parsing tree:")
             print(tabulate(table, headers="firstrow", tablefmt="grid"))
 
-            if output_file:
-                with open(output_file, "w") as file:
-                    file.write("Parsing tree:\n")
-                    file.write(tabulate(table, headers="firstrow", tablefmt="grid"))
-
+            with open(self.out_file, "a") as f:
+                f.write("\nParsing tree:\n")
+                f.write(tabulate(table, headers="firstrow", tablefmt="grid"))
