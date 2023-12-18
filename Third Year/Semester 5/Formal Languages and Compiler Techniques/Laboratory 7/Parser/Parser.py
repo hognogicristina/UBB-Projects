@@ -8,6 +8,8 @@ class Parser:
         self.sequence = self.read_sequence(sequence_file)
         self.working = []
         self.input = [self.grammar.get_start_symbol()]
+        self.current_production_indices = {}
+        self.another_try_performed = False
         self.state = "q"
         self.index = 0
 
@@ -15,15 +17,20 @@ class Parser:
         Path("out").mkdir(parents=True, exist_ok=True)
         open(self.out_file, "w").close()
 
+        terminals = self.grammar.get_terminals()[0].split()
+        terminal_id_mapping = {}
+        for i, terminal in enumerate(terminals):
+            terminal_id_mapping[i + 1] = terminal
+
         seq = []
         with open(seq_file) as f:
-            if seq_file == "grammars/PIF.out":
+            if seq_file == "sequence/PIF.out":
                 lines = f.readlines()
                 for line in lines:
                     parts = line.split(" -> ")
                     if len(parts) == 2:
-                        token_id = parts[0].strip()
-                        seq.extend([token_id])
+                        token_id = int(parts[0].strip())
+                        seq.extend([terminal_id_mapping[token_id]])
             else:
                 line = f.readline()
                 while line:
@@ -137,22 +144,13 @@ class Parser:
                 if len(self.input) == 0 and self.index == len(self.sequence):
                     self.success()
                 else:
-                    if (
-                            self.index == len(self.sequence) - 1 and
-                            self.working and
-                            self.working[-1] != self.sequence[-1] and
-                            self.input[-1] == self.sequence[-1] and
-                            self.input[0] in self.grammar.get_non_terminals()[0].split(" ")
-                    ):
-                        self.momentary_insuccess()
+                    if self.input[0] in self.grammar.get_non_terminals()[0].split(" "):
+                        self.expand()
                     else:
-                        if self.input[0] in self.grammar.get_non_terminals()[0].split(" "):
-                            self.expand()
+                        if self.index < len(self.sequence) and self.input[0] == self.sequence[self.index]:
+                            self.advance()
                         else:
-                            if self.index < len(self.sequence) and self.input[0] == self.sequence[self.index]:
-                                self.advance()
-                            else:
-                                self.momentary_insuccess()
+                            self.momentary_insuccess()
             else:
                 if self.state == "b":
                     if self.working and self.working[-1] in self.grammar.get_terminals()[0].split(" "):
