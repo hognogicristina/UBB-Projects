@@ -1,0 +1,9 @@
+p = 31
+q = 53
+e = 67
+plaintext = algebra_
+
+p = 31
+q = 43
+e = 11
+plaintext = crypto
