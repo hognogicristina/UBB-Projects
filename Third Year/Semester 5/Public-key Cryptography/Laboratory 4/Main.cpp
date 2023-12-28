@@ -14,6 +14,7 @@ bool is_valid_input(const string &input) {
             return false;
         }
     }
+
     return true;
 }
 
@@ -35,12 +36,14 @@ unsigned long long gcd(unsigned long long a, unsigned long long b) {
     if (b == 0) {
         return a;
     }
+
     return gcd(b, a % b);
 }
 
 // Function to compute modular exponentiation (a^b mod m)
 unsigned long long mod_pow(unsigned long long base, unsigned long long exp, unsigned long long mod) {
     unsigned long long result = 1;
+
     while (exp > 0) {
         if (exp % 2 == 1) {
             result = (result * base) % mod;
@@ -48,6 +51,7 @@ unsigned long long mod_pow(unsigned long long base, unsigned long long exp, unsi
         base = (base * base) % mod;
         exp /= 2;
     }
+
     return result;
 }
 
@@ -58,12 +62,14 @@ unsigned long long mod_inverse(unsigned long long a, unsigned long long m) {
             return x;
         }
     }
+
     return 0; // Inverse doesn't exist
 }
 
 // Function to convert letters to a number, treating lowercase letters as uppercase
 unsigned long long letters_to_num(const string &letters) {
     unsigned long long num = 0;
+
     for (char letter: letters) {
         // Convert lowercase letter to uppercase
         char uppercaseLetter = toupper(letter);
@@ -74,12 +80,14 @@ unsigned long long letters_to_num(const string &letters) {
             num = num * 27 + (uppercaseLetter - 'A' + 1);
         }
     }
+
     return num;
 }
 
 // Function to convert a number to letters
 string num_to_letters(unsigned long long number, int block_size) {
     string text;
+
     for (int i = block_size - 1; i >= 0; i--) {
         unsigned long long coefficient = number / pow(27, i);
         number %= static_cast<unsigned long long>(pow(27, i));
@@ -89,6 +97,7 @@ string num_to_letters(unsigned long long number, int block_size) {
             text += '_';
         }
     }
+
     return text;
 }
 
@@ -141,7 +150,7 @@ int main() {
             } else {
                 cout << "Invalid input.\n";
             }
-        } while (!is_prime(p) || p < 13);
+        } while (!is_prime(p));
 
         do {
             cout << "Enter prime number q: ";
@@ -156,7 +165,7 @@ int main() {
             } else {
                 cout << "Invalid input. Please enter a valid positive integer.\n";
             }
-        } while (!is_prime(q) || q < 13 || q == p);
+        } while (!is_prime(q) || q == p);
 
         unsigned long long n = p * q;
         unsigned long long phi_n = (p - 1) * (q - 1);

@@ -1,5 +1,5 @@
 import re
-from DS.Transition import Transition  # Assuming Transition class is defined in a separate module
+from DS.Transition import Transition
 
 
 # Function to print a list of strings enclosed in curly braces
@@ -10,8 +10,7 @@ def print_list_of_string(list_name, lst):
 # Finite Automaton (FA) class
 class FA:
     def __init__(self, filename):
-        # Initialize the FA object with a given filename
-        self.filename = filename
+        self.filename = filename  # Initialize the FA object with a given filename
         self.states = []  # List to store states
         self.alphabet = []  # List to store the alphabet symbols
         self.transitions = []  # List to store transitions between states
@@ -83,24 +82,6 @@ class FA:
             else:
                 print(f"({transition.get_from()}, {transition.get_to()}, {transition.get_label()})", end="")
         print("}")
-
-    def check_accepted(self, word):
-        # Check if a given word is accepted by the FA
-        word_as_list = list(word)
-        current_state = self.initial_state
-        idx = 0
-        for c in word_as_list:
-            found = False
-            if idx >= len(self.transitions):
-                return False
-            transition = self.transitions[idx]
-            if transition.get_from() == current_state and transition.get_label() == c:
-                current_state = transition.get_to()
-                idx += 1
-                found = True
-            if not found:
-                return False
-        return current_state in self.output_states
 
     def get_next_accepted(self, word):
         # Get the longest accepted substring of a given word
