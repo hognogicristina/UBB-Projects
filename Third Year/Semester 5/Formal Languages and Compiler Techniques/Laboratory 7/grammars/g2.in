@@ -1,5 +1,5 @@
 N = PROGRAM STMTLIST STMT SIMPLSTMT STRUCTSTMT DECLARATION ARRAYDECL TYPE TYPE1 ASSIGNSTMT IOSTMT EXPRESSION TERM FACTOR RADSTMT IFSTMT WHILESTMT CONDITION RELATION OPERATOR
-E = identifier constant + - * / < > % == = >= <= <> != [ ] ( ) { } . , : ; ' " _ endl begin end prog int real str char bool read if else write while arr sys and or rad
+E = identifier constant + - * / % < > == = >= <= != [ ] ( ) { } . , : ; ' " _ endl begin end prog int real str char bool read if else write while arr sys and or rad
 S = PROGRAM
 P =
     PROGRAM -> prog { STMTLIST }
@@ -43,10 +43,9 @@ P =
     CONDITION -> EXPRESSION RELATION EXPRESSION or CONDITION
     RELATION -> >
     RELATION -> <
-    RELATION -> =
     RELATION -> ==
+    RELATION -> =
     RELATION -> >=
     RELATION -> <=
-    RELATION -> <>
     RELATION -> !=
     WHILESTMT -> while CONDITION begin : STMTLIST end ;
