@@ -1,0 +1,27 @@
+// Min of 3 numbers
+
+prog
+{
+    a: int
+    #b: int
+    c: int
+
+    sys.read(a)
+    sys.read(#b)
+    sys.read(c)
+
+    #smallest: int
+    #smallest = a
+
+    if #smallest > #b
+    begin:
+        #smallest = #b
+    end;
+
+    if #smallest > c
+    begin:
+        #smallest = c
+    end;
+
+    sys.write(#smallest)
+}

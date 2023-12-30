@@ -1,0 +1,56 @@
+// Compute the sum of n numbers, computer the max/min of n numbers
+
+// Compute the sum of n numbers
+prog
+{
+    n: int
+    sum: int
+    i: int
+
+    sys.read(n)
+    sum = 0
+    i = 1
+
+    while i <= n
+    begin:
+        sum = sum + i
+        i = i + 1
+    end;
+
+    sys.write("Sum: ")
+    sys.write(sum)
+
+    // Compute the max/min of n numbers
+    #nr: arr(int) [10]
+    max: int
+    min: int
+
+    num: int
+    i: int
+
+    sys.read(#nr)
+    max = -999999
+    min = 999999
+
+    while i < 10
+    begin:
+        num = #nr[i]
+
+        if num > max
+        begin:
+            max = num
+        end;
+
+        if num < min
+        begin:
+            min = num
+        end;
+
+        i = i + 1
+    end;
+
+    sys.write("Max: ")
+    sys.write(max)
+    sys.write("Min: ")
+    sys.write(min)
+}

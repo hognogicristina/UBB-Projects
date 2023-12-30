@@ -11,12 +11,13 @@ simplstmt ::= declaration | assignstmt | iostmt | radstmt
 assignstmt ::= IDENTIFIER "=" expression
 expression ::= term | expression operator term
 operator ::= "+" | "-" | "*" | "/" | "%"
-term ::= IDENTIFIER | CONSTANT
-iostmt ::= "sys" "." "read" "(" IDENTIFIER ")" | "sys" "." "write" "(" IDENTIFIER ")" | "sys" "." "write" "(" CONSTANTA ")"
+term ::= IDENTIFIER | CONSTANT | "-" IDENTIFIER | factor
+factor ::= - IDENTIFIER | radstmt | IDENTIFIER "[" IDENTIFIER "]" | IDENTIFIER "[" CONSTANT "]" | "(" expression ")"
+iostmt ::= "sys" "." "read" "(" IDENTIFIER ")" | "sys" "." "write" "(" IDENTIFIER ")" | "sys" "." "write" "(" CONSTANTA ")" | "sys" "." "write" "(" endl ")"
 radstmt ::= "rad" "(" IDENTIFIER ")"
 structstmt ::= ifstmt | whilestmt
 ifstmt ::= "if" condition "begin" ":" stmtlist "end" ";"
 ifstmt ::= "if" condition "begin" ":" stmtlist "else" "begin" ":" stmtlist "end" ";"
 whilestmt ::= "while" condition "begin" ":" stmtlist "end" ";"
 condition ::= expression RELATION expression | condition "and" condition | condition "or" condition
-RELATION ::= "<" |  ">" | "=" | "==" | ">=" | "<=" | " "<>" | "!="
+RELATION ::= "<" |  ">" | "==" | "=" | ">=" | "<=" | "!="

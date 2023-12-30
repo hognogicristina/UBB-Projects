@@ -1,0 +1,96 @@
+// Verify if a number is prime, compute gcd of 2 numbers, compute the solutions for a 2nd order equation using Syntax.in and Lexic.txt
+
+// Verify if a number is prime
+prog
+{
+    x: int
+    i: int
+    #prime: int
+
+    sys.read(x)
+
+    i = 2
+    #prime = 1
+
+    while i * i < x and #prime == 1
+    begin:
+        if x % i == 0
+        begin:
+            #prime = 0
+        else begin:
+            i = i + 1
+        end;
+    end;
+
+    if #prime == 1
+    begin:
+        sys.write("The number is prime")
+        sys.write(endl)
+    else begin:
+        sys.write("The number is not prime")
+        sys.write(endl)
+    end;
+
+    // Compute gcd of 2 numbers
+    n: int
+    m: int
+
+    sys.write("n = ")
+    sys.read(n)
+
+    sys.write("m = ")
+    sys.read(m)
+
+    remind: int
+
+    while m != 0
+    begin:
+        remind = n % m
+        n = m
+        m = remind
+    end;
+
+    sys.write("gcd = ")
+    sys.write(n)
+
+    // Compute the solutions for a 2nd order equation
+    a: int
+    b: int
+    c: int
+
+    sys.write("The equation is ax^2 + bx + c = 0")
+    sys.write(endl)
+
+    sys.write("a = ")
+    sys.read(a)
+
+    sys.write("b = ")
+    sys.read(b)
+
+    sys.write("c = ")
+    sys.read(c)
+
+    #delta: int
+    #delta = b * b - 4 * a * c
+
+    sol1: real
+    sol2: real
+
+    if #delta < 0
+    begin:
+        sys.write("No real solutions.")
+    end;
+
+    if #delta == 0
+    begin:
+        sol1 = (-b) / (2 * a)
+    end;
+
+    sol1 = ((-b) - (rad(#delta))) / (2 * a)
+    sol2 = ((-b) + (rad(#delta))) / (2 * a)
+
+    sys.write("2 solutions ")
+    sys.write(sol1)
+    sys.write(" and ")
+    sys.write(sol2)
+}
