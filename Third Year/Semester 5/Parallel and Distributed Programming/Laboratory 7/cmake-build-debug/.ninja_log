@@ -1,0 +1,4 @@
+# ninja log v5
+1	57	1703941852874784247	build.ninja	dddbc20af9bb09e
+0	300	1703941853179491882	CMakeFiles/Laboratory_7.dir/Util.cpp.o	76bd997ecbd36e96
+0	311	1703941853191395551	CMakeFiles/Laboratory_7.dir/Polynomial.cpp.o	6a86654eb8647e17
