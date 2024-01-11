@@ -1,235 +1,108 @@
-#include <iostream>
-#include <vector>
-#include <set>
-#include <thread>
-#include <chrono>
-#include <cstring>
-#include <map>
-#include <mpi.h>
+#include "mpi.h"
+#include <pthread.h>
+#include <unistd.h>
+#include <sstream>
 
-class BaseMessage {
-public:
-    virtual ~BaseMessage() {}
-};
+#include "Mpi_comms.h"
+#include "DSM.h"
+#include "Globals.h"
+#include "Utils.h"
 
-class CloseMessage : public BaseMessage {};
+pthread_mutex_t lock;
+DSM dsm;
 
-class SubscribeMessage : public BaseMessage {
-public:
-    std::string variable;
-    int rank;
-
-    SubscribeMessage(const std::string& variable, int rank)
-            : variable(variable), rank(rank) {}
-};
-
-class UpdateMessage : public BaseMessage {
-public:
-    std::string variable;
-    int value;
-
-    UpdateMessage(const std::string& variable, int value)
-            : variable(variable), value(value) {}
-};
-
-class DSM {
-private:
-    std::map<std::string, std::set<int>> subscribers;
-    std::map<std::string, int> variables;
-    MPI_Comm communicator;
-
-public:
-    DSM(MPI_Comm comm) : communicator(comm) {
-        variables["first"] = 0;
-        variables["second"] = 1;
-        variables["third"] = 2;
-
-        subscribers["first"] = std::set<int>();
-        subscribers["second"] = std::set<int>();
-        subscribers["third"] = std::set<int>();
-    }
-
-    void setVariable(const std::string& variable, int value) {
-        MPI_Barrier(communicator);
-        variables[variable] = value;
-        MPI_Barrier(communicator);
-    }
-
-    void updateVariable(const std::string& variable, int value) {
-        setVariable(variable, value);
-        sendMessageToSubscribers(variable, UpdateMessage(variable, value));
-    }
-
-    void checkAndReplace(const std::string& variable, int oldValue, int newValue) {
-        MPI_Barrier(communicator);
-        if (variables[variable] == oldValue) {
-            updateVariable(variable, newValue);
+void *listener(void *) {
+    while (true) {
+        println("waiting..");
+        int *message;
+        message = get_message();
+        const char *var = nullptr;
+        if (message[1] == 0)
+            var = "a";
+        else if (message[1] == 1)
+            var = "b";
+        else if (message[1] == 2)
+            var = "c";
+        if (message[0] == 0) {
+            std::stringstream ss;
+            ss << "updating " << var << " with " << message[2];
+            println(ss.str());
+            pthread_mutex_lock(&lock);
+            dsm.set_variable(var, message[2]);
+            pthread_mutex_unlock(&lock);
+        } else if (message[0] == 1) {
+            std::stringstream ss;
+            ss << "subscribing " << var << " with " << message[2];
+            println(ss.str());
+            pthread_mutex_lock(&lock);
+            dsm.update_subscription(var, message[2]);
+            pthread_mutex_unlock(&lock);
+        } else if (message[0] == 2) {
+            println("quitting");
+            break;
         }
-        MPI_Barrier(communicator);
+        delete message;
     }
+    return nullptr;
+}
 
-    void subscribeTo(const std::string& variable) {
-        subscribers[variable].insert(MPI::COMM_WORLD.Get_rank());
-        syncSubscription(variable, MPI::COMM_WORLD.Get_rank());
+int main() {
+    MPI_Init(nullptr, nullptr);
+    int id, procs_cnt;
+    MPI_Comm_size(MPI_COMM_WORLD, &procs_cnt);
+    MPI_Comm_rank(MPI_COMM_WORLD, &id);
+    set_current_id(id);
+    set_procs(procs_cnt);
+    pthread_mutex_init(&lock, nullptr);
+    pthread_t t;
+    pthread_create(&t, nullptr, listener, &dsm);
+    if (current_id == 0) {
+        pthread_mutex_lock(&lock);
+        dsm.subscribe("a");
+        pthread_mutex_unlock(&lock);
+        pthread_mutex_lock(&lock);
+        dsm.subscribe("b");
+        pthread_mutex_unlock(&lock);
+        pthread_mutex_lock(&lock);
+        dsm.subscribe("c");
+        pthread_mutex_unlock(&lock);
+        usleep(2000000);
+        pthread_mutex_lock(&lock);
+        dsm.update_variable("a", 2);
+        pthread_mutex_unlock(&lock);
+        pthread_mutex_lock(&lock);
+        dsm.update_variable("c", 4);
+        pthread_mutex_unlock(&lock);
+        usleep(500000);
+        pthread_mutex_lock(&lock);
+        dsm.check_and_replace("c", 4, 6);
+        pthread_mutex_unlock(&lock);
+        DSM::close();
+    } else if (current_id == 1) {
+        pthread_mutex_lock(&lock);
+        dsm.subscribe("a");
+        pthread_mutex_unlock(&lock);
+        pthread_mutex_lock(&lock);
+        dsm.subscribe("b");
+        pthread_mutex_unlock(&lock);
+        usleep(1000000);
+        pthread_mutex_lock(&lock);
+        dsm.update_variable("a", 6);
+        pthread_mutex_unlock(&lock);
+    } else if (current_id == 2) {
+        pthread_mutex_lock(&lock);
+        dsm.subscribe("c");
+        pthread_mutex_unlock(&lock);
+        usleep(1000000);
+        pthread_mutex_lock(&lock);
+        println(dsm.get_var("c"));
+        pthread_mutex_unlock(&lock);
     }
-
-    void syncSubscription(const std::string& variable, int rank) {
-        subscribers[variable].insert(rank);
-    }
-
-    void sendMessageToSubscribers(const std::string& variable, const BaseMessage& message) {
-        for (int i = 0; i < MPI::COMM_WORLD.Get_size(); i++) {
-            if (MPI::COMM_WORLD.Get_rank() == i || subscribers[variable].count(i) == 0) {
-                continue;
-            }
-
-            // Serialize the message into a buffer
-            std::vector<char> messageData(sizeof(SubscribeMessage));
-            memcpy(messageData.data(), &message, sizeof(SubscribeMessage));
-
-            MPI_Send(messageData.data(), messageData.size(), MPI_CHAR, i, 0, MPI_COMM_WORLD);
-        }
-    }
-
-    void sendMessageToAll(const BaseMessage& message) {
-        for (int i = 0; i < MPI::COMM_WORLD.Get_size(); i++) {
-            if (MPI::COMM_WORLD.Get_rank() == i && !dynamic_cast<const CloseMessage*>(&message)) {
-                continue;
-            }
-
-            // Serialize the message into a buffer
-            std::vector<char> messageData(sizeof(SubscribeMessage));
-            memcpy(messageData.data(), &message, sizeof(SubscribeMessage));
-
-            MPI_Send(messageData.data(), messageData.size(), MPI_CHAR, i, 0, MPI_COMM_WORLD);
-        }
-    }
-
-    void close() {
-        sendMessageToAll(CloseMessage());
-    }
-
-    friend std::ostream& operator<<(std::ostream& os, const DSM& dsm) {
-        os << "DSM: \n";
-        for (const auto& entry : dsm.subscribers) {
-            os << "subscribers[" << entry.first << "] = ";
-            for (int rank : entry.second) {
-                os << rank << " ";
-            }
-            os << "\n";
-        }
-        os << "variables = ";
-        for (const auto& variable : dsm.variables) {
-            os << variable.first << ":" << variable.second << " ";
-        }
-        os << "\n";
-        return os;
-    }
-};
-
-class Subscriber {
-private:
-    DSM& dsm;
-
-public:
-    Subscriber(DSM& dsm) : dsm(dsm) {}
-
-    void run() {
-        while (true) {
-            int rank;
-            MPI_Status status;
-            char buffer[sizeof(BaseMessage)];
-
-            std::cout << MPI::COMM_WORLD.Get_rank() << " is waiting" << std::endl;
-
-            MPI_Recv(buffer, sizeof(BaseMessage), MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-
-            if (status.MPI_TAG == CloseMessageTag) {
-                std::cout << MPI::COMM_WORLD.Get_rank() << " stopped" << std::endl;
-                break;
-            } else if (status.MPI_TAG == SubscribeMessageTag) {
-                SubscribeMessage subscribeMessage;
-                memcpy(&subscribeMessage, buffer, sizeof(SubscribeMessage));
-                std::cout << "Subscriber message in " << MPI::COMM_WORLD.Get_rank() << ": " << subscribeMessage.rank << " subscribes to " << subscribeMessage.variable << std::endl;
-                this->dsm.syncSubscription(subscribeMessage.variable, subscribeMessage.rank);
-            } else if (status.MPI_TAG == UpdateMessageTag) {
-                UpdateMessage updateMessage;
-                memcpy(&updateMessage, buffer, sizeof(UpdateMessage));
-                std::cout << "Update message in " << MPI::COMM_WORLD.Get_rank() << ": " << updateMessage.variable << "->" << updateMessage.value << std::endl;
-                this->dsm.setVariable(updateMessage.variable, updateMessage.value);
-            }
-        }
-
-        std::cout << "Final " << MPI::COMM_WORLD.Get_rank() << " - " << this->dsm << std::endl;
-    }
-};
-
-const int CloseMessageTag = 0;
-const int SubscribeMessageTag = 1;
-const int UpdateMessageTag = 2;
-
-int main(int argc, char** argv) {
-    MPI_Init(&argc, &argv);
-    int rank;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    int size;
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    DSM dsm(MPI_COMM_WORLD);
-
-    std::cout << "Start " << rank << " of " << size << std::endl;
-
-    if (rank == 0) {
-        std::thread subscriberThread([&]() {
-            Subscriber subscriber(dsm);
-            subscriber.run();
-        });
-
-        subscriberThread.detach();
-
-        dsm.subscribeTo("first");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.subscribeTo("second");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.subscribeTo("third");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.checkAndReplace("first", 0, 10);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.checkAndReplace("third", 2, 30);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.checkAndReplace("second", 1, 50);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.close();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    } else if (rank == 1) {
-        std::thread subscriberThread([&]() {
-            Subscriber subscriber(dsm);
-            subscriber.run();
-        });
-
-        subscriberThread.detach();
-
-        dsm.subscribeTo("first");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.subscribeTo("third");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    } else if (rank == 2) {
-        std::thread subscriberThread([&]() {
-            Subscriber subscriber(dsm);
-            subscriber.run();
-        });
-
-        subscriberThread.detach();
-
-        // Uncomment if needed:
-        // dsm.subscribeTo("third");
-        // std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.subscribeTo("second");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        dsm.checkAndReplace("second", 1, 50);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
-
+    pthread_join(t, nullptr);
+    println("a: " + std::to_string(dsm.get_var("a")));
+    println("b: " + std::to_string(dsm.get_var("b")));
+    println("c: " + std::to_string(dsm.get_var("c")));
+    pthread_mutex_destroy(&lock);
     MPI_Finalize();
     return 0;
 }

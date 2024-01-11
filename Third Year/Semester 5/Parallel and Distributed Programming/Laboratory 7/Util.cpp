@@ -26,7 +26,7 @@ Polynomial Util::MpiMultiplication(const Polynomial &A, const Polynomial &B, int
 }
 
 Polynomial Util::Karatsuba(const Polynomial &A, const Polynomial &B) {
-    if (A.getN() < 10 || B.getN() < 10) {
+    if (A.getN() < 100 || B.getN() < 100) {
         return Multiplication(A, B);
     }
 

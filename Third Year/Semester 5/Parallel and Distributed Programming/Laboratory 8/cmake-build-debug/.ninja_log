@@ -1,7 +1,3 @@
 # ninja log v5
-0	267	1703943033481473356	CMakeFiles/Laboratory_8.dir/Main.cpp.o	c8ecb18af570732
-0	535	1703943033750093637	CMakeFiles/Laboratory_8.dir/Message.cpp.o	1553e739499865a3
-3	517	1703943259091849401	CMakeFiles/Laboratory_8.dir/Main.cpp.o	c8ecb18af570732
-4	550	1703943475524235133	CMakeFiles/Laboratory_8.dir/Message.cpp.o	1553e739499865a3
-5	558	1703943526610353734	CMakeFiles/Laboratory_8.dir/Message.cpp.o	1553e739499865a3
 4	625	1703943526678499510	CMakeFiles/Laboratory_8.dir/Main.cpp.o	c8ecb18af570732
+5	558	1703943526610353734	CMakeFiles/Laboratory_8.dir/Message.cpp.o	1553e739499865a3

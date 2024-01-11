@@ -11,8 +11,8 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-    Polynomial polyA = Polynomial(3);
-    Polynomial polyB = Polynomial(20);
+    Polynomial polyA = Polynomial(100000);
+    Polynomial polyB = Polynomial(100000);
     if (world_rank == 0) {
         polyA.GeneratePolynomial();
         polyB.GeneratePolynomial();

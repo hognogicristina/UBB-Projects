@@ -55,18 +55,6 @@ build CMakeFiles/Laboratory_8.dir/Main.cpp.o: CXX_COMPILER__Laboratory_8_unscann
   OBJECT_DIR = CMakeFiles/Laboratory_8.dir
   OBJECT_FILE_DIR = CMakeFiles/Laboratory_8.dir
 
-build CMakeFiles/Laboratory_8.dir/DistributedProtocol.cpp.o: CXX_COMPILER__Laboratory_8_unscanned_Debug /Users/hognogicristina/Library/Mobile$ Documents/com~apple~CloudDocs/College/Third$ Year/Semester$ 5/Parallel$ and$ Distributed$ Programming/Laboratories/Laboratory$ 8/DistributedProtocol.cpp || cmake_object_order_depends_target_Laboratory_8
-  DEP_FILE = CMakeFiles/Laboratory_8.dir/DistributedProtocol.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/Laboratory_8.dir
-  OBJECT_FILE_DIR = CMakeFiles/Laboratory_8.dir
-
-build CMakeFiles/Laboratory_8.dir/Message.cpp.o: CXX_COMPILER__Laboratory_8_unscanned_Debug /Users/hognogicristina/Library/Mobile$ Documents/com~apple~CloudDocs/College/Third$ Year/Semester$ 5/Parallel$ and$ Distributed$ Programming/Laboratories/Laboratory$ 8/Message.cpp || cmake_object_order_depends_target_Laboratory_8
-  DEP_FILE = CMakeFiles/Laboratory_8.dir/Message.cpp.o.d
-  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/Laboratory_8.dir
-  OBJECT_FILE_DIR = CMakeFiles/Laboratory_8.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Laboratory_8
@@ -75,7 +63,7 @@ build CMakeFiles/Laboratory_8.dir/Message.cpp.o: CXX_COMPILER__Laboratory_8_unsc
 #############################################
 # Link the executable Laboratory_8
 
-build Laboratory_8: CXX_EXECUTABLE_LINKER__Laboratory_8_Debug CMakeFiles/Laboratory_8.dir/Main.cpp.o CMakeFiles/Laboratory_8.dir/DistributedProtocol.cpp.o CMakeFiles/Laboratory_8.dir/Message.cpp.o
+build Laboratory_8: CXX_EXECUTABLE_LINKER__Laboratory_8_Debug CMakeFiles/Laboratory_8.dir/Main.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
   OBJECT_DIR = CMakeFiles/Laboratory_8.dir
   POST_BUILD = :
