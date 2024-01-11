@@ -10,11 +10,9 @@ Polynomial::Polynomial(int n, const std::vector<int> &coefficients) : N(n), Coef
 void Polynomial::GeneratePolynomial() {
     std::srand(std::time(nullptr));
     for (int i = 0; i < N; i++) {
-        Coefficients[i] = std::rand() % 21 - 10; // Random number between -10 and 10
+        Coefficients[i] = std::rand() % 21 - 10;
     }
 }
-
-// Implement the rest of the member functions in a similar manner
 
 int Polynomial::getN() const {
     return N;
@@ -23,17 +21,14 @@ int Polynomial::getN() const {
 int Polynomial::getCoefficient(int index) const {
     if (index >= 0 && index < N) {
         return Coefficients[index];
-    } else {
-        // Handle the error, e.g., return a default value or throw an exception.
-        return 0; // Default value
     }
+
+    return 0;
 }
 
 void Polynomial::setCoefficient(int index, int value) {
     if (index >= 0 && index < N) {
         Coefficients[index] = value;
-    } else {
-        // Handle the error, e.g., do nothing or throw an exception.
     }
 }
 
@@ -50,7 +45,7 @@ Polynomial Polynomial::Sum(const Polynomial &B) const {
         CoefficientsSum[i] += B.Coefficients[i];
     }
 
-    return Polynomial(DegreeSum, CoefficientsSum);
+    return Polynomial{DegreeSum, CoefficientsSum};
 }
 
 Polynomial Polynomial::Difference(const Polynomial &B) const {
@@ -66,17 +61,19 @@ Polynomial Polynomial::Difference(const Polynomial &B) const {
         CoefficientsSum[i] -= B.Coefficients[i];
     }
 
-    return Polynomial(DegreeSum, CoefficientsSum);
+    return Polynomial{DegreeSum, CoefficientsSum};
 }
 
 Polynomial Polynomial::GetFirstMCoefficients(int m) const {
     std::vector<int> resultCoefficients(Coefficients.begin(), Coefficients.begin() + m);
-    return Polynomial(m, resultCoefficients);
+
+    return Polynomial{m, resultCoefficients};
 }
 
 Polynomial Polynomial::GetLastMCoefficients(int m) const {
     std::vector<int> resultCoefficients(Coefficients.end() - m, Coefficients.end());
-    return Polynomial(m, resultCoefficients);
+
+    return Polynomial{m, resultCoefficients};
 }
 
 Polynomial Polynomial::Shift(int m) const {
@@ -87,11 +84,11 @@ Polynomial Polynomial::Shift(int m) const {
         newCoefficients[i] = Coefficients[i - m];
     }
 
-    return Polynomial(newSize, newCoefficients);
+    return Polynomial{newSize, newCoefficients};
 }
 
 std::string Polynomial::ToString() const {
-    std::string str = "";
+    std::string str;
     for (int i = 0; i < N; i++) {
         if (i == 0) {
             str += std::to_string(Coefficients[i]);
@@ -99,5 +96,10 @@ std::string Polynomial::ToString() const {
             str += " + " + std::to_string(Coefficients[i]) + "x^" + std::to_string(i);
         }
     }
+
     return str;
+}
+
+std::vector<int> Polynomial::GetCoefficients() const {
+    return Coefficients;
 }

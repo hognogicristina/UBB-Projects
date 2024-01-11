@@ -13,7 +13,7 @@ The documentation will describe:
 
 ### Compile
 
-> mpic++ Main.cpp Polynomial.cpp Utils.cpp -o Main
+> mpic++ -std=c++11 Main.cpp Polynomial.cpp Util.cpp -o Main
 
 ### Run
 
@@ -21,16 +21,34 @@ The documentation will describe:
 
 ### Results
 
-**A:** -3 + 0x^1 + 1x^2 + 7x^3
+**A:** 10 + 9x^1 + -7x^2
 
-**B:** -3 + 0x^1 + 1x^2 + 7x^3 + 9x^4 + 2x^5 + 10x^6 + 10x^7
+**B:** 10 + 9x^1 + -7x^2 + -7x^3 + -9x^4 + 10x^5 + -3x^6 + 9x^7 + -3x^8 + 8x^9 + -5x^10 + -2x^11 + 5x^12 + 5x^13 + 4x^14 + -1x^15 + -5x^16 + 0x^17 + -5x^18 + 1x^19
 
 **Rank:** 0
 
-**PolyKaraCheck:** **Rank:** 1
+**Rank:** 1
 
 **Rank:** 2
 
 **Rank:** 3
 
-9 + 0x^1 + -6x^2 + -42x^3 + -26x^4 + 8x^5 + 28x^6 + 35x^7 + 24x^8 + 80x^9 + 70x^10
+**Karatsuba Multiplication Time:** 2 microseconds
+
+Start: 0 -> End: 0
+
+Start: 0 -> End: 0
+
+Start: 0 -> End: 0
+
+Start: 0 -> End: 3
+
+**Rank:** 2
+
+**Rank:** 3
+
+**Rank:** 0
+
+**MPI Multiplication Time:** 6 microseconds
+
+**Rank:** 1

@@ -14,7 +14,7 @@ Polynomial Util::Multiplication(const Polynomial &A, const Polynomial &B) {
 }
 
 Polynomial Util::MpiMultiplication(const Polynomial &A, const Polynomial &B, int start, int end) {
-    std::cout << start << "->" << end << std::endl;
+    std::cout << "Start: " << start << " -> " << "End: " << end << std::endl;
     int DegreeMul = A.getN() + B.getN() - 1;
     Polynomial polyMul(DegreeMul);
     for (int i = start; i < end; i++) {
@@ -26,9 +26,10 @@ Polynomial Util::MpiMultiplication(const Polynomial &A, const Polynomial &B, int
 }
 
 Polynomial Util::Karatsuba(const Polynomial &A, const Polynomial &B) {
-    if (A.getN() < 2 || B.getN() < 2) {
+    if (A.getN() < 10 || B.getN() < 10) {
         return Multiplication(A, B);
     }
+
     int m = std::min(A.getN(), B.getN()) / 2;
     Polynomial lowA = A.GetFirstMCoefficients(m);
     Polynomial highA = A.GetLastMCoefficients(A.getN() - m);

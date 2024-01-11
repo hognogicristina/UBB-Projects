@@ -12,11 +12,11 @@ public:
 
     void GeneratePolynomial();
 
-    int getN() const; // Getter for N
+    int getN() const;
 
-    int getCoefficient(int index) const; // Getter for Coefficients
+    int getCoefficient(int index) const;
 
-    void setCoefficient(int index, int value); // Setter for Coefficients
+    void setCoefficient(int index, int value);
 
     Polynomial Sum(const Polynomial &B) const;
 
@@ -38,4 +38,18 @@ private:
 };
 
 
-#endif //LABORATORY_7_POLYNOMIAL_H
+#endif //LABORATORY_7_POLYNOMIAL_H#ifndef LABORATORY_7_UTIL_H
+#define LABORATORY_7_UTIL_H
+
+#include "Polynomial.h"
+
+class Util {
+public:
+    static Polynomial Multiplication(const Polynomial &A, const Polynomial &B);
+
+    static Polynomial MpiMultiplication(const Polynomial &A, const Polynomial &B, int start, int end);
+
+    static Polynomial Karatsuba(const Polynomial &A, const Polynomial &B);
+};
+
+#endif //LABORATORY_7_UTIL_H
