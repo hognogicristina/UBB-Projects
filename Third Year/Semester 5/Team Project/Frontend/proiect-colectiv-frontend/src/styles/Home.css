@@ -1,0 +1,60 @@
+html,
+body {
+    margin: 0;
+}
+
+.home-container {
+    font-family: 'Chalkduster', sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/resources/background_home_page.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.home-main h1 {
+    font-size: 2.5em;
+    margin-top: 0;
+    text-align: center;
+    max-width: 1000px;
+}
+
+.home-main h1:first-child {
+    margin-bottom: 0;
+}
+
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 2em;
+    margin-bottom: 10em;
+}
+
+.home-button {
+    font-size: 3.5em;
+    padding: 20px 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: rgba(28, 94, 164, 0.5);
+    font-family: 'Chalkduster', serif;
+    color: white;
+    text-decoration: none;
+    width: 250px;
+    text-align: center;
+}
+
+.home-button:hover {
+    background-color: rgba(28, 94, 164, 0.8);
+}

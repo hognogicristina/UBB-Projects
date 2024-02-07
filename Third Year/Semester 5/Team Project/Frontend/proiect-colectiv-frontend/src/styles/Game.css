@@ -1,0 +1,33 @@
+html,
+body {
+    margin: 0;
+}
+
+.game-container {
+    font-family: 'Chalkduster', sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/resources/background.png');
+    background-size: cover;
+}
+
+.game-main h1 {
+    font-size: 2.5em;
+    margin-top: 0;
+    text-align: center;
+    max-width: 1000px;
+}
+
+.game-main h1:first-child {
+    margin-bottom: 0;
+}

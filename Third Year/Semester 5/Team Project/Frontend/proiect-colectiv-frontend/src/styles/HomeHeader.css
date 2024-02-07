@@ -1,0 +1,29 @@
+.home-header {
+    background-image: url('/resources/background_header.png');
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.1em;
+    font-family: 'Chalkduster', sans-serif;
+    border-bottom: 1px solid #1b84cc;
+}
+
+.header-title {
+    font-size: 2em;
+}
+
+nav ul {
+    list-style-type: none;
+    gap: 6em;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}

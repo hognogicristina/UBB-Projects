@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Iakab",
+      "Score": -420
+    }
+  ],
+  "questions": [
+    {
+      "question": "Which Romanian historical figure is known as 'The Great Unifier'?",
+      "answers": [
+        {
+          "text": "Vlad the Impaler",
+          "is_correct": false
+        },
+        {
+          "text": "Mihai Eminescu",
+          "is_correct": false
+        },
+        {
+          "text": "Mircea the Elder",
+          "is_correct": true
+        },
+        {
+          "text": "Nicolae Ceaușescu",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question": "When did Romania become a unified nation?",
+      "answers": [
+        {
+          "text": "1848",
+          "is_correct": false
+        },
+        {
+          "text": "1918",
+          "is_correct": true
+        },
+        {
+          "text": "1945",
+          "is_correct": false
+        },
+        {
+          "text": "1989",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question": "What famous historical event is associated with the Romanian Revolution of 1989?",
+      "answers": [
+        {
+          "text": "The fall of the Berlin Wall",
+          "is_correct": false
+        },
+        {
+          "text": "The Hungarian Revolution",
+          "is_correct": false
+        },
+        {
+          "text": "The overthrow of Nicolae Ceaușescu",
+          "is_correct": true
+        },
+        {
+          "text": "The Romanian War of Independence",
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "question": "Who was the first King of Romania?",
+      "answers": [
+        {
+          "text": "Constantine Brâncoveanu",
+          "is_correct": false
+        },
+        {
+          "text": "Carol I",
+          "is_correct": true
+        },
+        {
+          "text": "Stephen the Great",
+          "is_correct": false
+        },
+        {
+          "text": "Ion Antonescu",
+          "is_correct": false
+        }
+      ]
+    }
+  ]
+}

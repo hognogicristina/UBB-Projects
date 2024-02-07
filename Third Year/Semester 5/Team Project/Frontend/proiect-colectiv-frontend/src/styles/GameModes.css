@@ -1,0 +1,23 @@
+.game-mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 2em;
+    margin-bottom: 10em;
+}
+
+.game-mode-button {
+    font-size: 3.5em;
+    padding: 20px 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: rgba(28, 94, 164, 0.5);
+    font-family: 'Chalkduster', serif;
+    text-decoration: none;
+}
+
+.game-mode-button:hover {
+    background-color: rgba(28, 94, 164, 0.8);
+}

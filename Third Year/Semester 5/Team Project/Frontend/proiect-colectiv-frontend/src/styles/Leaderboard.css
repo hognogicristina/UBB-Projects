@@ -1,0 +1,103 @@
+html,
+body {
+    margin: 0;
+}
+
+.leaderboard-container {
+    font-family: 'Chalkduster', sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/resources/background_leaderboard.png');
+    background-size: cover;
+}
+
+.leaderboard-main h1 {
+    font-size: 2.5em;
+    margin-top: 0;
+    text-align: center;
+    max-width: 1000px;
+}
+
+.leaderboard-main h1:first-child {
+    margin-bottom: 0;
+}
+
+.leaderboard-wrapper {
+    width: 850px;
+    margin-top: -300px;
+    text-align: center;
+}
+
+.leaderboard-title {
+    font-size: 3.5em;
+    margin-top: 150px;
+}
+
+.leaderboard {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: #f0f8ff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rank, .name, .score {
+    flex: 1;
+    text-align: center;
+    color: #333;
+}
+
+.rank {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.score {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.leaderboard-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+}
+
+.leaderboard-button {
+    font-size: 1.5em;
+    padding: 30px 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: rgba(28, 94, 164, 0.5);
+    font-family: 'Chalkduster', serif;
+    text-decoration: none;
+}
+
+.leaderboard-button:hover {
+    background-color: rgba(28, 94, 164, 0.8);
+}

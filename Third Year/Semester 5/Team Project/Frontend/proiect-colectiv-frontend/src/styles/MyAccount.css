@@ -1,0 +1,87 @@
+.edit-account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.edit-account-main {
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    font-size: 3.5em;
+    padding: 20px 60px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: rgba(28, 94, 164, 0.5);
+    font-family: 'Chalkduster', serif;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+.chalkduster-font {
+    font-family: 'Chalkduster', sans-serif;
+}
+
+.enlarged-input {
+    font-size: 18px;
+    padding: 12px;
+}
+
+.small-button {
+    padding: 15px 300px;
+    font-size: 1rem;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}

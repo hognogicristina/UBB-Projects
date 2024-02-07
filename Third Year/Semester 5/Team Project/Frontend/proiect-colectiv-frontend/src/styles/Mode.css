@@ -1,0 +1,67 @@
+.mode-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 2em;
+    margin-bottom: 10em;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.mode-button {
+    font-size: 2em;
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: rgba(28, 94, 164, 0.5);
+    font-family: 'Chalkduster', serif;
+    width: 400px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mode-button.selected-right {
+    border: 3px solid green;
+}
+
+.mode-button .checkmark {
+    margin-left: 10px;
+    color: green;
+    font-size: 1.5em;
+}
+
+.mode-button.selected-wrong {
+    border: 3px solid red;
+}
+
+.mode-button .mark {
+    margin-left: 10px;
+    color: red;
+    font-size: 1.5em;
+}
+
+.score-time {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 70px;
+    right: 300px;
+    padding: 0 10px;
+}
+
+.score-time p {
+    font-size: 1.7em;
+    color: white;
+    margin: 0 40px;
+}
