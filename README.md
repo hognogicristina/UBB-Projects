@@ -57,8 +57,8 @@ This repository includes my homeworks and projects from college.
 <br>
 <li><b>6<sup>th</sup> Semester</b></li>
 <ul>
-	<li><a href="">Academic ethics and integrity (in Computer Science)</a></li>
-	<li><a href="">Blockchain: Smart Contracts</a></li>
+	<li><a href="">[Academic ethics and integrity (in Computer Science)](https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Academic%20ethics%20and%20integrity%20(in%20Computer%20Science))</a></li>
+	<li><a href="">[Blockchain: Smart Contracts](https://github.com/hognogicristina/UBB-Projects/tree/main/Third%20Year/Semester%206/Blockchain%20Smart%20Contracts)</a></li>
 	<li><a href="">Business Intelligence</a></li>
 	<li><a href="">Elaboration of the Bachelor's Thesis</a></li>
 	<li><a href="">Numerical Calculus</a></li>
